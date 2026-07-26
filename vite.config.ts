@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  // 相对路径，适配 GitHub Pages 项目页 / 自定义域，无需硬编码仓库名
-  base: './',
+  // GitHub Pages 项目页路径：https://xiaoxi109.github.io/LexiCore/
+  base: '/LexiCore/',
   server: {
     host: true,
     port: 5173,
