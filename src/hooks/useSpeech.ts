@@ -1,50 +1,94 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 /**
- * Text-to-speech via the Web Speech API (browser built-in, no audio files).
- * Picks a British-English voice when available, falls back to any en voice.
+ * Text-to-speech via Piper WASM (local inference, no system TTS needed).
+ * Uses en_US-lessac-medium voice (American English, female, clear).
+ * On first click, downloads ~60MB Piper model from CDN (one-time).
+ * Subsequent clicks synthesize in milliseconds.
  */
 export function useSpeech() {
   const [supported, setSupported] = useState(true)
   const [speaking, setSpeaking] = useState(false)
-  const voiceRef = useRef<SpeechSynthesisVoice | null>(null)
+  const [loading, setLoading] = useState(false)
+  const sessionRef = useRef<any>(null)
+  const initPromiseRef = useRef<Promise<any> | null>(null)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const reqIdRef = useRef(0)
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-      setSupported(false)
-      return
+  // Lazy initialize Piper TTS on first use
+  const ensureSession = useCallback(async () => {
+    if (sessionRef.current?.ready) return sessionRef.current
+
+    if (initPromiseRef.current) {
+      return initPromiseRef.current
     }
-    const pick = () => {
-      const voices = window.speechSynthesis.getVoices()
-      if (!voices.length) return
-      voiceRef.current =
-        voices.find((v) => v.lang === 'en-GB') ||
-        voices.find((v) => v.lang.startsWith('en')) ||
-        voices[0]
-    }
-    pick()
-    window.speechSynthesis.onvoiceschanged = pick
-    return () => {
-      window.speechSynthesis.onvoiceschanged = null
-    }
+
+    setLoading(true)
+    initPromiseRef.current = (async () => {
+      try {
+        const { TtsSession } = await import('@realtimex/piper-tts-web')
+        const session = await TtsSession.create({
+          voiceId: 'en_US-lessac-medium',
+        })
+        sessionRef.current = session
+        setLoading(false)
+        return session
+      } catch (err) {
+        console.error('Piper TTS init failed:', err)
+        setSupported(false)
+        setLoading(false)
+        throw err
+      }
+    })()
+
+    return initPromiseRef.current
   }, [])
 
   const speak = useCallback(
-    (text: string, rate = 0.9) => {
+    async (text: string, rate = 0.9) => {
       if (!supported || !text) return
-      const synth = window.speechSynthesis
-      synth.cancel()
-      const u = new SpeechSynthesisUtterance(text)
-      u.lang = 'en-GB'
-      u.rate = rate
-      if (voiceRef.current) u.voice = voiceRef.current
-      u.onstart = () => setSpeaking(true)
-      u.onend = () => setSpeaking(false)
-      u.onerror = () => setSpeaking(false)
-      synth.speak(u)
+
+      // Stop any currently playing audio
+      if (audioRef.current) {
+        audioRef.current.pause()
+        URL.revokeObjectURL(audioRef.current.src)
+        audioRef.current = null
+      }
+
+      // Invalidate stale requests (rapid multi-click)
+      const id = ++reqIdRef.current
+
+      try {
+        const session = await ensureSession()
+        if (id !== reqIdRef.current) return // stale
+
+        setSpeaking(true)
+        const audioBlob = await session.predict(text)
+        if (id !== reqIdRef.current) return // stale
+
+        const url = URL.createObjectURL(audioBlob)
+        const audio = new Audio(url)
+        audio.playbackRate = rate
+        audioRef.current = audio
+
+        audio.onended = () => {
+          setSpeaking(false)
+          URL.revokeObjectURL(url)
+          audioRef.current = null
+        }
+        audio.onerror = () => {
+          setSpeaking(false)
+          URL.revokeObjectURL(url)
+          audioRef.current = null
+        }
+        await audio.play()
+      } catch (err) {
+        console.error('Piper TTS speak failed:', err)
+        setSpeaking(false)
+      }
     },
-    [supported],
+    [supported, ensureSession],
   )
 
-  return { speak, speaking, supported }
+  return { speak, speaking, supported, loading }
 }

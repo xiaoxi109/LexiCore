@@ -65,7 +65,7 @@ function LevelBadge({ level }: { level: Level }) {
 }
 
 function SpeakerBtn({ text, className = '', rate }: { text: string; className?: string; rate?: number }) {
-  const { speak, speaking } = useSpeech()
+  const { speak, speaking, loading } = useSpeech()
   return (
     <button
       type="button"
@@ -73,9 +73,9 @@ function SpeakerBtn({ text, className = '', rate }: { text: string; className?: 
         e.stopPropagation()
         speak(text, rate)
       }}
-      title="发音"
+      title={loading ? '正在加载语音模型…' : '发音'}
       className={`inline-flex items-center justify-center rounded-full p-2 text-brand-600 transition hover:bg-brand-50 hover:text-brand-700 active:scale-95 dark:text-brand-300 dark:hover:bg-brand-500/10 ${
-        speaking ? 'animate-pulse' : ''
+        speaking || loading ? 'animate-pulse' : ''
       } ${className}`}
     >
       <SpeakerIcon width={18} height={18} />
