@@ -286,7 +286,7 @@ function SyncProgressBtns({
 
 /* ---------------------------- Model Download Btn ---------------------------- */
 function ModelDownloadBtn({ className = '' }: { className?: string }) {
-  const { downloadStatus } = useSpeech()
+  const { downloadStatus, downloadProgress } = useSpeech()
 
   const handleClick = async (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -310,12 +310,20 @@ function ModelDownloadBtn({ className = '' }: { className?: string }) {
   }
 
   if (downloadStatus === 'downloading') {
+    const pct = Math.min(99, Math.max(0, downloadProgress.pct))
     return (
       <span
-        className={`inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700 dark:bg-amber-500/15 dark:text-amber-300 ${className}`}
+        className={`inline-flex items-center gap-2 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700 dark:bg-amber-500/15 dark:text-amber-300 ${className}`}
+        title={downloadProgress.label || '正在下载语音模型…'}
       >
-        <SpinnerIcon width={14} height={14} className="animate-spin" />
-        下载中…
+        <SpinnerIcon width={14} height={14} className="animate-spin shrink-0" />
+        <span className="relative h-1.5 w-16 overflow-hidden rounded-full bg-amber-200 dark:bg-amber-500/30">
+          <span
+            className="absolute inset-y-0 left-0 rounded-full bg-amber-500 transition-all duration-200"
+            style={{ width: `${pct}%` }}
+          />
+        </span>
+        <span className="tabular-nums">{pct}%</span>
       </span>
     )
   }
@@ -324,7 +332,7 @@ function ModelDownloadBtn({ className = '' }: { className?: string }) {
     <button
       type="button"
       onClick={handleClick}
-      title={downloadStatus === 'error' ? '下载失败，点击重试' : '点击下载语音模型'}
+      title={downloadStatus === 'error' ? '下载失败，点击重试' : '点击下载语音模型（约 70MB，仅首次较慢）'}
       className={`inline-flex items-center gap-1.5 rounded-full border text-xs font-medium transition active:scale-95 ${
         downloadStatus === 'error'
           ? 'border-red-300 bg-red-50 text-red-600 hover:bg-red-100 dark:border-red-800 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20'

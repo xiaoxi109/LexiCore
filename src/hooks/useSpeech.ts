@@ -4,16 +4,25 @@ import { useCallback, useEffect, useState } from 'react'
 type DownloadStatus = 'idle' | 'downloading' | 'ready' | 'error'
 
 let _status: DownloadStatus = 'idle'
+let _progress = 0
+let _progressLabel = ''
 let sessionShared: any = null
 let initPromiseShared: Promise<void> | null = null
 let audioShared: HTMLAudioElement | null = null
 let reqIdShared = 0
 
 const subscribers = new Set<(s: DownloadStatus) => void>()
+const progressSubscribers = new Set<(p: { pct: number; label: string }) => void>()
 
 function emit(s: DownloadStatus) {
   _status = s
   subscribers.forEach((fn) => fn(s))
+}
+
+function emitProgress(pct: number, label: string) {
+  _progress = pct
+  _progressLabel = label
+  progressSubscribers.forEach((fn) => fn({ pct, label }))
 }
 
 /** Subscribe to shared download status. Returns unsubscribe function. */
@@ -22,17 +31,40 @@ function onStatusChange(fn: (s: DownloadStatus) => void) {
   return () => { subscribers.delete(fn) }
 }
 
+/** Subscribe to download progress {pct:0-100, label}. Returns unsubscribe function. */
+function onProgressChange(fn: (p: { pct: number; label: string }) => void) {
+  progressSubscribers.add(fn)
+  return () => { progressSubscribers.delete(fn) }
+}
+
 /** Manually trigger model download. Safe to call multiple times. */
 export async function downloadModel(): Promise<void> {
   if (_status === 'ready') return
   if (_status === 'downloading') return initPromiseShared!
 
   emit('downloading')
+  emitProgress(0, '准备中…')
   initPromiseShared = (async () => {
     try {
+      // Phase 1: load WASM engine (ONNX + Piper phonemize)
+      emitProgress(5, '加载引擎…')
       const { TtsSession } = await import('@realtimex/piper-tts-web')
-      sessionShared = await TtsSession.create({ voiceId: 'en_US-lessac-medium' })
+
+      // Phase 2: download voice model from HuggingFace (big file, real progress)
+      // fallbackStrategy 'auto' → tries CDN first, falls back to local WASM if offline
+      sessionShared = await TtsSession.create({
+        voiceId: 'en_US-lessac-medium',
+        fallbackStrategy: 'auto',
+        progress: (p: { url: string; total: number; loaded: number }) => {
+          if (p.total > 0) {
+            const modelPct = Math.round((p.loaded / p.total) * 100)
+            // Map model download (0-100%) to overall bar 10% → 95%
+            emitProgress(10 + Math.round(modelPct * 0.85), '下载语音模型…')
+          }
+        },
+      })
       if (sessionShared?.ready) {
+        emitProgress(100, '完成')
         emit('ready')
       } else {
         throw new Error('TtsSession not ready after create')
@@ -53,6 +85,10 @@ export function getDownloadStatus(): DownloadStatus {
   return _status
 }
 
+export function getDownloadProgress(): { pct: number; label: string } {
+  return { pct: _progress, label: _progressLabel }
+}
+
 /**
  * Text-to-speech via Piper WASM (local inference, no system TTS needed).
  * Uses en_US-lessac-medium voice (American English, female, clear).
@@ -61,10 +97,16 @@ export function useSpeech() {
   const [speaking, setSpeaking] = useState(false)
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<DownloadStatus>(_status)
+  const [progress, setProgress] = useState<{ pct: number; label: string }>({
+    pct: _progress,
+    label: _progressLabel,
+  })
   const supported = true // Piper works on any modern browser with WASM
 
   // Sync shared status into local state
   useEffect(() => onStatusChange(setStatus), [])
+  // Sync shared download progress into local state
+  useEffect(() => onProgressChange(setProgress), [])
 
   // Ensure session: wait for download if in progress, trigger download if idle
   const ensureSession = useCallback(async () => {
@@ -135,5 +177,5 @@ export function useSpeech() {
     [ensureSession],
   )
 
-  return { speak, speaking, supported, loading, downloadStatus: status }
+  return { speak, speaking, supported, loading, downloadStatus: status, downloadProgress: progress }
 }
