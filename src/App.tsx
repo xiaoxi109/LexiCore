@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { ALL_WORDS, LEVELS, TOTAL, CATEGORIES, groupByCategory } from './data'
 import type { Level, Word, CategoryId } from './data'
-import { useSpeech } from './hooks/useSpeech'
+import { useSpeech, downloadModel } from './hooks/useSpeech'
 import { useLocalStorage } from './hooks/useLocalStorage'
 import {
   CheckIcon,
+  DownloadIcon,
   MoonIcon,
   SearchIcon,
   SpeakerIcon,
+  SpinnerIcon,
   SunIcon,
   XIcon,
 } from './components/icons'
@@ -79,6 +81,59 @@ function SpeakerBtn({ text, className = '', rate }: { text: string; className?: 
       } ${className}`}
     >
       <SpeakerIcon width={18} height={18} />
+    </button>
+  )
+}
+
+/* ---------------------------- Model Download Btn ---------------------------- */
+function ModelDownloadBtn({ className = '' }: { className?: string }) {
+  const { downloadStatus } = useSpeech()
+
+  const handleClick = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    try {
+      await downloadModel()
+    } catch {
+      // error already handled in hook
+    }
+  }
+
+  if (downloadStatus === 'ready') {
+    return (
+      <span
+        className={`inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300 ${className}`}
+        title="语音模型已就绪"
+      >
+        <CheckIcon width={14} height={14} />
+        语音就绪
+      </span>
+    )
+  }
+
+  if (downloadStatus === 'downloading') {
+    return (
+      <span
+        className={`inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700 dark:bg-amber-500/15 dark:text-amber-300 ${className}`}
+      >
+        <SpinnerIcon width={14} height={14} className="animate-spin" />
+        下载中…
+      </span>
+    )
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      title={downloadStatus === 'error' ? '下载失败，点击重试' : '点击下载语音模型'}
+      className={`inline-flex items-center gap-1.5 rounded-full border text-xs font-medium transition active:scale-95 ${
+        downloadStatus === 'error'
+          ? 'border-red-300 bg-red-50 text-red-600 hover:bg-red-100 dark:border-red-800 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20'
+          : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
+      } ${className}`}
+    >
+      <DownloadIcon width={14} height={14} />
+      {downloadStatus === 'error' ? '重试下载' : '下载语音'}
     </button>
   )
 }
@@ -294,6 +349,7 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2">
+            <ModelDownloadBtn className="px-3 py-1.5" />
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="rounded-xl border border-slate-200 p-2 text-slate-600 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"

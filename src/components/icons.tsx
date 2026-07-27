@@ -53,3 +53,17 @@ export const XIcon = (p: P) => (
     <path d="M18 6 6 18M6 6l12 12" />
   </svg>
 )
+
+export const DownloadIcon = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <polyline points="7 10 12 15 17 10" />
+    <line x1="12" x2="12" y1="15" y2="3" />
+  </svg>
+)
+
+export const SpinnerIcon = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+  </svg>
+)
