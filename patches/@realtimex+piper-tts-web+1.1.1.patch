@@ -1,5 +1,5 @@
 diff --git a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
-index e969f08..95ec849 100644
+index e969f08..f244c9e 100644
 --- a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 +++ b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 @@ -10,9 +10,9 @@ var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot
@@ -9,9 +9,9 @@ index e969f08..95ec849 100644
 -const HF_BASE = "https://huggingface.co/diffusionstudio/piper-voices/resolve/main";
 -const ONNX_BASE = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/";
 -const WASM_BASE = "https://cdn.jsdelivr.net/npm/@diffusionstudio/piper-wasm@1.0.0/build/piper_phonemize";
-+const HF_BASE = "https://hf-mirror.com/diffusionstudio/piper-voices/resolve/main";
++const HF_BASE = `${import.meta.env.BASE_URL}tts/model`;
 +const ONNX_BASE = "https://fastly.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/";
-+const WASM_BASE = "https://fastly.jsdelivr.net/npm/@diffusionstudio/piper-wasm@1.0.0/build/piper_phonemize";
++const WASM_BASE = `${import.meta.env.BASE_URL}tts/piper/piper_phonemize`;
  const PATH_MAP = {
    "ar_JO-kareem-low": "ar/ar_JO/kareem/low/ar_JO-kareem-low.onnx",
    "ar_JO-kareem-medium": "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx",
@@ -33,3 +33,13 @@ index e969f08..95ec849 100644
    try {
      const root = await navigator.storage.getDirectory();
      const dir = await root.getDirectoryHandle("piper", {
+@@ -376,6 +376,9 @@ _wasmPaths = new WeakMap();
+ _logger = new WeakMap();
+ _TtsSession_instances = new WeakSet();
+ setupWasmPaths_fn = async function(fallbackStrategy) {
++  // Self-hosted build: rely on the Vite-bundled same-origin onnxruntime-web wasm.
++  // Do NOT override ort.env.wasm.wasmPaths, so the bundled asset (same origin) is used.
++  return;
+   var _a, _b, _c, _d, _e;
+   const strategy = fallbackStrategy ?? "cdn";
+   try {
