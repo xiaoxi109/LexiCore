@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { ALL_WORDS, LEVELS, TOTAL, CATEGORIES, groupByCategory } from './data'
 import type { Level, Word, CategoryId } from './data'
 import { useSpeech, downloadModel } from './hooks/useSpeech'
 import { useLocalStorage } from './hooks/useLocalStorage'
+import { StatusBar, Style } from '@capacitor/status-bar'
 import {
   CheckIcon,
   DownloadIcon,
@@ -11,6 +12,7 @@ import {
   SpeakerIcon,
   SpinnerIcon,
   SunIcon,
+  UploadIcon,
   XIcon,
 } from './components/icons'
 
@@ -82,6 +84,86 @@ function SpeakerBtn({ text, className = '', rate }: { text: string; className?: 
     >
       <SpeakerIcon width={18} height={18} />
     </button>
+  )
+}
+
+/* ---------------------------- Import/Export Progress ---------------------------- */
+function SyncProgressBtns({
+  masteredArr,
+  onImport,
+  className = '',
+}: {
+  masteredArr: string[]
+  onImport: (words: string[]) => void
+  className?: string
+}) {
+  const fileRef = useRef<HTMLInputElement>(null)
+
+  const handleExport = () => {
+    const data = {
+      app: 'LexiCore',
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      masteredCount: masteredArr.length,
+      mastered: masteredArr,
+    }
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `lexicore-progress-${new Date().toISOString().slice(0, 10)}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result as string)
+        if (!data || !Array.isArray(data.mastered)) {
+          alert('无效的进度文件：缺少 mastered 字段')
+          return
+        }
+        // 合并：取并集
+        const merged = [...new Set([...masteredArr, ...data.mastered])]
+        const added = merged.length - masteredArr.length
+        onImport(merged)
+        alert(`导入成功！新增 ${added} 个已掌握单词`)
+      } catch {
+        alert('文件格式错误，请选择 LexiCore 导出的 JSON 文件')
+      }
+    }
+    reader.readAsText(file)
+    // reset so same file can be re-imported
+    e.target.value = ''
+  }
+
+  return (
+    <div className={`flex items-center gap-1 ${className}`}>
+      <button
+        type="button"
+        onClick={handleExport}
+        disabled={masteredArr.length === 0}
+        title="导出已掌握进度"
+        className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-50 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+      >
+        <DownloadIcon width={14} height={14} />
+        导出
+      </button>
+      <button
+        type="button"
+        onClick={() => fileRef.current?.click()}
+        title="导入已掌握进度（合并）"
+        className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-50 active:scale-95 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+      >
+        <UploadIcon width={14} height={14} />
+        导入
+      </button>
+      <input ref={fileRef} type="file" accept=".json" onChange={handleFileChange} className="hidden" />
+    </div>
   )
 }
 
@@ -301,8 +383,13 @@ export default function App() {
 
   useEffect(() => {
     const root = document.documentElement
-    if (theme === 'dark') root.classList.add('dark')
-    else root.classList.remove('dark')
+    if (theme === 'dark') {
+      root.classList.add('dark')
+      StatusBar.setStyle({ style: Style.Dark }).catch(() => {})
+    } else {
+      root.classList.remove('dark')
+      StatusBar.setStyle({ style: Style.Light }).catch(() => {})
+    }
   }, [theme])
 
   const toggleMastered = useCallback(
@@ -349,6 +436,7 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2">
+            <SyncProgressBtns masteredArr={masteredArr} onImport={(words) => setMasteredArr(words)} />
             <ModelDownloadBtn className="px-3 py-1.5" />
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
