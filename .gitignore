@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Local build/data scripts (not needed for the deployed web app)
+scripts/

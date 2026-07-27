@@ -3,6 +3,7 @@ import { ALL_WORDS, LEVELS, TOTAL, CATEGORIES, groupByCategory } from './data'
 import type { Level, Word, CategoryId } from './data'
 import { useSpeech, downloadModel } from './hooks/useSpeech'
 import { useLocalStorage } from './hooks/useLocalStorage'
+import { useToast, ToastContainer, type ToastType } from './hooks/useToast'
 import { StatusBar, Style } from '@capacitor/status-bar'
 import {
   CheckIcon,
@@ -88,53 +89,169 @@ function SpeakerBtn({ text, className = '', rate }: { text: string; className?: 
 }
 
 /* ---------------------------- Import/Export Progress ---------------------------- */
+
+interface ImportExportResult {
+  type: 'success' | 'error' | 'info'
+  message: string
+}
+
 function SyncProgressBtns({
   masteredArr,
   onImport,
+  onToast,
   className = '',
 }: {
   masteredArr: string[]
   onImport: (words: string[]) => void
+  onToast: (message: string, type: 'success' | 'error' | 'info') => void
   className?: string
 }) {
   const fileRef = useRef<HTMLInputElement>(null)
 
+  // Build a known-word set for validation
+  const knownWords = useMemo(() => new Set(ALL_WORDS.map((w) => w.word.toLowerCase())), [])
+
+  // Export format version
+  const EXPORT_VERSION = 2
+
   const handleExport = () => {
+    const levels: Record<string, number> = {}
+    for (const w of masteredArr) {
+      const word = ALL_WORDS.find((x) => x.word.toLowerCase() === w.toLowerCase())
+      if (word) {
+        levels[word.level] = (levels[word.level] || 0) + 1
+      }
+    }
+
     const data = {
       app: 'LexiCore',
-      version: 1,
+      version: EXPORT_VERSION,
       exportedAt: new Date().toISOString(),
       masteredCount: masteredArr.length,
+      byLevel: levels,
       mastered: masteredArr,
     }
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `lexicore-progress-${new Date().toISOString().slice(0, 10)}.json`
+    const dateStr = new Date().toISOString().slice(0, 10)
+    a.download = `lexicore-progress-${dateStr}.json`
     a.click()
     URL.revokeObjectURL(url)
+    onToast(`已导出 ${masteredArr.length} 个已掌握单词`, 'success')
+  }
+
+  const validateAndMerge = (incoming: string[]): ImportExportResult => {
+    // Normalize: lowercase, trim
+    const clean = incoming
+      .map((w) => (typeof w === 'string' ? w.trim() : ''))
+      .filter((w) => w.length > 0)
+      .map((w) => w.toLowerCase())
+
+    if (clean.length === 0) {
+      return { type: 'error', message: '文件中没有找到有效的单词' }
+    }
+
+    // Validate against known word list
+    const valid = clean.filter((w) => knownWords.has(w))
+    const unknown = clean.filter((w) => !knownWords.has(w))
+
+    if (valid.length === 0) {
+      return {
+        type: 'error',
+        message: `文件中的单词均不在词表中。请确认选择的是 LexiCore 导出的进度文件。`,
+      }
+    }
+
+    // Merge with existing (union)
+    const existingLower = masteredArr.map((w) => w.toLowerCase())
+    const mergedLower = [...new Set([...existingLower, ...valid])]
+
+    // Restore original casing from ALL_WORDS
+    const merged = mergedLower.map((lower) => {
+      const found = ALL_WORDS.find((w) => w.word.toLowerCase() === lower)
+      return found ? found.word : lower
+    })
+
+    const added = merged.length - masteredArr.length
+
+    let msg = `导入成功！新增 ${added} 个已掌握单词`
+    if (unknown.length > 0) {
+      msg += `（${unknown.length} 个单词不在词表中，已忽略）`
+    }
+    if (added === 0) {
+      msg = '导入完成，没有新增单词（所有单词已掌握）'
+    }
+
+    return { type: 'success', message: msg }
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
+
     const reader = new FileReader()
     reader.onload = () => {
       try {
-        const data = JSON.parse(reader.result as string)
-        if (!data || !Array.isArray(data.mastered)) {
-          alert('无效的进度文件：缺少 mastered 字段')
+        const raw = reader.result as string
+
+        // Try JSON format first
+        let words: string[] | null = null
+        try {
+          const data = JSON.parse(raw)
+          if (data && Array.isArray(data.mastered)) {
+            words = data.mastered
+          } else if (Array.isArray(data)) {
+            // Plain JSON array of words
+            words = data
+          }
+        } catch {
+          // Not JSON, try plain text format
+        }
+
+        // Try plain text format (one word per line, or comma-separated)
+        if (words === null) {
+          // Split by newlines or commas
+          const lines = raw
+            .split(/[\n\r,]+/)
+            .map((s) => s.trim())
+            .filter((s) => s.length > 0 && !s.startsWith('{') && !s.startsWith('['))
+          if (lines.length > 0) {
+            words = lines
+          }
+        }
+
+        if (!words || words.length === 0) {
+          onToast('无法解析文件内容，请使用 LexiCore 导出的 JSON 文件', 'error')
           return
         }
-        // 合并：取并集
-        const merged = [...new Set([...masteredArr, ...data.mastered])]
-        const added = merged.length - masteredArr.length
+
+        const result = validateAndMerge(words)
+        if (result.type === 'error') {
+          onToast(result.message, 'error')
+          return
+        }
+
+        // Merge and apply
+        const clean = words
+          .map((w) => (typeof w === 'string' ? w.trim().toLowerCase() : ''))
+          .filter((w) => w.length > 0 && knownWords.has(w))
+        const existingLower = masteredArr.map((w) => w.toLowerCase())
+        const mergedLower = [...new Set([...existingLower, ...clean])]
+        const merged = mergedLower.map((lower) => {
+          const found = ALL_WORDS.find((w) => w.word.toLowerCase() === lower)
+          return found ? found.word : lower
+        })
+
         onImport(merged)
-        alert(`导入成功！新增 ${added} 个已掌握单词`)
+        onToast(result.message, 'success')
       } catch {
-        alert('文件格式错误，请选择 LexiCore 导出的 JSON 文件')
+        onToast('文件读取失败，请重试', 'error')
       }
+    }
+    reader.onerror = () => {
+      onToast('文件读取失败，请重试', 'error')
     }
     reader.readAsText(file)
     // reset so same file can be re-imported
@@ -162,7 +279,7 @@ function SyncProgressBtns({
         <UploadIcon width={14} height={14} />
         导入
       </button>
-      <input ref={fileRef} type="file" accept=".json" onChange={handleFileChange} className="hidden" />
+      <input ref={fileRef} type="file" accept=".json,.txt,.csv" onChange={handleFileChange} className="hidden" />
     </div>
   )
 }
@@ -378,8 +495,14 @@ export default function App() {
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState<Word | null>(null)
   const [masteredArr, setMasteredArr] = useLocalStorage<string[]>('lexicore-mastered', [])
+  const { toasts, addToast, removeToast } = useToast()
 
   const masteredSet = useMemo(() => new Set(masteredArr), [masteredArr])
+
+  const handleToast = useCallback(
+    (message: string, type: ToastType) => addToast(message, type),
+    [addToast],
+  )
 
   useEffect(() => {
     const root = document.documentElement
@@ -436,7 +559,7 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2">
-            <SyncProgressBtns masteredArr={masteredArr} onImport={(words) => setMasteredArr(words)} />
+            <SyncProgressBtns masteredArr={masteredArr} onImport={(words) => setMasteredArr(words)} onToast={handleToast} />
             <ModelDownloadBtn className="px-3 py-1.5" />
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -605,6 +728,8 @@ export default function App() {
           onToggleMastered={() => toggleMastered(selected)}
         />
       )}
+
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
     </div>
   )
 }
