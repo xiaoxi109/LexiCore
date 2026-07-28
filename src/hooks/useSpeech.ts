@@ -50,19 +50,24 @@ export async function downloadModel(): Promise<void> {
       emitProgress(5, '加载引擎…')
       const { TtsSession } = await import('@realtimex/piper-tts-web')
 
-      // Phase 2: download voice model from HuggingFace (big file, real progress)
-      // fallbackStrategy 'auto' → tries CDN first, falls back to local WASM if offline
-      sessionShared = await TtsSession.create({
-        voiceId: 'en_US-lessac-medium',
-        fallbackStrategy: 'auto',
-        progress: (p: { url: string; total: number; loaded: number }) => {
-          if (p.total > 0) {
-            const modelPct = Math.round((p.loaded / p.total) * 100)
-            // Map model download (0-100%) to overall bar 10% → 95%
-            emitProgress(10 + Math.round(modelPct * 0.85), '下载语音模型…')
-          }
-        },
-      })
+      // Phase 2: load voice model from local assets (packaged with APK)
+        // fallbackStrategy 'local' → use local files only, no network download needed
+        sessionShared = await TtsSession.create({
+          voiceId: 'en_US-lessac-medium',
+          fallbackStrategy: 'local',
+          allowLocalModels: true,
+          wasmPaths: {
+            onnxWasm: '/tts/onnx/',
+            piperData: '/tts/piper/',
+            piperWasm: '/tts/piper/',
+          },
+          progress: (p: { url: string; total: number; loaded: number }) => {
+            if (p.total > 0) {
+              const modelPct = Math.round((p.loaded / p.total) * 100)
+              emitProgress(10 + Math.round(modelPct * 0.85), '加载语音模型…')
+            }
+          },
+        })
       if (sessionShared?.ready) {
         emitProgress(100, '完成')
         emit('ready')
