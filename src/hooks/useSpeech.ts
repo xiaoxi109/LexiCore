@@ -50,17 +50,21 @@ export async function downloadModel(): Promise<void> {
       emitProgress(5, '加载引擎…')
       const { TtsSession } = await import('@realtimex/piper-tts-web')
 
-      // Phase 2: load voice model from local assets (packaged with APK)
-        // fallbackStrategy 'local' → use local files only, no network download needed
-        sessionShared = await TtsSession.create({
-          voiceId: 'en_US-lessac-medium',
-          fallbackStrategy: 'local',
-          allowLocalModels: true,
-          wasmPaths: {
-            onnxWasm: '/tts/onnx/',
-            piperData: '/tts/piper/',
-            piperWasm: '/tts/piper/',
-          },
+      // Determine strategy based on runtime environment
+      // In Capacitor Android (APK), use 'local' for offline support
+      // In web browser, use 'auto' to allow CDN fallback
+      const isCapacitor = typeof window !== 'undefined' && (window as any).Capacitor !== undefined;
+      const strategy = isCapacitor ? 'local' : 'auto';
+      
+      sessionShared = await TtsSession.create({
+        voiceId: 'en_US-lessac-medium',
+        fallbackStrategy: strategy,
+        allowLocalModels: true,
+        wasmPaths: {
+          onnxWasm: '/tts/onnx/',
+          piperData: '/tts/piper/',
+          piperWasm: '/tts/piper/',
+        },
           progress: (p: { url: string; total: number; loaded: number }) => {
             if (p.total > 0) {
               const modelPct = Math.round((p.loaded / p.total) * 100)
