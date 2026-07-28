@@ -1,8 +1,8 @@
-// LexiCore · A1 (auto-generated from official CEFR list + enriched data)
+// Oxford 3000 · A1 (auto-generated from official CEFR list + enriched data)
 import type { Word } from './types'
 
 export const A1: Word[] = [
-  { word: 'a, an', level: 'A1', ipa: '', pos: 'art.', meaning: '冠词（a 用于辅音音素前，an 用于元音音素前）', examples: [
+  { word: 'a, an', level: 'A1', ipa: 'eɪ; æn', pos: 'art.', meaning: '冠词（a 用于辅音音素前，an 用于元音音素前）', examples: [
     { en: 'She is a teacher.', zh: '她是一位老师。' },
     { en: 'It is an apple.', zh: '它是一个苹果。' }
   ] },
@@ -85,7 +85,7 @@ export const A1: Word[] = [
     { en: 'I agree with you.', zh: '我同意你的看法。' },
     { en: 'They agreed to help.', zh: '他们答应帮忙。' }
   ] },
-  { word: 'air', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 大气，空气；空中，天空', examples: [
+  { word: 'air', level: 'A1', ipa: 'eə(r)', pos: 'n.', meaning: 'n. 大气，空气；空中，天空', examples: [
     { en: 'His hands clawed the air.', zh: '他的双手在空中乱抓。' },
     { en: 'We have air superiority.', zh: '我们有空中优势。' },
     { en: 'The air was circulated mechanically.', zh: '空气是用机械推动循环的。' }
@@ -123,7 +123,7 @@ export const A1: Word[] = [
     { en: 'The zoo has many animals.', zh: '动物园里有很多动物。' },
     { en: 'A dog is a friendly animal.', zh: '狗是一种友善的动物。' }
   ] },
-  { word: 'another', level: 'A1', ipa: '', pos: 'det., pron.', meaning: 'det. （同类的）另一，又一；（不同类的）另外一个，其他一个', examples: [
+  { word: 'another', level: 'A1', ipa: 'əˈnʌðə(r)', pos: 'det., pron.', meaning: 'det. （同类的）另一，又一；（不同类的）另外一个，其他一个', examples: [
     { en: 'She was expecting another baby.', zh: '她怀上又一个孩子了。' },
     { en: 'I saw yet another doctor.', zh: '我还看了另一位医生。' },
     { en: 'Time is another important consideration.', zh: '时间是另一个需要考虑的重要因素。' }
@@ -136,7 +136,7 @@ export const A1: Word[] = [
     { en: 'Do you have any questions?', zh: '你有什么问题吗？' },
     { en: 'I don’t have any money.', zh: '我一点钱也没有。' }
   ] },
-  { word: 'anyone', level: 'A1', ipa: '', pos: 'pron.', meaning: 'pron. 任何人；某个人', examples: [
+  { word: 'anyone', level: 'A1', ipa: 'ˈeniwʌn', pos: 'pron.', meaning: 'pron. 任何人；某个人', examples: [
     { en: 'I didn\'t tell anyone, honestly!', zh: '我确实没告诉过任何人！' },
     { en: 'Anyone can appreciate our music.', zh: '任何人都能欣赏我们的音乐。' },
     { en: 'Is anyone getting hungry?', zh: '有人觉得饿吗？' }
@@ -154,7 +154,7 @@ export const A1: Word[] = [
     { en: 'I eat an apple every day.', zh: '我每天吃一个苹果。' },
     { en: 'The apple is red and sweet.', zh: '这个苹果又红又甜。' }
   ] },
-  { word: 'April', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 四月', examples: [
+  { word: 'April', level: 'A1', ipa: 'ˈeɪprəl', pos: 'n.', meaning: 'n. 四月', examples: [
     { en: 'I arrived at the end of April.', zh: '我是四月底到达的。' },
     { en: 'We went to Japan last April.', zh: '去年四月我们去了日本。' },
     { en: 'Applications must be in by April 30.', zh: '申请务必于四月三十日之前寄到。' }
@@ -190,7 +190,7 @@ export const A1: Word[] = [
     { en: 'He is a famous artist.', zh: '他是一位著名的艺术家。' },
     { en: 'The artist painted a lake.', zh: '那位画家画了一片湖。' }
   ] },
-  { word: 'as', level: 'A1', ipa: '', pos: 'prep., conj.', meaning: 'prep. 作为；以……身份', examples: [
+  { word: 'as', level: 'A1', ipa: 'æz; əz', pos: 'prep., conj.', meaning: 'prep. 作为；以……身份', examples: [
     { en: 'You\'re as tall as your father.', zh: '你和你父亲一样高。' },
     { en: 'I felt as pleased as anything.', zh: '我感到无比高兴。' },
     { en: 'He\'s as stubborn as a mule.', zh: '他像骡子一样倔。' }
@@ -199,7 +199,7 @@ export const A1: Word[] = [
     { en: 'May I ask you a question?', zh: '我可以问你一个问题吗？' },
     { en: 'She asked for help.', zh: '她请求帮助。' }
   ] },
-  { word: 'at', level: 'A1', ipa: '', pos: 'prep.', meaning: 'prep. 在（表示存在或出现的地点、场所、位置、空间）；在……岁时', examples: [
+  { word: 'at', level: 'A1', ipa: 'æt; ət', pos: 'prep.', meaning: 'prep. 在（表示存在或出现的地点、场所、位置、空间）；在……岁时', examples: [
     { en: 'I reside at the mission at St. Michael\'s.', zh: '我住在圣迈克尔教堂的布道所。' },
     { en: 'I always feel at home at Ye Olde Starre Inn.', zh: '在昨日星辰客栈，我总是觉得非常舒适安逸。' },
     { en: 'I was good at sums at school.', zh: '我上学时擅长算术。' }
@@ -246,7 +246,7 @@ export const A1: Word[] = [
     { en: 'I ate a banana for lunch.', zh: '我午餐吃了一根香蕉。' },
     { en: 'Monkeys like bananas.', zh: '猴子喜欢香蕉。' }
   ] },
-  { word: 'band', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 乐队；一伙，一群', examples: [
+  { word: 'band', level: 'A1', ipa: 'bænd', pos: 'n.', meaning: 'n. 乐队；一伙，一群', examples: [
     { en: 'The singer re-formed his band.', zh: '这名歌手对他的乐队进行了重组。' },
     { en: 'There was a naff band playing.', zh: '有一支蹩脚的乐队在演奏。' },
     { en: 'The band is remixing some tracks.', zh: '这个乐队正在重新合成一些曲目。' }
@@ -259,12 +259,12 @@ export const A1: Word[] = [
     { en: 'I take a bath every evening.', zh: '我每天晚上洗澡。' },
     { en: 'The baby is in the bath.', zh: '宝宝在浴缸里。' }
   ] },
-  { word: 'bathroom', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 浴室，盥洗室；<美>卫生间，厕所', examples: [
+  { word: 'bathroom', level: 'A1', ipa: 'ˈbɑːθruːm; ˈbɑːθrʊm', pos: 'n.', meaning: 'n. 浴室，盥洗室；<美>卫生间，厕所', examples: [
     { en: 'The bathroom floor was awash.', zh: '浴室地板浸在水中。' },
     { en: 'I went next door to the bathroom.', zh: '我进了隔壁的洗手间。' },
     { en: 'Are you done hogging the bathroom?', zh: '你要霸占浴室到什么时候？' }
   ] },
-  { word: 'be', level: 'A1', ipa: '', pos: 'v., auxiliaryv.', meaning: 'aux. 被（用于被动语态）；正，正在（用于进行时）', examples: [
+  { word: 'be', level: 'A1', ipa: 'biː; bi', pos: 'v., auxiliaryv.', meaning: 'aux. 被（用于被动语态）；正，正在（用于进行时）', examples: [
     { en: 'I can be very persuasive when I want to be.', zh: '当我想要的时候，我会很有说服力的。' },
     { en: 'Allah be praised.', zh: '感谢真主！' },
     { en: 'Allah be praised!', zh: '赞美安拉！' }
@@ -411,7 +411,7 @@ export const A1: Word[] = [
     { en: 'Some people are born brainy.', zh: '有些人生来就聪明。' },
     { en: 'I was born on Christmas Day.', zh: '我出生在圣诞节。' }
   ] },
-  { word: 'both', level: 'A1', ipa: '', pos: 'det., pron.', meaning: 'det. 双方，两者', examples: [
+  { word: 'both', level: 'A1', ipa: 'bəʊθ', pos: 'det., pron.', meaning: 'det. 双方，两者', examples: [
     { en: 'You\'re both coming? Splendid!', zh: '你们俩都要来？太好了！' },
     { en: 'Both drivers escaped unhurt.', zh: '两个驾驶员都幸免于难，安然无恙。' },
     { en: 'Both teams battled hard.', zh: '两队拼得很厉害。' }
@@ -560,7 +560,7 @@ export const A1: Word[] = [
     { en: 'The cat is small.', zh: '这只猫很小。' },
     { en: 'I have a cat.', zh: '我有一只猫。' }
   ] },
-  { word: 'CD', level: 'A1', ipa: '', pos: 'n.', meaning: 'abbr. 光盘，激光唱片（compact disc）；呼叫设备（calling device）', examples: [
+  { word: 'CD', level: 'A1', ipa: 'ˌsiː ˈdiː', pos: 'n.', meaning: 'abbr. 光盘，激光唱片（compact disc）；呼叫设备（calling device）', examples: [
     { en: 'She traded her posters for his CD.', zh: '她以海报换取他的光盘。' },
     { en: 'I just bought this awesome new CD!', zh: '我刚买了这张特棒的新CD！' },
     { en: 'Snap! I\'ve just bought that CD too!', zh: '真是巧了！我也刚买了那张光盘！' }
@@ -664,7 +664,7 @@ export const A1: Word[] = [
     { en: 'He belongs to an exclusive club.', zh: '他参加的是一个上层人士俱乐部。' },
     { en: 'The next player discarded a club.', zh: '接下来的那位玩家出了张梅花牌。' }
   ] },
-  { word: 'coat', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 外套，大衣；<美>（指套装的）短上衣', examples: [
+  { word: 'coat', level: 'A1', ipa: 'kəʊt', pos: 'n.', meaning: 'n. 外套，大衣；<美>（指套装的）短上衣', examples: [
     { en: 'I wondered whose the coat was.', zh: '我思忖着那件大衣是谁的。' },
     { en: 'Here, let me take your coat.', zh: '来，我帮你拿大衣。' },
     { en: 'She was wearing a new coat.', zh: '她穿了一件新外衣。' }
@@ -692,12 +692,12 @@ export const A1: Word[] = [
     { en: 'Come here!', zh: '过来！' },
     { en: 'She comes to my house.', zh: '她来我家。' }
   ] },
-  { word: 'common', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 共同的，共享的；常见的，普遍的，一般的', examples: [
+  { word: 'common', level: 'A1', ipa: 'ˈkɒmən', pos: 'adj.', meaning: 'adj. 共同的，共享的；常见的，普遍的，一般的', examples: [
     { en: 'It\'s not a word in common usage.', zh: '这不是一个常用词。' },
     { en: 'Jackson is a common English name.', zh: '杰克逊是常见的英语人名。' },
     { en: 'Winters is a common enough surname.', zh: '温特斯是一个相当普通的姓。' }
   ] },
-  { word: 'company', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 公司；陪伴，同伴', examples: [
+  { word: 'company', level: 'A1', ipa: 'ˈkʌmpəni', pos: 'n.', meaning: 'n. 公司；陪伴，同伴', examples: [
     { en: 'The company employs 18 workers.', zh: '该公司雇用18位职工。' },
     { en: 'The company sued for defamation.', zh: '这个公司因受到诽谤而提起诉讼。' },
     { en: 'The company wants quick results.', zh: '这公司要立竿见影的成果。' }
@@ -706,7 +706,7 @@ export const A1: Word[] = [
     { en: 'Compare the two books.', zh: '比较一下这两本书。' },
     { en: 'We compared prices.', zh: '我们比较了价格。' }
   ] },
-  { word: 'complete', level: 'A1', ipa: '', pos: 'adj., v.', meaning: 'adj. 完全的，彻底的；全部的，完整的', examples: [
+  { word: 'complete', level: 'A1', ipa: 'kəmˈpliːt', pos: 'adj., v.', meaning: 'adj. 完全的，彻底的；全部的，完整的', examples: [
     { en: 'We were in complete agreement.', zh: '我们意见完全一致。' },
     { en: 'I felt like a complete idiot.', zh: '我感到完全像个傻瓜。' },
     { en: 'You must complete three written assignments.', zh: '你必须完成三个书面作业。' }
@@ -715,12 +715,12 @@ export const A1: Word[] = [
     { en: 'I use a computer.', zh: '我用电脑。' },
     { en: 'The computer is new.', zh: '电脑是新的。' }
   ] },
-  { word: 'concert', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 音乐会，演奏会；一致，和谐', examples: [
+  { word: 'concert', level: 'A1', ipa: 'ˈkɒnsət', pos: 'n.', meaning: 'n. 音乐会，演奏会；一致，和谐', examples: [
     { en: 'When does the concert begin?', zh: '音乐会什么时间开始？' },
     { en: 'Their concert there was a sell-out.', zh: '他们在那儿的音乐会座无虚席。' },
     { en: 'The concert had been a great success.', zh: '音乐会非常成功。' }
   ] },
-  { word: 'conversation', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. （非正式的）谈话，交谈；<旧>社交，交际', examples: [
+  { word: 'conversation', level: 'A1', ipa: 'ˌkɒnvəˈseɪʃ(ə)n', pos: 'n.', meaning: 'n. （非正式的）谈话，交谈；<旧>社交，交际', examples: [
     { en: 'She was engrossed in conversation.', zh: '她聚精会神地谈话。' },
     { en: 'The subject came up in conversation.', zh: '谈话中提到了这个话题。' },
     { en: 'I heard snatches of the conversation.', zh: '我听到几段零星的谈话。' }
@@ -729,7 +729,7 @@ export const A1: Word[] = [
     { en: 'My mother cooks dinner.', zh: '我妈妈做晚饭。' },
     { en: 'He is a cook.', zh: '他是一名厨师。' }
   ] },
-  { word: 'cooking', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 烹饪，烹调；饭菜', examples: [
+  { word: 'cooking', level: 'A1', ipa: 'ˈkʊkɪŋ', pos: 'n.', meaning: 'n. 烹饪，烹调；饭菜', examples: [
     { en: 'I find cooking very relaxing.', zh: '我发现烹饪非常令人放松。' },
     { en: 'My husband does all the cooking.', zh: '我丈夫把做饭全包了下来。' },
     { en: 'She praised his cooking.', zh: '她称赞他的烹调技术。' }
@@ -746,7 +746,7 @@ export const A1: Word[] = [
     { en: 'The cost of living is high.', zh: '生活成本很高。' },
     { en: 'What is the cost?', zh: '费用是多少？' }
   ] },
-  { word: 'could', level: 'A1', ipa: '', pos: 'modalv.', meaning: 'v. （礼貌地请求许可）可以，能；（礼貌地请求别人做事）能，能否', examples: [
+  { word: 'could', level: 'A1', ipa: 'kʊd; kəd', pos: 'modalv.', meaning: 'v. （礼貌地请求许可）可以，能；（礼貌地请求别人做事）能，能否', examples: [
     { en: 'Could I stay tonight?', zh: '今晚我可以待在这吗？' },
     { en: 'He could be spiteful.', zh: '他可能怀有恶意。' },
     { en: 'If you could mobilize the resources, you could get it done.', zh: '如果你能调动资源，你就能完成它。' }
@@ -755,7 +755,7 @@ export const A1: Word[] = [
     { en: 'China is a big country.', zh: '中国是个大国。' },
     { en: 'I live in the country.', zh: '我住在乡下。' }
   ] },
-  { word: 'course', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 课程；过程', examples: [
+  { word: 'course', level: 'A1', ipa: 'kɔːs', pos: 'n.', meaning: 'n. 课程；过程', examples: [
     { en: 'The course lasts five weeks.', zh: '这门课程上五周。' },
     { en: 'Of course I\'m not afraid!', zh: '当然我不怕！' },
     { en: 'The course has a vocational emphasis.', zh: '这门课程着重职业培训。' }
@@ -783,7 +783,7 @@ export const A1: Word[] = [
     { en: 'I love Chinese culture.', zh: '我喜爱中国文化。' },
     { en: 'Music is part of culture.', zh: '音乐是文化的一部分。' }
   ] },
-  { word: 'cup', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 杯子；一杯（的量）', examples: [
+  { word: 'cup', level: 'A1', ipa: 'kʌp', pos: 'n.', meaning: 'n. 杯子；一杯（的量）', examples: [
     { en: 'She pushed the cup towards me.', zh: '她把杯子推向我这边。' },
     { en: 'She crumpled up her coffee cup.', zh: '她挤瘪了咖啡杯。' },
     { en: 'Mind that cup, you clumsy oaf!', zh: '当心那个杯子，你这笨手笨脚的家伙！' }
@@ -835,12 +835,12 @@ export const A1: Word[] = [
     { en: 'A sunny day.', zh: '晴朗的一天。' },
     { en: 'Have a good day!', zh: '祝你有美好的一天！' }
   ] },
-  { word: 'dear', level: 'A1', ipa: '', pos: 'adj., exclam.', meaning: 'adj. 珍视的；(用于信函抬头名字或头衔前)亲爱的', examples: [
+  { word: 'dear', level: 'A1', ipa: 'dɪə(r)', pos: 'adj., exclam.', meaning: 'adj. 珍视的；(用于信函抬头名字或头衔前)亲爱的', examples: [
     { en: 'Would you like a drink, dear?', zh: '喝点什么吗，亲爱的？' },
     { en: 'My dear girl, you\'re wrong.', zh: '我亲爱的姑娘，你错了。' },
     { en: 'You\'re a lot like me, dear.', zh: '你和我太像了，亲爱的。' }
   ] },
-  { word: 'December', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 十二月', examples: [
+  { word: 'December', level: 'A1', ipa: 'dɪˈsembə(r)', pos: 'n.', meaning: 'n. 十二月', examples: [
     { en: 'I keep forgetting it\'s December.', zh: '我总是忘了现在是12月份。' },
     { en: 'He departed his job December 16.', zh: '他于12月16日离职。' },
     { en: 'Prices edged up 2% in the year to December.', zh: '到12月为止的年度价格上涨了2%。' }
@@ -857,7 +857,7 @@ export const A1: Word[] = [
     { en: 'Can you describe the man?', zh: '你能描述一下那个人吗？' },
     { en: 'He described the picture.', zh: '他描述了那幅画。' }
   ] },
-  { word: 'description', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 描述，形容，说明；类型', examples: [
+  { word: 'description', level: 'A1', ipa: 'dɪˈskrɪpʃn', pos: 'n.', meaning: 'n. 描述，形容，说明；类型', examples: [
     { en: 'The description was pretty vague.', zh: '这项描述是相当含糊的。' },
     { en: 'The description fits us to a tee.', zh: '这个描述恰好符合我们的情况。' },
     { en: 'They gave a general description of the man.', zh: '他们对这个男人作了大致的描述。' }
@@ -894,7 +894,7 @@ export const A1: Word[] = [
     { en: 'Sugar is ubiquitous in the diet.', zh: '糖在饮食中到处可见。' },
     { en: 'Bamboo is the panda\'s staple diet.', zh: '大熊猫的基本食物是竹子。' }
   ] },
-  { word: 'difference', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 差异，不同之处；差额', examples: [
+  { word: 'difference', level: 'A1', ipa: 'ˈdɪfrəns', pos: 'n.', meaning: 'n. 差异，不同之处；差额', examples: [
     { en: 'Okay, there is a slight difference.', zh: '好吧，是有稍稍的不同。' },
     { en: 'It won\'t make a scrap of difference.', zh: '这不会有丝毫的差别。' },
     { en: 'Few people understand the difference.', zh: '很少有人了解这个差别。' }
@@ -970,7 +970,7 @@ export const A1: Word[] = [
     { en: 'My father drives a car.', zh: '我父亲开车。' },
     { en: 'I learn to drive.', zh: '我学开车。' }
   ] },
-  { word: 'driver', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 司机，驾驶员；驱动程序', examples: [
+  { word: 'driver', level: 'A1', ipa: 'ˈdraɪvə(r)', pos: 'n.', meaning: 'n. 司机，驾驶员；驱动程序', examples: [
     { en: 'He yelled at the other driver.', zh: '他冲着另一位司机大叫。' },
     { en: 'The driver suffered head injuries.', zh: '司机头部受伤。' },
     { en: 'The driver was robbed at gunpoint.', zh: '司机遭持枪抢劫。' }
@@ -979,7 +979,7 @@ export const A1: Word[] = [
     { en: 'I read during the day.', zh: '我白天读书。' },
     { en: 'We travel during summer.', zh: '我们夏天旅行。' }
   ] },
-  { word: 'DVD', level: 'A1', ipa: '', pos: 'n.', meaning: 'abbr. 数字化视频光盘（Digital Video Disk）', examples: [
+  { word: 'DVD', level: 'A1', ipa: 'ˌdiː viː ˈdiː', pos: 'n.', meaning: 'abbr. 数字化视频光盘（Digital Video Disk）', examples: [
     { en: 'The DVD can be rented from your local store.', zh: '这DVD可在你们当地的商店租借。' },
     { en: 'Pirate copies of the DVD are already being sold.', zh: '该DVD的盗版已经有售了。' },
     { en: 'With DVD, you can watch the latest movies in the comfort of your own home.', zh: '有了DVD，你就可以在自己家里舒舒服服地观看最新的电影。' }
@@ -988,7 +988,7 @@ export const A1: Word[] = [
     { en: 'Each child has a book.', zh: '每个孩子都有一本书。' },
     { en: 'We have one each.', zh: '我们每人一个。' }
   ] },
-  { word: 'ear', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 耳朵；灵敏的听力', examples: [
+  { word: 'ear', level: 'A1', ipa: 'ɪə(r)', pos: 'n.', meaning: 'n. 耳朵；灵敏的听力', examples: [
     { en: 'She tweaked his ear playfully.', zh: '她拧他的耳朵逗着玩儿。' },
     { en: 'He tweaked Guy\'s ear roughly.', zh: '他粗暴地扯盖伊的耳朵。' },
     { en: 'A bullet whizzed past my ear.', zh: '一颗子弹嗖的一声从我耳边飞过。' }
@@ -1023,7 +1023,7 @@ export const A1: Word[] = [
     { en: 'Eighteen kids are skating.', zh: '十八个孩子在滑旱冰。' },
     { en: 'My classmate is eighteen.', zh: '我的同学十八岁。' }
   ] },
-  { word: 'eighty', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 八十；八十岁', examples: [
+  { word: 'eighty', level: 'A1', ipa: 'ˈeɪti', pos: 'number', meaning: 'n. 八十；八十岁', examples: [
     { en: 'He\'s getting on for eighty.', zh: '他近八十岁了。' },
     { en: 'Eighty horses trotted up.', zh: '80匹马小跑上来。' },
     { en: 'Eighty million years ago, dinosaurs ruled the earth.', zh: '八千万年前，地球是恐龙的天下。' }
@@ -1106,7 +1106,7 @@ export const A1: Word[] = [
     { en: 'He finished top in the exam.', zh: '他考试得了第一名。' },
     { en: 'The exam was a real killer.', zh: '这考试可真费劲。' }
   ] },
-  { word: 'example', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 例子，例证；榜样，楷模', examples: [
+  { word: 'example', level: 'A1', ipa: 'ɪɡˈzɑːmp(ə)l', pos: 'n.', meaning: 'n. 例子，例证；榜样，楷模', examples: [
     { en: 'Let me give you an example.', zh: '让我来举一个例子吧。' },
     { en: 'She is a shining example to us all.', zh: '她是我们所有人的光辉榜样。' },
     { en: 'Her courage is an example to us all.', zh: '她的勇气是我们大家的榜样。' }
@@ -1115,7 +1115,7 @@ export const A1: Word[] = [
     { en: 'I am excited!', zh: '我很兴奋！' },
     { en: 'She is excited about the trip.', zh: '她对旅行感到兴奋。' }
   ] },
-  { word: 'exciting', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 令人兴奋的，令人激动的；惊险刺激的（尤指无法预知下一步将发生什么）', examples: [
+  { word: 'exciting', level: 'A1', ipa: 'ɪkˈsaɪtɪŋ', pos: 'adj.', meaning: 'adj. 令人兴奋的，令人激动的；惊险刺激的（尤指无法预知下一步将发生什么）', examples: [
     { en: '"Golly," he says, "Isn\'t it exciting!"', zh: '他说，“天哪！这真是太令人兴奋了！”' },
     { en: 'It promises to be an exciting few days.', zh: '那可望是兴奋刺激的几天。' },
     { en: 'Every day was exciting and adventuresome.', zh: '过去的每一天都令人兴奋充满惊险和刺激。' }
@@ -1132,7 +1132,7 @@ export const A1: Word[] = [
     { en: 'Please explain this word.', zh: '请解释这个单词。' },
     { en: 'Can you explain it?', zh: '你能解释一下吗？' }
   ] },
-  { word: 'extra', level: 'A1', ipa: '', pos: 'adj., adv.', meaning: 'adj. 额外的；另外收费的', examples: [
+  { word: 'extra', level: 'A1', ipa: 'ˈekstrə', pos: 'adj., adv.', meaning: 'adj. 额外的；另外收费的', examples: [
     { en: 'Running shoes have extra cushioning.', zh: '跑鞋有额外的减震设计。' },
     { en: 'She won\'t pay any extra.', zh: '她不会支付任何额外费用。' },
     { en: 'She tried extra hard.', zh: '她特别努力。' }
@@ -1153,7 +1153,7 @@ export const A1: Word[] = [
     { en: 'Leaves fall in autumn.', zh: '秋天树叶落下。' },
     { en: 'Don’t fall!', zh: '别摔倒！' }
   ] },
-  { word: 'false', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 错误的，不真实的；伪造的', examples: [
+  { word: 'false', level: 'A1', ipa: 'fɔːls', pos: 'adj.', meaning: 'adj. 错误的，不真实的；伪造的', examples: [
     { en: 'The thief used a false identity.', zh: '窃贼使用的是假身份。' },
     { en: 'The whole argument rests on a false assumption.', zh: '整个论证都是基于一个错误的假设。' },
     { en: 'He hid behind a false identity.', zh: '他隐姓埋名。' }
@@ -1179,7 +1179,7 @@ export const A1: Word[] = [
     { en: 'A big farm.', zh: '一个大农场。' },
     { en: 'We visit the farm.', zh: '我们参观农场。' }
   ] },
-  { word: 'farmer', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 农夫，农民', examples: [
+  { word: 'farmer', level: 'A1', ipa: 'ˈfɑːmə(r)', pos: 'n.', meaning: 'n. 农夫，农民', examples: [
     { en: 'There once was a poor farmer who had four sons.', zh: '从前有一个贫苦的农夫，他有四个儿子。' },
     { en: 'A farmer is entitled to a certain particularized tax treatment.', zh: '农民能够享受某种具体的税收待遇。' },
     { en: 'At first glance, organic farming looks much more expensive for the farmer.', zh: '乍一看，有机耕作对农民来说似乎昂贵得多。' }
@@ -1188,7 +1188,7 @@ export const A1: Word[] = [
     { en: 'A fast car.', zh: '一辆快车。' },
     { en: 'He runs fast.', zh: '他跑得快。' }
   ] },
-  { word: 'fat', level: 'A1', ipa: '', pos: 'adj., n.', meaning: 'adj. 肥的，肥胖的；厚的，宽的', examples: [
+  { word: 'fat', level: 'A1', ipa: 'fæt', pos: 'adj., n.', meaning: 'adj. 肥的，肥胖的；厚的，宽的', examples: [
     { en: 'Excess food is stored as fat.', zh: '多余的食物作为脂肪贮存起来。' },
     { en: 'This dress makes me look fat.', zh: '这衣服我穿着显胖。' },
     { en: 'The manager was fat and jolly.', zh: '经理胖乎乎乐呵呵的。' }
@@ -1201,7 +1201,7 @@ export const A1: Word[] = [
     { en: 'What is your favourite colour?', zh: '你最喜欢什么颜色？' },
     { en: 'This is my favourite book.', zh: '这是我最喜欢的书。' }
   ] },
-  { word: 'February', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 二月', examples: [
+  { word: 'February', level: 'A1', ipa: 'ˈfebruəri', pos: 'n.', meaning: 'n. 二月', examples: [
     { en: 'Postal workers are getting a 5.2% pay rise, backdated to February.', zh: '邮政员工的工资将提高5.2%，追溯至二月份起算。' },
     { en: 'He welshed on his agreement with the team that he would play for them in February.', zh: '他逃避履行他与球队合同中在二月为他们踢球的协议。' },
     { en: 'His exhibition opens on February 5.', zh: '他的展览2月5日开幕。' }
@@ -1210,12 +1210,12 @@ export const A1: Word[] = [
     { en: 'I feel happy.', zh: '我感到开心。' },
     { en: 'The water feels cold.', zh: '水摸起来很凉。' }
   ] },
-  { word: 'feeling', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 感觉，感触；预感', examples: [
+  { word: 'feeling', level: 'A1', ipa: 'ˈfiːlɪŋ', pos: 'n.', meaning: 'n. 感觉，感触；预感', examples: [
     { en: 'She\'s feeling a little homesick.', zh: '她感到有些想家了。' },
     { en: 'I\'m not feeling very well.', zh: '我感觉身体不太好。' },
     { en: 'How are you feeling now?', zh: '你现在感觉怎么样？' }
   ] },
-  { word: 'festival', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 活动节期，纪念活动；节日，节庆', examples: [
+  { word: 'festival', level: 'A1', ipa: 'ˈfestɪvl; ˈfestəvəl', pos: 'n.', meaning: 'n. 活动节期，纪念活动；节日，节庆', examples: [
     { en: 'I declare this festival open.', zh: '我宣布庆祝活动开始。' },
     { en: 'Not everyone approves of the festival.', zh: '不是每个人都喜欢这个节日。' },
     { en: 'The film festival takes place in October.', zh: '电影节将于十月举行。' }
@@ -1224,32 +1224,32 @@ export const A1: Word[] = [
     { en: 'I have a few friends.', zh: '我有几个朋友。' },
     { en: 'Few people know this.', zh: '很少有人知道这个。' }
   ] },
-  { word: 'fifteen', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 十五；十五个', examples: [
+  { word: 'fifteen', level: 'A1', ipa: 'ˌfɪfˈtiːn', pos: 'number', meaning: 'n. 十五；十五个', examples: [
     { en: 'Three fives are fifteen.', zh: '三个五等于十五。' },
     { en: 'The talks began some fifteen minutes late.', zh: '商谈迟了约十五分钟才开始。' },
     { en: 'We paid off our mortgage after fifteen years.', zh: '我们历经十五年的时间还清了抵押借款。' }
   ] },
-  { word: 'fifth', level: 'A1', ipa: '', pos: 'number', meaning: 'adj. 第五的；五分之一的', examples: [
+  { word: 'fifth', level: 'A1', ipa: 'fɪfθ', pos: 'number', meaning: 'adj. 第五的；五分之一的', examples: [
     { en: 'The meeting is on April fifth.', zh: '会议日期是四月五日。' },
     { en: 'He finished fifth in the race.', zh: '他赛跑得了第五名。' },
     { en: 'Today is the fifth (of May).', zh: '今天是（五月）五号。' }
   ] },
-  { word: 'fifty', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 五十；五十个', examples: [
+  { word: 'fifty', level: 'A1', ipa: 'ˈfɪfti', pos: 'number', meaning: 'n. 五十；五十个', examples: [
     { en: 'Fifty is the new forty.', zh: '四十尚未老，五十正当年。' },
     { en: 'We have invited fifty people altogether.', zh: '我们共邀请了五十人。' },
     { en: 'Let\'s split this fifty-fifty.', zh: '咱们把这平分了吧。' }
   ] },
-  { word: 'fill', level: 'A1', ipa: '', pos: 'v.', meaning: 'v. （使）充满，占满；堵塞，填补', examples: [
+  { word: 'fill', level: 'A1', ipa: 'fɪl', pos: 'v.', meaning: 'v. （使）充满，占满；堵塞，填补', examples: [
     { en: 'Dentists fill teeth and repair broken ones.', zh: '牙医补牙并修理坏牙。' },
     { en: 'The company has been unable to fill the post.', zh: '公司的这个空缺还未能填补。' },
     { en: 'Teachers will be asked to fill in a questionnaire.', zh: '教师们将被要求填写一份调查问卷。' }
   ] },
-  { word: 'film', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'n. 电影，影片；电影艺术，电影业', examples: [
+  { word: 'film', level: 'A1', ipa: 'fɪlm', pos: 'n., v.', meaning: 'n. 电影，影片；电影艺术，电影业', examples: [
     { en: 'Jenny\'s writing a film script.', zh: '珍妮在写一个电影脚本。' },
     { en: 'She loaded film into the camera.', zh: '她把胶卷装到照相机里。' },
     { en: 'The film jumped during projection.', zh: '电影放映时跳了片。' }
   ] },
-  { word: 'final', level: 'A1', ipa: '', pos: 'adj., n.', meaning: 'adj. 最终的，结束的；(出现次序)最后的，末尾的', examples: [
+  { word: 'final', level: 'A1', ipa: 'ˈfaɪn(ə)l', pos: 'adj., n.', meaning: 'adj. 最终的，结束的；(出现次序)最后的，末尾的', examples: [
     { en: 'The judge\'s decision is final.', zh: '法官的判决是最终判决。' },
     { en: 'The judges\' decision is final.', zh: '裁判的决定为最终决定。' },
     { en: 'I\'ll text you the final score.', zh: '我会发短信告诉你最终的比分。' }
@@ -1270,7 +1270,7 @@ export const A1: Word[] = [
     { en: 'The fire is hot.', zh: '火很烫。' },
     { en: 'We sit by the fire.', zh: '我们坐在火边。' }
   ] },
-  { word: 'first', level: 'A1', ipa: '', pos: 'det., number, adv., n.', meaning: 'det. 第一位的，最先的；首（次）的', examples: [
+  { word: 'first', level: 'A1', ipa: 'fɜːst', pos: 'det., number, adv., n.', meaning: 'det. 第一位的，最先的；首（次）的', examples: [
     { en: 'We\'re expecting our first baby.', zh: '我们要生第一个孩子了。' },
     { en: 'First rake the soil smooth.', zh: '首先把地耙平。' },
     { en: 'She won the first hole.', zh: '她在第一洞时领先。' }
@@ -1279,7 +1279,7 @@ export const A1: Word[] = [
     { en: 'I catch a fish.', zh: '我钓到一条鱼。' },
     { en: 'We fish in the lake.', zh: '我们在湖里钓鱼。' }
   ] },
-  { word: 'five', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 五，五个；五美元钞票', examples: [
+  { word: 'five', level: 'A1', ipa: 'faɪv', pos: 'number', meaning: 'n. 五，五个；五美元钞票', examples: [
     { en: 'She brought up five children.', zh: '她抚育了五个孩子。' },
     { en: 'Britain won five gold medals.', zh: '英国夺取了五块金牌。' },
     { en: 'He arrived around five o\'clock.', zh: '他大约是五点钟到的。' }
@@ -1288,7 +1288,7 @@ export const A1: Word[] = [
     { en: 'A flat road.', zh: '一条平路。' },
     { en: 'I live in a flat.', zh: '我住在一套公寓里。' }
   ] },
-  { word: 'flight', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 航班，班机；飞行', examples: [
+  { word: 'flight', level: 'A1', ipa: 'flaɪt', pos: 'n.', meaning: 'n. 航班，班机；飞行', examples: [
     { en: 'We\'re booked on the same flight.', zh: '我们订了同一班机的机票。' },
     { en: 'My flight was an hour late.', zh: '我那趟航班晚点了一小时。' },
     { en: 'The flight was heavily overbooked.', zh: '该班机售票大大超出机位数量。' }
@@ -1301,7 +1301,7 @@ export const A1: Word[] = [
     { en: 'A beautiful flower.', zh: '一朵美丽的花。' },
     { en: 'She picks flowers.', zh: '她摘花。' }
   ] },
-  { word: 'fly', level: 'A1', ipa: '', pos: 'v., n.', meaning: 'v. 飞，飞行；乘飞机，搭乘（某公司航班）', examples: [
+  { word: 'fly', level: 'A1', ipa: 'flaɪ', pos: 'v., n.', meaning: 'v. 飞，飞行；乘飞机，搭乘（某公司航班）', examples: [
     { en: 'Magda was going to fly standby.', zh: '玛格达将凭剩余廉价机票乘飞机旅行。' },
     { en: 'She is licensed to fly solo.', zh: '她已获准单飞。' },
     { en: 'She brushed the fly away.', zh: '她挥手赶走了苍蝇。' }
@@ -1322,7 +1322,7 @@ export const A1: Word[] = [
     { en: 'He plays football.', zh: '他踢足球。' },
     { en: 'A football match.', zh: '一场足球赛。' }
   ] },
-  { word: 'for', level: 'A1', ipa: '', pos: 'prep.', meaning: 'prep. （表示对象、用途等）给，对；为了，以帮助', examples: [
+  { word: 'for', level: 'A1', ipa: 'fɔː(r); fə(r)', pos: 'prep.', meaning: 'prep. （表示对象、用途等）给，对；为了，以帮助', examples: [
     { en: 'Let\'s hear it for the teachers, for a change.', zh: '咱们变换一下，这回为老师们鼓鼓掌。' },
     { en: 'He was jailed for life for murder.', zh: '他因谋杀罪被终身监禁。' },
     { en: 'I\'ve sent off for some books for my course.', zh: '我已去函邮购一些上课用的书。' }
@@ -1331,27 +1331,27 @@ export const A1: Word[] = [
     { en: 'I forget his name.', zh: '我忘了他的名字。' },
     { en: 'Don’t forget your book.', zh: '别忘带书。' }
   ] },
-  { word: 'form', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'v. （使）出现；（使）（关系、习惯或想法）形成', examples: [
+  { word: 'form', level: 'A1', ipa: 'fɔːm', pos: 'n., v.', meaning: 'v. （使）出现；（使）（关系、习惯或想法）形成', examples: [
     { en: 'He hates violence in any form.', zh: '他憎恶任何形式的暴力。' },
     { en: 'She despised gossip in any form.', zh: '她对任何形式的流言飞语都嗤之以鼻。' },
     { en: 'Water vapour condenses to form clouds.', zh: '水蒸汽冷凝形成云。' }
   ] },
-  { word: 'forty', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 四十', examples: [
+  { word: 'forty', level: 'A1', ipa: 'ˈfɔːti', pos: 'number', meaning: 'n. 四十', examples: [
     { en: 'Fifty is the new forty.', zh: '四十尚未老，五十正当年。' },
     { en: 'My car does forty miles to the gallon.', zh: '我的车每加仑汽油跑四十英里。' },
     { en: 'You can\'t live on forty pounds a week.', zh: '你靠每周四十英镑没法过活。' }
   ] },
-  { word: 'four', level: 'A1', ipa: '', pos: 'number', meaning: 'num. 四，四个', examples: [
+  { word: 'four', level: 'A1', ipa: 'fɔː(r)', pos: 'number', meaning: 'num. 四，四个', examples: [
     { en: 'She\'s four years his junior.', zh: '她比他小四岁。' },
     { en: 'There\'s only four days left.', zh: '只剩下四天了。' },
     { en: 'Four quarters make a whole.', zh: '四个四分之一构成一个整体。' }
   ] },
-  { word: 'fourteen', level: 'A1', ipa: '', pos: 'number', meaning: 'num. 十四；十四个', examples: [
+  { word: 'fourteen', level: 'A1', ipa: 'ˌfɔːˈtiːn', pos: 'number', meaning: 'num. 十四；十四个', examples: [
     { en: '"Fourteen minutes," Chris said, taking a peep at his watch.', zh: '“十四分钟，”克里斯瞥了一眼手表说道。' },
     { en: 'I\'m fourteen years old.', zh: '我14岁。' },
     { en: 'She spent fourteen years in retailing.', zh: '她做了14年的零售。' }
   ] },
-  { word: 'fourth', level: 'A1', ipa: '', pos: 'number', meaning: 'adj. 第四的，第四个的；四分之一的', examples: [
+  { word: 'fourth', level: 'A1', ipa: 'fɔːθ', pos: 'number', meaning: 'adj. 第四的，第四个的；四分之一的', examples: [
     { en: 'Thompson is lying in fourth place.', zh: '汤姆森名列第四。' },
     { en: 'This was their fourth successive win.', zh: '这是他们连续第四次获胜。' },
     { en: 'The lift bell pinged at the fourth floor.', zh: '该电梯铃在四楼发出响声。' }
@@ -1360,7 +1360,7 @@ export const A1: Word[] = [
     { en: 'The water is free.', zh: '水是免费的。' },
     { en: 'I am free on Sunday.', zh: '我周日有空。' }
   ] },
-  { word: 'Friday', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 星期五；忠仆', examples: [
+  { word: 'Friday', level: 'A1', ipa: 'ˈfraɪdeɪ', pos: 'n.', meaning: 'n. 星期五；忠仆', examples: [
     { en: 'The party is on Friday evening.', zh: '聚会定于周五晚上举行。' },
     { en: 'Today is Friday, September 14th.', zh: '今天是9月14日，星期五。' },
     { en: 'It\'s not doable by Friday.', zh: '这事星期五之前做不了。' }
@@ -1373,7 +1373,7 @@ export const A1: Word[] = [
     { en: 'She is a friendly girl.', zh: '她是个友好的女孩。' },
     { en: 'The people here are friendly.', zh: '这里的人很友好。' }
   ] },
-  { word: 'from', level: 'A1', ipa: '', pos: 'prep.', meaning: 'prep. 从……起；从……开始', examples: [
+  { word: 'from', level: 'A1', ipa: 'frɒm; frəm', pos: 'prep.', meaning: 'prep. 从……起；从……开始', examples: [
     { en: 'Cheap flights are available from budget travel agents from $240.', zh: '起价$240的廉价机票可从一些经济旅行社那里买到。' },
     { en: 'Departure times are 08:15 from Baltimore, and 10:15 from Newark.', zh: '从巴尔的摩的出发时间是08:15，从纽瓦克的出发时间是10:15。' },
     { en: 'The album was compiled from live recordings from last year\'s tour.', zh: '这套唱片选辑由去年巡回演出的实况录音汇编而成。' }
@@ -1390,12 +1390,12 @@ export const A1: Word[] = [
     { en: 'The cup is full.', zh: '杯子满了。' },
     { en: 'I am full, thank you.', zh: '我吃饱了，谢谢。' }
   ] },
-  { word: 'fun', level: 'A1', ipa: '', pos: 'n., adj.', meaning: 'n. 乐趣，享受；嬉戏，玩笑', examples: [
+  { word: 'fun', level: 'A1', ipa: 'fʌn', pos: 'n., adj.', meaning: 'n. 乐趣，享受；嬉戏，玩笑', examples: [
     { en: 'We\'re gonna have a lotta fun.', zh: '我们将玩得非常开心。' },
     { en: 'She\'s really fun to be with.', zh: '和她在一起真开心。' },
     { en: 'It was all innocent fun.', zh: '那不过是些无恶意的玩笑。' }
   ] },
-  { word: 'funny', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 滑稽的，有趣的；古怪的，难以解释的', examples: [
+  { word: 'funny', level: 'A1', ipa: 'ˈfʌni', pos: 'adj.', meaning: 'adj. 滑稽的，有趣的；古怪的，难以解释的', examples: [
     { en: 'She found it hilariously funny.', zh: '她觉得这事儿滑稽极了。' },
     { en: 'I\'ll tell you a funny story.', zh: '我将给你讲个好笑的故事。' },
     { en: '\'What\'s so funny ?\' she demanded.', zh: '“什么事这么好笑？”她问道。' }
@@ -1404,7 +1404,7 @@ export const A1: Word[] = [
     { en: 'I think about the future.', zh: '我会思考未来。' },
     { en: 'The future is bright.', zh: '未来是光明的。' }
   ] },
-  { word: 'game', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 游戏，比赛；一局，一场', examples: [
+  { word: 'game', level: 'A1', ipa: 'ɡeɪm', pos: 'n.', meaning: 'n. 游戏，比赛；一局，一场', examples: [
     { en: 'He paced his game skilfully.', zh: '他巧妙地控制着自己的比赛节奏。' },
     { en: 'Let\'s play a different game.', zh: '咱们玩点别的游戏吧。' },
     { en: 'The game was pretty good.', zh: '这个游戏相当不错。' }
@@ -1425,7 +1425,7 @@ export const A1: Word[] = [
     { en: 'A clever girl.', zh: '一个聪明的女孩。' },
     { en: 'The girl sings.', zh: '女孩在唱歌。' }
   ] },
-  { word: 'girlfriend', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 女朋友', examples: [
+  { word: 'girlfriend', level: 'A1', ipa: 'ˈɡɜːlfrend', pos: 'n.', meaning: 'n. 女朋友', examples: [
     { en: 'I met a girlfriend for lunch.', zh: '我和一个女伴一起吃了午饭。' },
     { en: 'I had lunch with a girlfriend.', zh: '我同女友一起吃的午饭。' },
     { en: 'My girlfriend Lynn and I eloped.', zh: '我和女友琳恩私奔了。' }
@@ -1458,7 +1458,7 @@ export const A1: Word[] = [
     { en: 'My grandmother is kind.', zh: '我祖母很和善。' },
     { en: 'I visit my grandmother.', zh: '我看望祖母。' }
   ] },
-  { word: 'grandparent', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 祖父母；祖父或祖母', examples: [
+  { word: 'grandparent', level: 'A1', ipa: 'ˈɡrænpeərənt', pos: 'n.', meaning: 'n. 祖父母；祖父或祖母', examples: [
     { en: 'Part of its mission would be to promote the risks and realities associated with being a grandparent.', zh: '它的部分使命将是宣传作为祖父母的风险和现实。' },
     { en: 'Almost every grandparent wants to be with his or her grandchildren and is willing to make sacrifices.', zh: '几乎每个祖父母都想和孙辈在一起，并愿意为他们做出牺牲。' },
     { en: 'The remaining 22% lived in the home of another family member (such as a grandparent, in-law or sibling), a non-relative, or in group quarters like college dormitories.', zh: '剩下22%的人住在另一个家庭成员家里（如祖父母、姻亲或兄弟姐妹）、非亲属成员家里、或是像大学宿舍一样的集体住房里。' }
@@ -1471,7 +1471,7 @@ export const A1: Word[] = [
     { en: 'Green leaves.', zh: '绿色的叶子。' },
     { en: 'I like green.', zh: '我喜欢绿色。' }
   ] },
-  { word: 'grey', level: 'A1', ipa: '', pos: 'adj., n.', meaning: 'adj. 灰色的；（头发）灰白的，花白的', examples: [
+  { word: 'grey', level: 'A1', ipa: 'ɡreɪ', pos: 'adj., n.', meaning: 'adj. 灰色的；（头发）灰白的，花白的', examples: [
     { en: 'The walls were a uniform grey.', zh: '墙壁一律都是灰色。' },
     { en: 'Her face was grey and bloodless.', zh: '她脸色灰暗毫无血色。' },
     { en: 'The ceiling was grey and cracked.', zh: '该天花板是灰色并有裂缝的。' }
@@ -1488,12 +1488,12 @@ export const A1: Word[] = [
     { en: 'Can you guess?', zh: '你能猜到吗？' },
     { en: 'I guess it is a cat.', zh: '我猜是只猫。' }
   ] },
-  { word: 'guitar', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 吉他，六弦琴', examples: [
+  { word: 'guitar', level: 'A1', ipa: 'ɡɪˈtɑː(r)', pos: 'n.', meaning: 'n. 吉他，六弦琴', examples: [
     { en: 'He played some wah-wah guitar.', zh: '他弹了一会儿哇哇吉他。' },
     { en: 'She\'s no slouch on the guitar.', zh: '她是弹吉他的好手。' },
     { en: 'This guitar is a delight to play.', zh: '这吉他弹起来很惬意。' }
   ] },
-  { word: 'gym', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 体育馆，健身房；（尤指学校的）体育活动', examples: [
+  { word: 'gym', level: 'A1', ipa: 'dʒɪm', pos: 'n.', meaning: 'n. 体育馆，健身房；（尤指学校的）体育活动', examples: [
     { en: 'The commons is next to the gym.', zh: '学生公共食堂在体育馆的旁边。' },
     { en: 'I was in the gym lifting weights.', zh: '我正在健身房举哑铃。' },
     { en: 'The school has recently built a new gym.', zh: '学校最近新建了一个体育馆。' }
@@ -1526,7 +1526,7 @@ export const A1: Word[] = [
     { en: 'A red hat.', zh: '一顶红帽子。' },
     { en: 'Put on your hat.', zh: '戴上你的帽子。' }
   ] },
-  { word: 'hate', level: 'A1', ipa: '', pos: 'v., n.', meaning: 'v. 厌恶，不喜欢；仇恨，憎恨', examples: [
+  { word: 'hate', level: 'A1', ipa: 'heɪt', pos: 'v., n.', meaning: 'v. 厌恶，不喜欢；仇恨，憎恨', examples: [
     { en: 'Above all else I hate the cold.', zh: '我最讨厌寒冷。' },
     { en: 'The obverse of love is hate.', zh: '爱的反面是恨。' },
     { en: 'I hate being photographed.', zh: '我讨厌被拍照。' }
@@ -1535,7 +1535,7 @@ export const A1: Word[] = [
     { en: 'I have a dog.', zh: '我有一只狗。' },
     { en: 'We have milk.', zh: '我们喝牛奶。' }
   ] },
-  { word: 'have to', level: 'A1', ipa: '', pos: 'modalv.', meaning: '必须，不得不：表示某事是必需或必要的。', examples: [
+  { word: 'have to', level: 'A1', ipa: 'ˈhæv tu', pos: 'modalv.', meaning: '必须，不得不：表示某事是必需或必要的。', examples: [
     { en: 'They may have to amputate.', zh: '他们可能不得不施行截肢手术。' },
     { en: 'I have to finish this essay today. We have to hand them in tomorrow.', zh: '我今天得完成这篇论文，因为我们明天必须交。' },
     { en: 'Sorry, I really have to bail.', zh: '对不起，我真得赶紧走了。' }
@@ -1548,12 +1548,12 @@ export const A1: Word[] = [
     { en: 'She shakes her head.', zh: '她摇头。' },
     { en: 'The head of the school.', zh: '学校的校长。' }
   ] },
-  { word: 'health', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 身体状况；健康', examples: [
+  { word: 'health', level: 'A1', ipa: 'helθ', pos: 'n.', meaning: 'n. 身体状况；健康', examples: [
     { en: 'Her health degenerated quickly.', zh: '她的健康状况迅速恶化。' },
     { en: 'He\'s always enjoyed good health.', zh: '他一直都很健康。' },
     { en: 'She was radiant with health.', zh: '她身体健康，容光焕发。' }
   ] },
-  { word: 'healthy', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 健康的，健壮的；有益身心的', examples: [
+  { word: 'healthy', level: 'A1', ipa: 'ˈhelθi', pos: 'adj.', meaning: 'adj. 健康的，健壮的；有益身心的', examples: [
     { en: 'He has a healthy appetite.', zh: '他有健康的胃口。' },
     { en: 'She was delivered of a healthy boy.', zh: '她生下一个健康的男孩儿。' },
     { en: 'She\'s fanatical about healthy eating.', zh: '她对健康饮食着了迷。' }
@@ -1570,17 +1570,17 @@ export const A1: Word[] = [
     { en: 'Help me, please.', zh: '请帮帮我。' },
     { en: 'Thank you for your help.', zh: '谢谢你的帮助。' }
   ] },
-  { word: 'her', level: 'A1', ipa: '', pos: 'pron., det.', meaning: 'pron. 她（she的宾格）；她的（she的所有格）', examples: [
+  { word: 'her', level: 'A1', ipa: 'hɜː(r); hə(r)', pos: 'pron., det.', meaning: 'pron. 她（she的宾格）；她的（she的所有格）', examples: [
     { en: 'Her insolence cost her her job.', zh: '她的蛮横态度使她丢了工作。' },
     { en: 'Her grandchildren keep her young.', zh: '她的孙子孙女让她保持年轻。' },
     { en: 'Her version contradicted her daughter\'s.', zh: '她的说法与她女儿的说法相矛盾。' }
   ] },
-  { word: 'here', level: 'A1', ipa: '', pos: 'adv.', meaning: 'adv. 在这里；此时', examples: [
+  { word: 'here', level: 'A1', ipa: 'hɪə(r)', pos: 'adv.', meaning: 'adv. 在这里；此时', examples: [
     { en: 'They\'re here till Christmas.', zh: '他们将在这里一直住到圣诞节。' },
     { en: 'I\'ve been here before.', zh: '我以前来过这儿。' },
     { en: 'Who\'s in charge here?', zh: '这里谁负责？' }
   ] },
-  { word: 'hey', level: 'A1', ipa: '', pos: 'exclam.', meaning: 'int. （非正式）（引起注意等）喂；（表示不在意）嘿', examples: [
+  { word: 'hey', level: 'A1', ipa: 'heɪ', pos: 'exclam.', meaning: 'int. （非正式）（引起注意等）喂；（表示不在意）嘿', examples: [
     { en: 'Hey, watch where you\'re going!', zh: '嘿，瞧着点路！' },
     { en: '"Hey! Look out!" shouted Patty.', zh: '“嘿！当心！”帕蒂喊道。' },
     { en: 'Hey, hands off! That\'s my drink!', zh: '嘿，别动！那是我的饮料！' }
@@ -1593,27 +1593,27 @@ export const A1: Word[] = [
     { en: 'A high building.', zh: '一栋高楼。' },
     { en: 'The bird flies high.', zh: '鸟飞得高。' }
   ] },
-  { word: 'him', level: 'A1', ipa: '', pos: 'pron.', meaning: 'pron. 他（宾格）', examples: [
+  { word: 'him', level: 'A1', ipa: 'hɪm', pos: 'pron.', meaning: 'pron. 他（宾格）', examples: [
     { en: 'Go to him, tell him you\'re sorry.', zh: '去找他，告诉他你很抱歉。' },
     { en: 'She gave him a shake to wake him.', zh: '她摇摇他，把他叫醒。' },
     { en: 'We told him we\'d back him whatever.', zh: '我们告诉他，在任何情况下我们都会支持他。' }
   ] },
-  { word: 'his', level: 'A1', ipa: '', pos: 'det., pron.', meaning: 'det. 他的；它的（指雄性动物）', examples: [
+  { word: 'his', level: 'A1', ipa: 'hɪz; ɪz', pos: 'det., pron.', meaning: 'det. 他的；它的（指雄性动物）', examples: [
     { en: 'His mother always takes his part.', zh: '他母亲总是向着他。' },
     { en: 'His weight was harming his health.', zh: '他沉重的体重正危害着他的健康。' },
     { en: 'His views and his father\'s clashed.', zh: '他的观点与他父亲的观点相抵触。' }
   ] },
-  { word: 'history', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 历史；沿革，发展过程', examples: [
+  { word: 'history', level: 'A1', ipa: 'ˈhɪstri; ˈhɪstəri', pos: 'n.', meaning: 'n. 历史；沿革，发展过程', examples: [
     { en: 'I\'m very interested in history.', zh: '我很喜欢历史。' },
     { en: 'He studied History and Economics.', zh: '他学过历史和经济学。' },
     { en: 'She\'s studying art history.', zh: '她正在研读艺术史。' }
   ] },
-  { word: 'hobby', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 业余爱好，嗜好；<古> 小马，马驹', examples: [
+  { word: 'hobby', level: 'A1', ipa: 'ˈhɒbi', pos: 'n.', meaning: 'n. 业余爱好，嗜好；<古> 小马，马驹', examples: [
     { en: 'I only play jazz as a hobby.', zh: '我弹奏爵士乐只是一种业余爱好。' },
     { en: 'His hobby is freefall parachuting.', zh: '他的业余爱好是自由落体式跳伞。' },
     { en: 'He hasn\'t got any hobbies—unless you call watching TV a hobby.', zh: '他没有什么爱好—除非你把看电视也称作爱好。' }
   ] },
-  { word: 'holiday', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 假日；度假期', examples: [
+  { word: 'holiday', level: 'A1', ipa: 'ˈhɒlədeɪ', pos: 'n.', meaning: 'n. 假日；度假期', examples: [
     { en: 'Today is a holiday in Wales.', zh: '在威尔士今天是假日。' },
     { en: 'We rented a holiday villa in Spain.', zh: '我们在西班牙租了一座假日别墅。' },
     { en: 'They met while on holiday in Greece.', zh: '他们是在希腊度假时认识的。' }
@@ -1622,7 +1622,7 @@ export const A1: Word[] = [
     { en: 'I go home.', zh: '我回家。' },
     { en: 'Home is warm.', zh: '家是温暖的。' }
   ] },
-  { word: 'homework', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. （学生的）家庭作业；准备工作', examples: [
+  { word: 'homework', level: 'A1', ipa: 'ˈhəʊmwɜːk', pos: 'n.', meaning: 'n. （学生的）家庭作业；准备工作', examples: [
     { en: 'How much homework do you get?', zh: '你有多少家庭作业？' },
     { en: 'He let us off homework today.', zh: '他今天免了我们的家庭作业。' },
     { en: 'I\'ll do my homework after supper.', zh: '晚饭后我要做家庭作业。' }
@@ -1659,7 +1659,7 @@ export const A1: Word[] = [
     { en: 'How do you go?', zh: '你怎么去？' },
     { en: 'How nice!', zh: '多好啊！' }
   ] },
-  { word: 'however', level: 'A1', ipa: '', pos: 'adv.', meaning: 'adv. 然而，可是，不过；无论如何', examples: [
+  { word: 'however', level: 'A1', ipa: 'haʊˈevə(r)', pos: 'adv.', meaning: 'adv. 然而，可是，不过；无论如何', examples: [
     { en: 'On one issue, however, she was immovable.', zh: '然而，就一点而言，她态度是坚决的。' },
     { en: 'However, traders tended to discount the rumour.', zh: '但是，商人们倾向于不理会这个传闻。' },
     { en: 'However, he underestimates the scale of the problem.', zh: '然而，他却低估了问题的严重性。' }
@@ -1672,7 +1672,7 @@ export const A1: Word[] = [
     { en: 'I am hungry.', zh: '我饿了。' },
     { en: 'The child is hungry.', zh: '孩子饿了。' }
   ] },
-  { word: 'husband', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 丈夫', examples: [
+  { word: 'husband', level: 'A1', ipa: 'ˈhʌzbənd', pos: 'n.', meaning: 'n. 丈夫', examples: [
     { en: 'Her husband stood at her side.', zh: '她丈夫站在她身边。' },
     { en: 'Her husband walked out on her.', zh: '她的丈夫弃她而走。' },
     { en: 'She\'s divorcing her husband.', zh: '她在与丈夫闹离婚。' }
@@ -1681,12 +1681,12 @@ export const A1: Word[] = [
     { en: 'I am a student.', zh: '我是一名学生。' },
     { en: 'Can I help you?', zh: '需要我帮忙吗？' }
   ] },
-  { word: 'ice', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 冰；冰块', examples: [
+  { word: 'ice', level: 'A1', ipa: 'aɪs', pos: 'n.', meaning: 'n. 冰；冰块', examples: [
     { en: 'I\'ll get you some ice cream.', zh: '我去给你拿些冰激凌。' },
     { en: 'She was nicknamed \'The Ice Queen\'.', zh: '她外号叫“冰上王后”。' },
     { en: 'The ice started to crack.', zh: '冰开始裂了。' }
   ] },
-  { word: 'ice cream', level: 'A1', ipa: '', pos: 'n.', meaning: '冰淇淋：一种甜点，由牛奶、糖和其他成分制成，通常在冷冻状态下食用。', examples: [
+  { word: 'ice cream', level: 'A1', ipa: 'ˈaɪs kriːm', pos: 'n.', meaning: '冰淇淋：一种甜点，由牛奶、糖和其他成分制成，通常在冷冻状态下食用。', examples: [
     { en: 'She had homemade ice cream for dessert.', zh: '她吃了些自制冰淇淋当餐后甜点。' },
     { en: 'I\'ll get you some ice cream.', zh: '我去给你拿些冰激凌。' },
     { en: 'I\'ll bet they have yummy ice cream.', zh: '我打赌他们有好吃的冰激淋。' }
@@ -1695,7 +1695,7 @@ export const A1: Word[] = [
     { en: 'A good idea.', zh: '一个好主意。' },
     { en: 'I have an idea.', zh: '我有个主意。' }
   ] },
-  { word: 'if', level: 'A1', ipa: '', pos: 'conj.', meaning: 'conj. （表条件）如果；（表假设）要是，假如', examples: [
+  { word: 'if', level: 'A1', ipa: 'ɪf', pos: 'conj.', meaning: 'conj. （表条件）如果；（表假设）要是，假如', examples: [
     { en: 'I\'ll be there if poss.', zh: '如果可能我会去那里的。' },
     { en: 'If I were in charge...', zh: '假若由我负责…' },
     { en: 'I\'m damned if I\'ll apologize!', zh: '我决不道歉！' }
@@ -1716,12 +1716,12 @@ export const A1: Word[] = [
     { en: 'In the box.', zh: '在盒子里。' },
     { en: 'I am in class.', zh: '我在上课。' }
   ] },
-  { word: 'include', level: 'A1', ipa: '', pos: 'v.', meaning: 'v. 包含；把……列为一部分，把……算入', examples: [
+  { word: 'include', level: 'A1', ipa: 'ɪnˈkluːd', pos: 'v.', meaning: 'v. 包含；把……列为一部分，把……算入', examples: [
     { en: 'Symptoms include a sore throat.', zh: '症状包括嗓子疼。' },
     { en: 'Does the price include tax?', zh: '这个价钱是否包括税款？' },
     { en: 'Telephone charges include line rental.', zh: '电话费包括线路租用费。' }
   ] },
-  { word: 'information', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 消息，资料，情报；（计算机程序储存和使用的）数据，信息', examples: [
+  { word: 'information', level: 'A1', ipa: 'ˌɪnfəˈmeɪʃ(ə)n', pos: 'n.', meaning: 'n. 消息，资料，情报；（计算机程序储存和使用的）数据，信息', examples: [
     { en: 'We pooled ideas and information.', zh: '我们汇集了意见和信息。' },
     { en: 'This information could prove useful.', zh: '这条信息往后也许有用。' },
     { en: 'The research has yielded useful information.', zh: '这项研究提供了有用的资料。' }
@@ -1730,7 +1730,7 @@ export const A1: Word[] = [
     { en: 'I have an interest in music.', zh: '我对音乐有兴趣。' },
     { en: 'This book interests me.', zh: '这本书让我感兴趣。' }
   ] },
-  { word: 'interested', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 感兴趣的，关心的；利益相关的，当事的', examples: [
+  { word: 'interested', level: 'A1', ipa: 'ˈɪntrəstɪd', pos: 'adj.', meaning: 'adj. 感兴趣的，关心的；利益相关的，当事的', examples: [
     { en: 'He sounded genuinely interested.', zh: '听他的口气，他真的感兴趣。' },
     { en: 'I\'m not interested in sport.', zh: '我对体育运动不感兴趣。' },
     { en: 'Alex is not interested in girls yet.', zh: '亚历克斯对女孩子还不感兴趣。' }
@@ -1739,17 +1739,17 @@ export const A1: Word[] = [
     { en: 'An interesting book.', zh: '一本有趣的书。' },
     { en: 'The film is interesting.', zh: '这部电影很有趣。' }
   ] },
-  { word: 'internet', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 互联网，因特网（=the Internet）', examples: [
+  { word: 'internet', level: 'A1', ipa: 'ˈɪntənet', pos: 'n.', meaning: 'n. 互联网，因特网（=the Internet）', examples: [
     { en: 'I looked it up on the Internet.', zh: '我在互联网上查过此事。' },
     { en: 'I\'m jacking into the Internet now.', zh: '我正要接入互联网。' },
     { en: 'Distance is no problem on the Internet.', zh: '在互联网上距离已不成为问题。' }
   ] },
-  { word: 'interview', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'v. 面试，面谈；采访，访问', examples: [
+  { word: 'interview', level: 'A1', ipa: 'ˈɪntəvjuː', pos: 'n., v.', meaning: 'v. 面试，面谈；采访，访问', examples: [
     { en: 'She has just taped an interview.', zh: '她刚刚录制了一次采访。' },
     { en: 'The interview went smoothly.', zh: '面谈进展顺利。' },
     { en: 'She spruced up for the interview.', zh: '她为参加面试打扮了一番。' }
   ] },
-  { word: 'into', level: 'A1', ipa: '', pos: 'prep.', meaning: 'prep. 到……里面；触及，碰撞', examples: [
+  { word: 'into', level: 'A1', ipa: 'ˈɪntuː', pos: 'prep.', meaning: 'prep. 到……里面；触及，碰撞', examples: [
     { en: 'Caterpillars change into butterflies.', zh: '毛虫变成蝴蝶。' },
     { en: 'I walked into town.', zh: '我走进了市中心。' },
     { en: 'He slid into bed.', zh: '他不声不响地钻进被子。' }
@@ -1766,22 +1766,22 @@ export const A1: Word[] = [
     { en: 'It is a book.', zh: '它是一本书。' },
     { en: 'Where is it?', zh: '它在哪儿？' }
   ] },
-  { word: 'its', level: 'A1', ipa: '', pos: 'det.', meaning: 'pron. 它的', examples: [
+  { word: 'its', level: 'A1', ipa: 'ɪts', pos: 'det.', meaning: 'pron. 它的', examples: [
     { en: 'Its film industry operates in its own curiously hermetic way.', zh: '它的电影业以奇特而封闭的方式运作。' },
     { en: 'This made its mini-computers incompatible with its mainframes.', zh: '这使得它的微型电脑与其主机不兼容。' },
     { en: 'Her speech was memorable for its polemic rather than its substance.', zh: '她的演说之所以令人难忘，不是因其内容而是因其辩论方法。' }
   ] },
-  { word: 'jacket', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 夹克衫，短上衣；书皮，护封', examples: [
+  { word: 'jacket', level: 'A1', ipa: 'ˈdʒækɪt', pos: 'n.', meaning: 'n. 夹克衫，短上衣；书皮，护封', examples: [
     { en: 'Is your jacket real leather?', zh: '你的夹克是真皮的吗？' },
     { en: 'The knife sliced his jacket.', zh: '那把刀划破了他的上衣。' },
     { en: 'I zipped and buttoned my jacket.', zh: '我把夹克的拉链拉上，系好扣子。' }
   ] },
-  { word: 'January', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 一月', examples: [
+  { word: 'January', level: 'A1', ipa: 'ˈdʒænjuəri', pos: 'n.', meaning: 'n. 一月', examples: [
     { en: 'January is my least favourite month.', zh: '一月是我最不喜欢的月份。' },
     { en: 'Rose is due to start school in January.', zh: '罗斯一月份就要开始上学了。' },
     { en: 'The new President takes office in January.', zh: '新总统将于一月份就职。' }
   ] },
-  { word: 'jeans', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 牛仔裤；工装裤', examples: [
+  { word: 'jeans', level: 'A1', ipa: 'dʒiːnz', pos: 'n.', meaning: 'n. 牛仔裤；工装裤', examples: [
     { en: 'His jeans were left in tatters.', zh: '他的牛仔裤已破烂不堪。' },
     { en: 'I ripped my jeans on the fence.', zh: '我的牛仔裤在栅栏上划破了。' },
     { en: 'He was wearing faded blue jeans.', zh: '他穿着退色的蓝牛仔裤。' }
@@ -1802,17 +1802,17 @@ export const A1: Word[] = [
     { en: 'A glass of juice.', zh: '一杯果汁。' },
     { en: 'Apple juice.', zh: '苹果汁。' }
   ] },
-  { word: 'July', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 七月', examples: [
+  { word: 'July', level: 'A1', ipa: 'dʒʊˈlaɪ', pos: 'n.', meaning: 'n. 七月', examples: [
     { en: 'The car is taxed until July.', zh: '这辆汽车的牌照税缴纳到了七月。' },
     { en: 'It was the hottest July on record.', zh: '那是历史记载中最热的七月。' },
     { en: 'The new hospital opens on July 1st.', zh: '这家新医院七月一日开诊。' }
   ] },
-  { word: 'June', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 六月；琼（人名，来源于拉丁语，含义是“年轻气盛的六月”）', examples: [
+  { word: 'June', level: 'A1', ipa: 'dʒuːn', pos: 'n.', meaning: 'n. 六月；琼（人名，来源于拉丁语，含义是“年轻气盛的六月”）', examples: [
     { en: 'Ann\'s expecting a baby in June.', zh: '安六月份要生孩子。' },
     { en: 'They are to be married in June.', zh: '他们计划于六月份结婚。' },
     { en: 'Sales volumes fell 0.2% in June.', zh: '六月份的销售额下降了0.2%。' }
   ] },
-  { word: 'just', level: 'A1', ipa: '', pos: 'adv.', meaning: 'adv. 正好，恰好；正当……时', examples: [
+  { word: 'just', level: 'A1', ipa: 'dʒʌst', pos: 'adv.', meaning: 'adv. 正好，恰好；正当……时', examples: [
     { en: 'We\'ve only just arrived.', zh: '我们刚到。' },
     { en: 'We\'ve just redecorated.', zh: '我们刚刚重新装修过。' },
     { en: 'She just won\'t relax.', zh: '她就是不放松。' }
@@ -1825,7 +1825,7 @@ export const A1: Word[] = [
     { en: 'The key is on the table.', zh: '钥匙在桌上。' },
     { en: 'I have a key.', zh: '我有一把钥匙。' }
   ] },
-  { word: 'kilometre', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 千米，公里（=kilometer）', examples: [
+  { word: 'kilometre', level: 'A1', ipa: 'kɪˈlɒmɪtə(r)', pos: 'n.', meaning: 'n. 千米，公里（=kilometer）', examples: [
     { en: 'In a minute a cheetah can run about 1 kilometre and a half.', zh: '在一分钟内，猎豹可以跑大约1公里半。' },
     { en: 'She started to raise money for the trip and when she was 12, she had enough for the 11,000-kilometre journey.', zh: '她开始为此行筹款，12岁时，她就存下了足够走完那11000公里旅程的钱。' },
     { en: 'For his first trip, he went hiking with a friend around the M25—a 188-kilometre road that goes all the way around London.', zh: '他的第一次旅行是和他的一个朋友徒步 M25 高速公路，这是一条长达188公里的伦敦外环公路。' }
@@ -1842,7 +1842,7 @@ export const A1: Word[] = [
     { en: 'I know the answer.', zh: '我知道答案。' },
     { en: 'Do you know him?', zh: '你认识他吗？' }
   ] },
-  { word: 'land', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'n. 陆地，地面；土地（尤指耕地或建筑用地）', examples: [
+  { word: 'land', level: 'A1', ipa: 'lænd', pos: 'n., v.', meaning: 'n. 陆地，地面；土地（尤指耕地或建筑用地）', examples: [
     { en: '90% of the land is cultivated.', zh: '90%的土地已耕种。' },
     { en: 'They finally lost sight of land.', zh: '他们终于看不见陆地了。' },
     { en: 'His land abuts onto a road.', zh: '他的土地紧靠公路。' }
@@ -1863,7 +1863,7 @@ export const A1: Word[] = [
     { en: 'I am late.', zh: '我迟到了。' },
     { en: 'Don’t be late.', zh: '别迟到。' }
   ] },
-  { word: 'later', level: 'A1', ipa: '', pos: 'adv., adj.', meaning: 'adv. 后来，随后；<美，非正式>再见，回头见', examples: [
+  { word: 'later', level: 'A1', ipa: 'ˈleɪtə(r)', pos: 'adv., adj.', meaning: 'adv. 后来，随后；<美，非正式>再见，回头见', examples: [
     { en: 'Two days later tragedy struck.', zh: '两天后悲剧发生了。' },
     { en: 'He resigned ten years later.', zh: '他10年后辞职了。' },
     { en: 'She later became a doctor.', zh: '她后来当了医生。' }
@@ -1900,17 +1900,17 @@ export const A1: Word[] = [
     { en: 'A letter to my friend.', zh: '给朋友的一封信。' },
     { en: 'The first letter.', zh: '第一个字母。' }
   ] },
-  { word: 'library', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 图书馆，藏书楼；（书、激光唱片等的）私人收藏', examples: [
+  { word: 'library', level: 'A1', ipa: 'ˈlaɪbrəri', pos: 'n.', meaning: 'n. 图书馆，藏书楼；（书、激光唱片等的）私人收藏', examples: [
     { en: 'The library is all on one level.', zh: '图书馆全部在同一层楼上。' },
     { en: 'The new library is close to completion.', zh: '新图书馆快要竣工了。' },
     { en: 'Radios are not permitted in the library.', zh: '图书馆内不许使用收音机。' }
   ] },
-  { word: 'lie', level: 'A1', ipa: '', pos: 'v., n.', meaning: 'v. 平躺，平卧；位于，坐落在', examples: [
+  { word: 'lie', level: 'A1', ipa: 'laɪ', pos: 'v., n.', meaning: 'v. 平躺，平卧；位于，坐落在', examples: [
     { en: 'Father, I cannot lie to you.', zh: '爸爸，我不能对你说谎。' },
     { en: 'It was a lie, tout court.', zh: '那只不过是谎言。' },
     { en: 'We must nail this lie.', zh: '我们一定要戳穿这个谎言。' }
   ] },
-  { word: 'life', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 生命；人命，性命', examples: [
+  { word: 'life', level: 'A1', ipa: 'laɪf', pos: 'n.', meaning: 'n. 生命；人命，性命', examples: [
     { en: 'The operation saved her life.', zh: '手术挽救了她的生命。' },
     { en: 'Which planets can sustain life?', zh: '哪些行星可以维持生命的存在？' },
     { en: 'She enjoyed political life.', zh: '她喜爱政治生活。' }
@@ -1927,12 +1927,12 @@ export const A1: Word[] = [
     { en: 'Draw a line.', zh: '画一条线。' },
     { en: 'Wait in line.', zh: '排队等候。' }
   ] },
-  { word: 'lion', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 狮子；名人', examples: [
+  { word: 'lion', level: 'A1', ipa: 'ˈlaɪən', pos: 'n.', meaning: 'n. 狮子；名人', examples: [
     { en: 'The lion was stalking a zebra.', zh: '狮子偷偷接近斑马。' },
     { en: 'A lion is a dangerous animal.', zh: '狮子是猛兽。' },
     { en: 'The lion roared once and sprang.', zh: '狮子吼了一声，跳了起来。' }
   ] },
-  { word: 'list', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'n. 列表，清单；（船）倾侧', examples: [
+  { word: 'list', level: 'A1', ipa: 'lɪst', pos: 'n., v.', meaning: 'n. 列表，清单；（船）倾侧', examples: [
     { en: 'Double-space the entire list.', zh: '隔行写整个清单。' },
     { en: 'I am already on your mailing list.', zh: '我已经列在你的邮寄名单上了。' },
     { en: 'Princess Anne topped the guest list.', zh: '安妮公主的名字位于来宾名单之首。' }
@@ -1949,7 +1949,7 @@ export const A1: Word[] = [
     { en: 'I live in Beijing.', zh: '我住在北京。' },
     { en: 'We live well.', zh: '我们生活得很好。' }
   ] },
-  { word: 'local', level: 'A1', ipa: '', pos: 'adj., n.', meaning: 'adj. 当地的，地方的；局部的', examples: [
+  { word: 'local', level: 'A1', ipa: 'ˈləʊk(ə)l', pos: 'adj., n.', meaning: 'adj. 当地的，地方的；局部的', examples: [
     { en: 'He dabbles in local politics.', zh: '他开始涉足地方政坛。' },
     { en: 'I could call the local doctor.', zh: '我可以给当地医生打电话。' },
     { en: 'Police suspect a local gang.', zh: '警方怀疑当地的一个不良帮派。' }
@@ -1974,27 +1974,27 @@ export const A1: Word[] = [
     { en: 'I love my family.', zh: '我爱我的家人。' },
     { en: 'She loves music.', zh: '她热爱音乐。' }
   ] },
-  { word: 'lunch', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 午餐，午饭', examples: [
+  { word: 'lunch', level: 'A1', ipa: 'lʌntʃ', pos: 'n.', meaning: 'n. 午餐，午饭', examples: [
     { en: 'The court adjourned for lunch.', zh: '午餐时间法庭休庭。' },
     { en: 'Lunch was a leisurely affair.', zh: '吃午餐曾是一件从容的事。' },
     { en: 'When\'s lunch? I\'m famished!', zh: '什么时候吃午饭？我饿得要死了！' }
   ] },
-  { word: 'machine', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 机器，机械（装置）；计算机，电脑', examples: [
+  { word: 'machine', level: 'A1', ipa: 'məˈʃiːn', pos: 'n.', meaning: 'n. 机器，机械（装置）；计算机，电脑', examples: [
     { en: 'Now the machine is lying idle.', zh: '现在这台机器正处于闲置状态。' },
     { en: 'This machine only accepts coins.', zh: '这台机器只接受硬币。' },
     { en: 'This machine won\'t let you down.', zh: '你尽管放心，这台机器不会出毛病。' }
   ] },
-  { word: 'magazine', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 杂志，期刊；（电视、广播）专题节目', examples: [
+  { word: 'magazine', level: 'A1', ipa: 'ˌmæɡəˈziːn', pos: 'n.', meaning: 'n. 杂志，期刊；（电视、广播）专题节目', examples: [
     { en: 'She used to edit a women\'s magazine.', zh: '她曾主编过妇女杂志。' },
     { en: 'The new magazine has really taken off.', zh: '这份新杂志真是大受欢迎。' },
     { en: 'He has produced his own sports magazine.', zh: '他已经创办了自己的体育杂志。' }
   ] },
-  { word: 'main', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 主要的，最大的', examples: [
+  { word: 'main', level: 'A1', ipa: 'meɪn', pos: 'adj.', meaning: 'adj. 主要的，最大的', examples: [
     { en: 'What\'s the main disadvantage ?', zh: '主要的不利条件是什么？' },
     { en: 'Ghana\'s main export is cocoa.', zh: '加纳的主要出口产品是可可。' },
     { en: 'The main bedroom is enormous.', zh: '主卧室大极了。' }
   ] },
-  { word: 'make', level: 'A1', ipa: '', pos: 'v., n.', meaning: 'v. 制造；制定，拟定', examples: [
+  { word: 'make', level: 'A1', ipa: 'meɪk', pos: 'v., n.', meaning: 'v. 制造；制定，拟定', examples: [
     { en: 'Four quarters make a whole.', zh: '四个四分之一构成一个整体。' },
     { en: 'Photos make useful teaching aids.', zh: '照片可以成为有用的教具。' },
     { en: 'This sentence doesn\'t make sense.', zh: '这个句子不通。' }
@@ -2020,7 +2020,7 @@ export const A1: Word[] = [
     { en: 'We go to the market.', zh: '我们去市场。' },
     { en: 'A busy market.', zh: '繁忙的市场。' }
   ] },
-  { word: 'married', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 结婚的，已婚的；婚姻的，夫妇的', examples: [
+  { word: 'married', level: 'A1', ipa: 'ˈmærid', pos: 'adj.', meaning: 'adj. 结婚的，已婚的；婚姻的，夫妇的', examples: [
     { en: 'They\'re not married, actually.', zh: '他们实际上没有结婚。' },
     { en: 'I married above myself.', zh: '我和比我地位高的人结了婚。' },
     { en: 'She married a German.', zh: '她嫁给了一个德国人。' }
@@ -2034,12 +2034,12 @@ export const A1: Word[] = [
     { en: 'Other problems may follow.', zh: '其它问题也许会随之而来。' },
     { en: 'He may yield control.', zh: '他可能放弃控制权。' }
   ] },
-  { word: 'maybe', level: 'A1', ipa: '', pos: 'adv.', meaning: 'adv. （不确定）大概，或许；（提出建议）或许，也许', examples: [
+  { word: 'maybe', level: 'A1', ipa: 'ˈmeɪbi', pos: 'adv.', meaning: 'adv. （不确定）大概，或许；（提出建议）或许，也许', examples: [
     { en: 'Maybe he intends to leave her.', zh: '也许他打算离开她。' },
     { en: 'Maybe you should socialize more.', zh: '也许你应该多和人交往。' },
     { en: 'Maybe they\'ve just gone shopping.', zh: '或许他们刚刚去买东西了。' }
   ] },
-  { word: 'me', level: 'A1', ipa: '', pos: 'pron.', meaning: 'pron. 我（宾格）', examples: [
+  { word: 'me', level: 'A1', ipa: 'miː; mi', pos: 'pron.', meaning: 'pron. 我（宾格）', examples: [
     { en: 'They spat at me and taunted me.', zh: '他们又朝我吐唾沫又嘲弄我。' },
     { en: 'The way he treats me really burns me up.', zh: '他这样对待我真使我恼火。' },
     { en: 'She saw me, recognized me and cut me dead.', zh: '她看见了我，也认出了我，却不理睬我。' }
@@ -2052,12 +2052,12 @@ export const A1: Word[] = [
     { en: 'What does this word mean?', zh: '这个单词是什么意思？' },
     { en: 'He means well.', zh: '他本意是好的。' }
   ] },
-  { word: 'meaning', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 意思，意义，含义；真正重要性，价值', examples: [
+  { word: 'meaning', level: 'A1', ipa: 'ˈmiːnɪŋ', pos: 'n.', meaning: 'n. 意思，意义，含义；真正重要性，价值', examples: [
     { en: 'What\'s the meaning of this word?', zh: '这个单词的意思是什么？' },
     { en: 'What, pray, is the meaning of this?', zh: '请问，这是什么意思？' },
     { en: 'We cogitated on the meaning of life.', zh: '我们深思生命的意义。' }
   ] },
-  { word: 'meat', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 肉类，（某种）食用肉；重要的部分，有趣的部分', examples: [
+  { word: 'meat', level: 'A1', ipa: 'miːt', pos: 'n.', meaning: 'n. 肉类，（某种）食用肉；重要的部分，有趣的部分', examples: [
     { en: 'Wine vinegar tenderizes meat.', zh: '酒醋能让肉变得软嫩。' },
     { en: 'This meat is extremely tender.', zh: '这肉嫩得很。' },
     { en: 'What\'s wrong with eating meat?', zh: '吃肉有什么不对？' }
@@ -2066,7 +2066,7 @@ export const A1: Word[] = [
     { en: 'Nice to meet you.', zh: '很高兴认识你。' },
     { en: 'We meet at school.', zh: '我们在学校见面。' }
   ] },
-  { word: 'meeting', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 会议，集会；偶遇，会面', examples: [
+  { word: 'meeting', level: 'A1', ipa: 'ˈmiːtɪŋ', pos: 'n.', meaning: 'n. 会议，集会；偶遇，会面', examples: [
     { en: 'Who\'s chairing the meeting?', zh: '谁主持这次会议？' },
     { en: 'The meeting really dragged.', zh: '这会议开得真拖拉。' },
     { en: 'The meeting went off well.', zh: '会议进行得很好。' }
@@ -2075,7 +2075,7 @@ export const A1: Word[] = [
     { en: 'A family member.', zh: '一位家庭成员。' },
     { en: 'She is a member.', zh: '她是成员。' }
   ] },
-  { word: 'menu', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 菜单；饭菜，菜肴', examples: [
+  { word: 'menu', level: 'A1', ipa: 'ˈmenjuː', pos: 'n.', meaning: 'n. 菜单；饭菜，菜肴', examples: [
     { en: 'A waiter offered him the menu.', zh: '一个侍者给他送上了菜单。' },
     { en: 'The menu included roast grouse.', zh: '菜单里有烤松鸡肉。' },
     { en: 'The menu was on a blackboard.', zh: '菜单在黑板上。' }
@@ -2089,12 +2089,12 @@ export const A1: Word[] = [
     { en: 'It\'s only a low wall—about a metre high.', zh: '那只不过是一堵矮墙—约一米高。' },
     { en: 'Short-wave radio uses the 20-50 metre band.', zh: '短波收音机用的波段是20–50米。' }
   ] },
-  { word: 'midnight', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 午夜，半夜', examples: [
+  { word: 'midnight', level: 'A1', ipa: 'ˈmɪdnaɪt', pos: 'n.', meaning: 'n. 午夜，半夜', examples: [
     { en: 'They had to leave at midnight.', zh: '他们不得不半夜离开。' },
     { en: 'It won\'t go on beyond midnight.', zh: '这事不会延续到午夜以后。' },
     { en: 'The clock showed midnight.', zh: '时钟显示已是午夜。' }
   ] },
-  { word: 'mile', level: 'A1', ipa: '', pos: 'n.', meaning: 'n.  英里；一英里赛跑', examples: [
+  { word: 'mile', level: 'A1', ipa: 'maɪl', pos: 'n.', meaning: 'n.  英里；一英里赛跑', examples: [
     { en: 'She lives just half a mile away.', zh: '她就住在半英里之外。' },
     { en: 'After a mile, the slope steepened.', zh: '过了一英里后，山坡变陡了。' },
     { en: 'It\'s less than a mile to the beach.', zh: '离海滩不足一英里远。' }
@@ -2103,7 +2103,7 @@ export const A1: Word[] = [
     { en: 'I drink milk.', zh: '我喝牛奶。' },
     { en: 'A glass of milk.', zh: '一杯牛奶。' }
   ] },
-  { word: 'million', level: 'A1', ipa: '', pos: 'number', meaning: 'num. 一百万，一百万个', examples: [
+  { word: 'million', level: 'A1', ipa: 'ˈmɪljən', pos: 'number', meaning: 'num. 一百万，一百万个', examples: [
     { en: 'Unfilled positions number several million countrywide.', zh: '全国的空缺职位数达到数百万。' },
     { en: 'They pay him around $2 million net.', zh: '他们净付给他约两百万美元。' },
     { en: 'He\'s a man in a million.', zh: '他是个出类拔萃的人物。' }
@@ -2116,12 +2116,12 @@ export const A1: Word[] = [
     { en: 'I miss my friend.', zh: '我想念我的朋友。' },
     { en: 'Don’t miss the bus.', zh: '别错过公交车。' }
   ] },
-  { word: 'mistake', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'n. 错误，过失；（用词或数字上的）错误，口误，笔误', examples: [
+  { word: 'mistake', level: 'A1', ipa: 'mɪˈsteɪk', pos: 'n., v.', meaning: 'n. 错误，过失；（用词或数字上的）错误，口误，笔误', examples: [
     { en: 'We\'ve made a dreadful mistake.', zh: '我们犯了一个很大的错误。' },
     { en: 'You are making a big mistake.', zh: '你正在犯一个严重的错误。' },
     { en: 'I made a stupid mistake.', zh: '我犯了个愚蠢的错误。' }
   ] },
-  { word: 'model', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'n. 模型；模式', examples: [
+  { word: 'model', level: 'A1', ipa: 'ˈmɒd(ə)l', pos: 'n., v.', meaning: 'n. 模型；模式', examples: [
     { en: 'There she began to model in clay.', zh: '她开始在那儿用黏土做模型。' },
     { en: 'I made a full-size cardboard model.', zh: '我做了一个和原物一样大小的硬纸板模型。' },
     { en: 'I got to drive the latest model.', zh: '我得以驾驶最新式的车。' }
@@ -2134,7 +2134,7 @@ export const A1: Word[] = [
     { en: 'Wait a moment.', zh: '等一下。' },
     { en: 'At this moment.', zh: '此刻。' }
   ] },
-  { word: 'Monday', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 星期一', examples: [
+  { word: 'Monday', level: 'A1', ipa: 'ˈmʌndeɪ; ˈmʌndi', pos: 'n.', meaning: 'n. 星期一', examples: [
     { en: 'She started work last Monday.', zh: '她上个星期一开始工作。' },
     { en: 'It\'s Monday today, isn\'t it?', zh: '今天是星期一，对吧？' },
     { en: 'I work Monday to Friday.', zh: '我星期一到星期五上班。' }
@@ -2183,17 +2183,17 @@ export const A1: Word[] = [
     { en: 'A good movie.', zh: '一部好电影。' },
     { en: 'We watch a movie.', zh: '我们看电影。' }
   ] },
-  { word: 'much', level: 'A1', ipa: '', pos: 'det., pron., adv.', meaning: 'det. 许多', examples: [
+  { word: 'much', level: 'A1', ipa: 'mʌtʃ', pos: 'det., pron., adv.', meaning: 'det. 许多', examples: [
     { en: 'She\'s much better today.', zh: '她今天好多了。' },
     { en: 'It isn\'t worth much.', zh: '这不值多少钱。' },
     { en: 'She laughs too much.', zh: '她笑得太多了。' }
   ] },
-  { word: 'mum', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. （非正式）妈妈；（非正式）（栽培的）菊花', examples: [
+  { word: 'mum', level: 'A1', ipa: 'mʌm', pos: 'n.', meaning: 'n. （非正式）妈妈；（非正式）（栽培的）菊花', examples: [
     { en: 'My mum says I can\'t go.', zh: '我妈说我不能去。' },
     { en: 'Mum, I\'m still hungry!', zh: '妈，我还饿！' },
     { en: 'Mum, my tummy hurts.', zh: '妈妈，我肚子痛。' }
   ] },
-  { word: 'museum', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 博物馆', examples: [
+  { word: 'museum', level: 'A1', ipa: 'mjuˈziːəm', pos: 'n.', meaning: 'n. 博物馆', examples: [
     { en: 'Is the museum open on Sundays?', zh: '博物馆每星期天都开放吗？' },
     { en: 'The museum is open Mon.-Sun.', zh: '这个博物馆周一至周日开放。' },
     { en: 'Entry to the museum is free.', zh: '这座博物馆免费参观。' }
@@ -2214,7 +2214,7 @@ export const A1: Word[] = [
     { en: 'What is your name?', zh: '你叫什么名字？' },
     { en: 'Name the animal.', zh: '给动物起名。' }
   ] },
-  { word: 'natural', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 天然的，非人为的；合理的，意料之中的', examples: [
+  { word: 'natural', level: 'A1', ipa: 'ˈnætʃ(ə)rəl', pos: 'adj.', meaning: 'adj. 天然的，非人为的；合理的，意料之中的', examples: [
     { en: 'Crying is a natural safety valve.', zh: '哭泣是一种自然的释放压力的手段。' },
     { en: 'Water is a fish\'s natural element.', zh: '水是鱼的天然生活环境。' },
     { en: 'She is a natural athlete.', zh: '她是个天生的运动健将。' }
@@ -2227,17 +2227,17 @@ export const A1: Word[] = [
     { en: 'I need help.', zh: '我需要帮助。' },
     { en: 'We need water.', zh: '我们需要水。' }
   ] },
-  { word: 'negative', level: 'A1', ipa: '', pos: 'adj., n.', meaning: 'adj. 有害的，负面的；悲观的，消极的', examples: [
+  { word: 'negative', level: 'A1', ipa: 'ˈneɡətɪv', pos: 'adj., n.', meaning: 'adj. 有害的，负面的；悲观的，消极的', examples: [
     { en: 'They received a negative reply.', zh: '他们得到一个否定的答复。' },
     { en: 'His response was negative.', zh: '他的回答是否定的。' },
     { en: 'Try not to let negative thoughts take over.', zh: '尽量别受消极的想法左右。' }
   ] },
-  { word: 'neighbour', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 邻居，邻人；邻近的人（或物）', examples: [
+  { word: 'neighbour', level: 'A1', ipa: 'ˈneɪbə(r)', pos: 'n.', meaning: 'n. 邻居，邻人；邻近的人（或物）', examples: [
     { en: 'This neighbour crewed on a ferryboat.', zh: '这位邻居在一艘渡船上当船员。' },
     { en: 'Britain\'s nearest neighbour is France.', zh: '英国最近的邻国是法国。' },
     { en: '"Who is it?" he called.—"It\'s your neighbour."', zh: '“谁呀？”他喊道。—“你的邻居。”' }
   ] },
-  { word: 'never', level: 'A1', ipa: '', pos: 'adv.', meaning: 'adv. 决不，永不；不会，不可能（表示惊讶或震惊）', examples: [
+  { word: 'never', level: 'A1', ipa: 'ˈnevə(r)', pos: 'adv.', meaning: 'adv. 决不，永不；不会，不可能（表示惊讶或震惊）', examples: [
     { en: 'Her determination never wavered.', zh: '她的决心从未动摇过。' },
     { en: 'Her lectures never overrun.', zh: '她讲课从不拖堂。' },
     { en: 'He never drinks alcohol.', zh: '他从来不喝酒。' }
@@ -2250,7 +2250,7 @@ export const A1: Word[] = [
     { en: 'Good news!', zh: '好消息！' },
     { en: 'I read the news.', zh: '我读新闻。' }
   ] },
-  { word: 'newspaper', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 报纸，报；报社', examples: [
+  { word: 'newspaper', level: 'A1', ipa: 'ˈnjuːzpeɪpə(r)', pos: 'n.', meaning: 'n. 报纸，报；报社', examples: [
     { en: 'May I borrow your newspaper?', zh: '把你的报纸借我看行吗？' },
     { en: 'Give us the newspaper, will you?', zh: '把报纸给我好吗？' },
     { en: 'He was carrying a newspaper.', zh: '他正拿着一份报纸。' }
@@ -2259,7 +2259,7 @@ export const A1: Word[] = [
     { en: 'Next week.', zh: '下周。' },
     { en: 'The next day.', zh: '第二天。' }
   ] },
-  { word: 'next to', level: 'A1', ipa: '', pos: 'prep.', meaning: '紧挨着、靠近、在……旁边', examples: [
+  { word: 'next to', level: 'A1', ipa: 'ˈnekst tu', pos: 'prep.', meaning: '紧挨着、靠近、在……旁边', examples: [
     { en: 'The commons is next to the gym.', zh: '学生公共食堂在体育馆的旁边。' },
     { en: 'The seat next to him was vacant.', zh: '他旁边的座位空着。' },
     { en: 'We sat next to each other.', zh: '我们紧挨着坐在一起。' }
@@ -2272,17 +2272,17 @@ export const A1: Word[] = [
     { en: 'At night.', zh: '在夜晚。' },
     { en: 'A quiet night.', zh: '安静的夜晚。' }
   ] },
-  { word: 'nine', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 九，九个', examples: [
+  { word: 'nine', level: 'A1', ipa: 'naɪn', pos: 'number', meaning: 'n. 九，九个', examples: [
     { en: 'We still sighted nine yachts.', zh: '我们还是看到了九艘游艇。' },
     { en: 'Nine cases are still pending.', zh: '尚有九宗案件待决。' },
     { en: 'He has had nine Oscar nominations.', zh: '他已经获得九次奥斯卡提名。' }
   ] },
-  { word: 'nineteen', level: 'A1', ipa: '', pos: 'number', meaning: 'num. 十九', examples: [
+  { word: 'nineteen', level: 'A1', ipa: 'ˌnaɪnˈtiːn', pos: 'number', meaning: 'num. 十九', examples: [
     { en: 'They have nineteen days to make up their minds.', zh: '他们有十九天的时间来做出决定。' },
     { en: 'It\'s only nineteen yuan.', zh: '它只要十九元。' },
     { en: 'He has nineteen cards.', zh: '他有十九张卡。' }
   ] },
-  { word: 'ninety', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 九十', examples: [
+  { word: 'ninety', level: 'A1', ipa: 'ˈnaɪnti', pos: 'number', meaning: 'n. 九十', examples: [
     { en: 'Her weight was under ninety pounds.', zh: '她的体重不足90磅。' },
     { en: 'You got here with ninety seconds to spare.', zh: '你们到达这里时还剩有90秒钟。' },
     { en: 'You were never a ninety-eight pound weakling.', zh: '你从来就不是一个体重98磅、体质孱弱的人。' }
@@ -2291,12 +2291,12 @@ export const A1: Word[] = [
     { en: 'No, thank you.', zh: '不用了，谢谢。' },
     { en: 'I have no money.', zh: '我没有钱。' }
   ] },
-  { word: 'no one', level: 'A1', ipa: '', pos: 'pron.', meaning: '没有人：表示没有任何人存在或没有任何人做某事。', examples: [
+  { word: 'no one', level: 'A1', ipa: 'ˈnəʊ wʌn', pos: 'pron.', meaning: '没有人：表示没有任何人存在或没有任何人做某事。', examples: [
     { en: 'No one doubted his ability.', zh: '没有人怀疑他的能力。' },
     { en: 'Amazingly, no one noticed.', zh: '令人惊奇的是，竟没有人注意到。' },
     { en: 'No one ever questioned her capability.', zh: '从来没有人质疑过她的能力。' }
   ] },
-  { word: 'nobody', level: 'A1', ipa: '', pos: 'pron.', meaning: 'pron. 没有人（=no one）', examples: [
+  { word: 'nobody', level: 'A1', ipa: 'ˈnəʊbədi', pos: 'pron.', meaning: 'pron. 没有人（=no one）', examples: [
     { en: 'Remarkably, nobody was killed.', zh: '竟然没有死人，真是万幸。' },
     { en: 'Nobody can gainsay his claims.', zh: '没人能够反驳他的说法。' },
     { en: 'Nobody could predict the outcome.', zh: '谁也无法预料结果如何。' }
@@ -2308,12 +2308,12 @@ export const A1: Word[] = [
     { en: 'In the north.', zh: '在北方。' },
     { en: 'North wind.', zh: '北风。' }
   ] },
-  { word: 'nose', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 鼻子；（飞机、火箭等的）头部，机首', examples: [
+  { word: 'nose', level: 'A1', ipa: 'nəʊz', pos: 'n.', meaning: 'n. 鼻子；（飞机、火箭等的）头部，机首', examples: [
     { en: 'I wrinkled my nose in disgust.', zh: '我厌恶地皱起鼻子。' },
     { en: 'Aw, she\'s got her mother\'s nose!', zh: '哦，她的鼻子和她妈妈的一模一样！' },
     { en: 'She punched him on the nose.', zh: '她一拳打中了他的鼻子。' }
   ] },
-  { word: 'not', level: 'A1', ipa: '', pos: 'adv.', meaning: 'adv. 表示否定，不', examples: [
+  { word: 'not', level: 'A1', ipa: 'nɒt', pos: 'adv.', meaning: 'adv. 表示否定，不', examples: [
     { en: 'It\'s not over yet—not by a long chalk.', zh: '这事还没有了结—远远没有。' },
     { en: 'Not everybody agrees.', zh: '不是每一个人都同意。' },
     { en: 'Transport not incl.', zh: '不包括运输' }
@@ -2326,7 +2326,7 @@ export const A1: Word[] = [
     { en: 'There is nothing.', zh: '什么也没有。' },
     { en: 'I say nothing.', zh: '我什么也没说。' }
   ] },
-  { word: 'November', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 十一月', examples: [
+  { word: 'November', level: 'A1', ipa: 'nəʊˈvembə(r)', pos: 'n.', meaning: 'n. 十一月', examples: [
     { en: 'She left back in November.', zh: '她十一月份已经离开了。' },
     { en: 'Retail sales fell in November by 10%.', zh: '十一月份零售额下降10%。' },
     { en: 'The problems began last November.', zh: '问题于去年11月开始出现。' }
@@ -2339,12 +2339,12 @@ export const A1: Word[] = [
     { en: 'A phone number.', zh: '一个电话号码。' },
     { en: 'What is the number?', zh: '号码是多少？' }
   ] },
-  { word: 'nurse', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 护士；<旧>保姆，奶妈', examples: [
+  { word: 'nurse', level: 'A1', ipa: 'nɜːs', pos: 'n.', meaning: 'n. 护士；<旧>保姆，奶妈', examples: [
     { en: 'The nurse cleaned the wound.', zh: '护士清洗了伤口。' },
     { en: 'The nurse washed and shaved him.', zh: '护士给他洗了脸，刮了胡子。' },
     { en: 'She had spent 29 years as a nurse.', zh: '她已当了29年护士。' }
   ] },
-  { word: 'o\'clock', level: 'A1', ipa: '', pos: 'adv.', meaning: 'abbr. ……点钟（等于 of the clock）', examples: [
+  { word: 'o\'clock', level: 'A1', ipa: 'əˈklɒk', pos: 'adv.', meaning: 'abbr. ……点钟（等于 of the clock）', examples: [
     { en: 'The clock said three o\'clock.', zh: '时钟显示三点整。' },
     { en: 'It\'s gone six o\'clock already.', zh: '过了六点了。' },
     { en: 'He arrived around five o\'clock.', zh: '他大约是五点钟到的。' }
@@ -2353,7 +2353,7 @@ export const A1: Word[] = [
     { en: 'A small object.', zh: '一个小物体。' },
     { en: 'What is this object?', zh: '这个物体是什么？' }
   ] },
-  { word: 'October', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. [天] 十月', examples: [
+  { word: 'October', level: 'A1', ipa: 'ɒkˈtəʊbə(r)', pos: 'n.', meaning: 'n. [天] 十月', examples: [
     { en: 'The film festival takes place in October.', zh: '电影节将于十月举行。' },
     { en: 'This is a marginal improvement on October.', zh: '这是对10月份的一个小小的改进。' },
     { en: 'The official opening is planned for October.', zh: '正式开幕拟在十月。' }
@@ -2362,7 +2362,7 @@ export const A1: Word[] = [
     { en: 'A cup of water.', zh: '一杯水。' },
     { en: 'The colour of the sky.', zh: '天空的颜色。' }
   ] },
-  { word: 'off', level: 'A1', ipa: '', pos: 'adv., prep.', meaning: 'adv. 离开（某处），（在时间或空间上）距，离；从……移开，从……脱离', examples: [
+  { word: 'off', level: 'A1', ipa: 'ɒf', pos: 'adv., prep.', meaning: 'adv. 离开（某处），（在时间或空间上）距，离；从……移开，从……脱离', examples: [
     { en: 'The wedding is off.', zh: '婚礼被取消了。' },
     { en: 'I\'m off duty.', zh: '我下班了。' },
     { en: 'The milk smells off.', zh: '这奶的味道不对劲。' }
@@ -2375,12 +2375,12 @@ export const A1: Word[] = [
     { en: 'I often read.', zh: '我经常读书。' },
     { en: 'She often sings.', zh: '她经常唱歌。' }
   ] },
-  { word: 'oh', level: 'A1', ipa: '', pos: 'exclam.', meaning: 'int. 哦；哎呀（表示惊讶或恐惧等）', examples: [
+  { word: 'oh', level: 'A1', ipa: 'əʊ', pos: 'exclam.', meaning: 'int. 哦；哎呀（表示惊讶或恐惧等）', examples: [
     { en: 'Oh, I see what you\'re saying.', zh: '哦，我明白你说的了。' },
     { en: 'Oh crumbs! Is that the time?', zh: '啊，天哪！都这会儿啦？' },
     { en: 'I thought, oh my gawd!', zh: '我想，哦，我的上帝！' }
   ] },
-  { word: 'OK', level: 'A1', ipa: '', pos: 'exclam., adj., adv.', meaning: 'adj. 好的；不错的', examples: [
+  { word: 'OK', level: 'A1', ipa: 'əʊˈkeɪ', pos: 'exclam., adj., adv.', meaning: 'adj. 好的；不错的', examples: [
     { en: 'Relax! Everything will be OK.', zh: '别着急！一切都会好的。' },
     { en: 'Cameras ready? OK, shoot!', zh: '摄影机准备好了吗？好，开拍！' },
     { en: 'OK, there you go.', zh: '好，给你。' }
@@ -2401,17 +2401,17 @@ export const A1: Word[] = [
     { en: 'I have one apple.', zh: '我有一个苹果。' },
     { en: 'One, two, three!', zh: '一、二、三！' }
   ] },
-  { word: 'onion', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 洋葱，洋葱头', examples: [
+  { word: 'onion', level: 'A1', ipa: 'ˈʌnjən', pos: 'n.', meaning: 'n. 洋葱，洋葱头', examples: [
     { en: 'I sliced up an onion.', zh: '我把洋葱切成了片。' },
     { en: 'When the oil is hot, add the sliced onion.', zh: '油热之后，加入切好的洋葱。' },
     { en: 'You grind the onion and the raw cranberries together.', zh: '你把洋葱和新鲜越橘一起磨碎。' }
   ] },
-  { word: 'online', level: 'A1', ipa: '', pos: 'adj., adv.', meaning: 'adj. （产品、服务或信息）在线的，网上的；（计算机）联机的', examples: [
+  { word: 'online', level: 'A1', ipa: 'ˌɒnˈlaɪn', pos: 'adj., adv.', meaning: 'adj. （产品、服务或信息）在线的，网上的；（计算机）联机的', examples: [
     { en: 'An online tutorial is provided.', zh: '在线辅导可供查阅。' },
     { en: 'I keep getting disconnected when I\'m online.', zh: '我上网时不断掉线。' },
     { en: 'You can chat to other people who are online.', zh: '你可以与其他在线的人聊天。' }
   ] },
-  { word: 'only', level: 'A1', ipa: '', pos: 'adj., adv.', meaning: 'adv. 只，只有；仅在……情况下（或地方等）', examples: [
+  { word: 'only', level: 'A1', ipa: 'ˈəʊnli', pos: 'adj., adv.', meaning: 'adv. 只，只有；仅在……情况下（或地方等）', examples: [
     { en: 'Cigarettes are my only vice.', zh: '我唯一的罪过就是爱抽烟。' },
     { en: 'Only five people turned up.', zh: '只来了五个人。' },
     { en: 'I was only average academically.', zh: '我的学业成绩只能算平平。' }
@@ -2420,17 +2420,17 @@ export const A1: Word[] = [
     { en: 'Open the book.', zh: '打开书。' },
     { en: 'The door is open.', zh: '门开着。' }
   ] },
-  { word: 'opinion', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 意见，看法；（群体的）观点，信仰', examples: [
+  { word: 'opinion', level: 'A1', ipa: 'əˈpɪnjən', pos: 'n.', meaning: 'n. 意见，看法；（群体的）观点，信仰', examples: [
     { en: 'My opinion remains unchanged.', zh: '我的看法一如既往。' },
     { en: 'We\'ll need an expert opinion.', zh: '我们将需要专家的意见。' },
     { en: 'That\'s my personal opinion.', zh: '这是我的个人意见。' }
   ] },
-  { word: 'opposite', level: 'A1', ipa: '', pos: 'adj., n., prep., adv.', meaning: 'adj. 完全相反的，截然不同的；相反的，另一边的', examples: [
+  { word: 'opposite', level: 'A1', ipa: 'ˈɒpəzɪt', pos: 'adj., n., prep., adv.', meaning: 'adj. 完全相反的，截然不同的；相反的，另一边的', examples: [
     { en: 'Exactly the opposite is true.', zh: '事实恰恰相反。' },
     { en: 'What is the opposite of heavy?', zh: '重的反义词是什么？' },
     { en: 'He sat down in the chair opposite.', zh: '他在对面的椅子上坐了下来。' }
   ] },
-  { word: 'or', level: 'A1', ipa: '', pos: 'conj.', meaning: 'conj. （用以引出另一种可能性）或，或者，还是；（用于否定动词后）也不', examples: [
+  { word: 'or', level: 'A1', ipa: 'ɔː(r)', pos: 'conj.', meaning: 'conj. （用以引出另一种可能性）或，或者，还是；（用于否定动词后）也不', examples: [
     { en: 'I don\'t drink whisky or brandy or any other spirits.', zh: '我不喝威士忌和白兰地，也不喝其他烈性酒。' },
     { en: 'It was law or classics – I mean English or classics.', zh: '那是法律或者古典文学–我是说，英语或者古典文学。' },
     { en: 'This guy, his name was Briarly or Beardly or something.', zh: '这个家伙，他的名字叫布赖尔利，或比亚特利，或跟这差不多的。' }
@@ -2455,7 +2455,7 @@ export const A1: Word[] = [
     { en: 'Go out.', zh: '出去。' },
     { en: 'The light is out.', zh: '灯灭了。' }
   ] },
-  { word: 'outside', level: 'A1', ipa: '', pos: 'adv., adj.', meaning: 'n. 外表，外部（the outside）；（建筑物、车辆等的）周围，外围（the outside）', examples: [
+  { word: 'outside', level: 'A1', ipa: 'ˌaʊtˈsaɪd', pos: 'adv., adj.', meaning: 'n. 外表，外部（the outside）；（建筑物、车辆等的）周围，外围（the outside）', examples: [
     { en: 'Train your muscles and bones outside, and train your gomoku inside.', zh: '外练筋骨皮，内练五子棋。' },
     { en: 'Outside it was bitterly cold.', zh: '外面非常寒冷。' },
     { en: 'It\'s freezing cold outside.', zh: '外面极为寒冷。' }
@@ -2476,12 +2476,12 @@ export const A1: Word[] = [
     { en: 'I paint a flower.', zh: '我画一朵花。' },
     { en: 'A box of paint.', zh: '一盒颜料。' }
   ] },
-  { word: 'painting', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. （一幅）画，绘画作品；绘画创作，绘画', examples: [
+  { word: 'painting', level: 'A1', ipa: 'ˈpeɪntɪŋ', pos: 'n.', meaning: 'n. （一幅）画，绘画作品；绘画创作，绘画', examples: [
     { en: 'He is painting a huge volcano.', zh: '他正在画一座巨型火山。' },
     { en: 'Painting can be very therapeutic.', zh: '绘画可以使人很放松。' },
     { en: 'The painting was hung upside down.', zh: '这幅画挂颠倒了。' }
   ] },
-  { word: 'pair', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. （成双的两物品）一对，一双；（由两个相连的类似部分组成的）一套，一副', examples: [
+  { word: 'pair', level: 'A1', ipa: 'peə(r)', pos: 'n.', meaning: 'n. （成双的两物品）一对，一双；（由两个相连的类似部分组成的）一套，一副', examples: [
     { en: 'Maximo put on a pair of glasses.', zh: '马克西莫戴上了一副眼镜。' },
     { en: 'I need a new pair of specs.', zh: '我需要一副新眼镜。' },
     { en: 'The vase is one of a matching pair.', zh: '这只花瓶是一对中的一只。' }
@@ -2490,12 +2490,12 @@ export const A1: Word[] = [
     { en: 'A piece of paper.', zh: '一张纸。' },
     { en: 'I write on paper.', zh: '我在纸上写。' }
   ] },
-  { word: 'paragraph', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. （文章的）段，段落；段落符号', examples: [
+  { word: 'paragraph', level: 'A1', ipa: 'ˈpærəɡrɑːf', pos: 'n.', meaning: 'n. （文章的）段，段落；段落符号', examples: [
     { en: 'The editor struck out the whole paragraph.', zh: '编辑把整段全部删去了。' },
     { en: 'This paragraph refers to the events of last year.', zh: '这一段说的是去年发生的事。' },
     { en: 'Later, he inserted another paragraph into his will.', zh: '后来他在他的遗嘱中又加了一段。' }
   ] },
-  { word: 'parent', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 父亲（或母亲）；（动植物的）亲代，亲本', examples: [
+  { word: 'parent', level: 'A1', ipa: 'ˈpeərənt', pos: 'n.', meaning: 'n. 父亲（或母亲）；（动植物的）亲代，亲本', examples: [
     { en: 'A happy parent makes for a happy child.', zh: '幸福的家长造就幸福的孩子。' },
     { en: 'The written consent of a parent is required.', zh: '要求有家长的书面同意。' },
     { en: 'I\'m wearing two hats tonight—parent and teacher.', zh: '我今晚身兼两职—既是家长又是老师。' }
@@ -2508,7 +2508,7 @@ export const A1: Word[] = [
     { en: 'Part of the book.', zh: '书的一部分。' },
     { en: 'A part of the city.', zh: '城市的一部分。' }
   ] },
-  { word: 'partner', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. （跳舞、玩游戏等的）搭档，同伴；（合伙企业的）合伙人', examples: [
+  { word: 'partner', level: 'A1', ipa: 'ˈpɑːtnə(r)', pos: 'n.', meaning: 'n. （跳舞、玩游戏等的）搭档，同伴；（合伙企业的）合伙人', examples: [
     { en: 'Gerry offered to partner me at tennis.', zh: '格里提出和我搭档打网球。' },
     { en: 'He did not dally over the choice of a partner.', zh: '他没有在选择合伙人上面磨磨蹭蹭。' },
     { en: 'He is now co-partner in a new property company.', zh: '他现在是一家新房地产公司的合伙人。' }
@@ -2517,7 +2517,7 @@ export const A1: Word[] = [
     { en: 'A birthday party.', zh: '生日聚会。' },
     { en: 'We have a party.', zh: '我们开聚会。' }
   ] },
-  { word: 'passport', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 护照；途径，手段', examples: [
+  { word: 'passport', level: 'A1', ipa: 'ˈpɑːspɔːt', pos: 'n.', meaning: 'n. 护照；途径，手段', examples: [
     { en: 'He\'s gone off with my passport.', zh: '他拿走了我的护照。' },
     { en: 'Do you have an American passport?', zh: '你有美国护照吗？' },
     { en: 'She searched in vain for her passport.', zh: '她翻找自己的护照，但没找着。' }
@@ -2534,7 +2534,7 @@ export const A1: Word[] = [
     { en: 'A blue pen.', zh: '一支蓝色钢笔。' },
     { en: 'I write with a pen.', zh: '我用钢笔写字。' }
   ] },
-  { word: 'pencil', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 铅笔；石墨芯，类似石墨芯的东西', examples: [
+  { word: 'pencil', level: 'A1', ipa: 'ˈpens(ə)l', pos: 'n.', meaning: 'n. 铅笔；石墨芯，类似石墨芯的东西', examples: [
     { en: 'I snapped the pencil in half.', zh: '我啪的一声将铅笔折成两段。' },
     { en: 'I\'ll get a pencil and paper.', zh: '我去拿铅笔和纸。' },
     { en: 'He made marks with a pencil.', zh: '他用铅笔作了记号。' }
@@ -2543,27 +2543,27 @@ export const A1: Word[] = [
     { en: 'Many people.', zh: '许多人。' },
     { en: 'Kind people.', zh: '善良的人们。' }
   ] },
-  { word: 'pepper', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 胡椒粉；辣椒，甜椒，灯笼椒', examples: [
+  { word: 'pepper', level: 'A1', ipa: 'ˈpepə(r)', pos: 'n.', meaning: 'n. 胡椒粉；辣椒，甜椒，灯笼椒', examples: [
     { en: 'She shook some pepper onto her sandwich.', zh: '她在她的三明治上撒了些胡椒。' },
     { en: 'The officers blasted him with pepper spray.', zh: '该警察用胡椒粉喷雾剂喷他。' },
     { en: 'Brush the eggplant with oil, add salt and pepper, and bake till soft. Meanwhile, heat the remaining oil in a heavy pan.', zh: '给茄子刷好油，加盐和胡椒粉，烤到软。同时，加热厚底锅中剩余的油。' }
   ] },
-  { word: 'perfect', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 无瑕的，完好的；完全正确的，极其准确的', examples: [
+  { word: 'perfect', level: 'A1', ipa: 'ˈpɜːfɪkt', pos: 'adj.', meaning: 'adj. 无瑕的，完好的；完全正确的，极其准确的', examples: [
     { en: 'It was a perfect summer\'s day.', zh: '那是个完美的夏日。' },
     { en: 'She speaks perfect English.', zh: '她讲一口地道的英语。' },
     { en: 'He spoke perfect English.', zh: '他讲一口纯正的英语。' }
   ] },
-  { word: 'period', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 一段时间，时期；（人生或国家历史的）阶段，时代', examples: [
+  { word: 'period', level: 'A1', ipa: 'ˈpɪəriəd', pos: 'n.', meaning: 'n. 一段时间，时期；（人生或国家历史的）阶段，时代', examples: [
     { en: 'When did you last have a period ?', zh: '你上一次月经是什么时候？' },
     { en: 'It was a period of intense activity.', zh: '那是活动激烈的时期。' },
     { en: 'The novel is set in the Roman period.', zh: '该小说的背景是罗马时期。' }
   ] },
-  { word: 'person', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 人；自然人，法人', examples: [
+  { word: 'person', level: 'A1', ipa: 'ˈpɜːs(ə)n', pos: 'n.', meaning: 'n. 人；自然人，法人', examples: [
     { en: 'She\'s quite a chatty person.', zh: '她是个颇爱聊天的人。' },
     { en: 'He\'s quite a serious person.', zh: '他是一个相当严肃的人。' },
     { en: 'He\'s a fascinating person.', zh: '他是个魅力十足的人。' }
   ] },
-  { word: 'personal', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 个人的，私人的；私密的，隐私的', examples: [
+  { word: 'personal', level: 'A1', ipa: 'ˈpɜːsən(ə)l', pos: 'adj.', meaning: 'adj. 个人的，私人的；私密的，隐私的', examples: [
     { en: 'Do you have a personal trainer?', zh: '你有私人教练吗？' },
     { en: 'That\'s my personal opinion.', zh: '这是我的个人意见。' },
     { en: 'The letter was marked \'Personal\'.', zh: '信上标注着“私人”字样。' }
@@ -2576,17 +2576,17 @@ export const A1: Word[] = [
     { en: 'A family photo.', zh: '一张全家福。' },
     { en: 'Take a photo.', zh: '拍张照片。' }
   ] },
-  { word: 'photograph', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'n. 照片，相片', examples: [
+  { word: 'photograph', level: 'A1', ipa: 'ˈfəʊtəɡrɑːf', pos: 'n., v.', meaning: 'n. 照片，相片', examples: [
     { en: 'The photograph had been framed.', zh: '照片已镶了框。' },
     { en: 'He peered closely at the photograph.', zh: '他聚精会神地端详着相片。' },
     { en: 'It wasn\'t a very flattering photograph.', zh: '这张照片照得不如本人好看。' }
   ] },
-  { word: 'phrase', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 短语，词组；惯用语，习语', examples: [
+  { word: 'phrase', level: 'A1', ipa: 'freɪz', pos: 'n.', meaning: 'n. 短语，词组；惯用语，习语', examples: [
     { en: 'We bought a Danish phrase book.', zh: '我买了一本丹麦常用语手册。' },
     { en: 'Who coined the phrase \'desktop publishing\'?', zh: '谁创造了desktop publishing（桌面出版）这个词组？' },
     { en: 'The Italian phrase can be rendered as \'I did my best\'.', zh: '这个意大利语的短语可以译为“我尽力了”。' }
   ] },
-  { word: 'piano', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 钢琴', examples: [
+  { word: 'piano', level: 'A1', ipa: 'piˈænəʊ', pos: 'n.', meaning: 'n. 钢琴', examples: [
     { en: 'The piano was in good condition.', zh: '这台钢琴状况良好。' },
     { en: 'Nina had been playing the piano.', zh: '尼娜一直在弹钢琴。' },
     { en: 'I\'ve got a piano lesson later today.', zh: '今天晚些时候我有一堂钢琴课。' }
@@ -2599,12 +2599,12 @@ export const A1: Word[] = [
     { en: 'A piece of bread.', zh: '一片面包。' },
     { en: 'A piece of paper.', zh: '一张纸。' }
   ] },
-  { word: 'pig', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 猪；<非正式>令人讨厌的人，猪猡', examples: [
+  { word: 'pig', level: 'A1', ipa: 'pɪɡ', pos: 'n.', meaning: 'n. 猪；<非正式>令人讨厌的人，猪猡', examples: [
     { en: 'The pig rose squealing and bolted.', zh: '那头猪尖叫着站起来，飞快地跑开了。' },
     { en: 'Wild boar readily hybridizes with the domestic pig.', zh: '野猪很容易和家猪杂交。' },
     { en: '"A talking pig!" he exclaimed. "Well, I\'ll be darned."', zh: '“一头会说话的猪！”他惊叫到，“啊，我太惊奇了”。' }
   ] },
-  { word: 'pink', level: 'A1', ipa: '', pos: 'adj., n.', meaning: 'adj. 粉红色的；（因窘迫、愤怒或剧烈活动而）脸色发红的', examples: [
+  { word: 'pink', level: 'A1', ipa: 'pɪŋk', pos: 'adj., n.', meaning: 'adj. 粉红色的；（因窘迫、愤怒或剧烈活动而）脸色发红的', examples: [
     { en: 'Her dress was a violent pink.', zh: '她的连衣裙是非常鲜艳的粉红色。' },
     { en: 'Judi\'s favourite colour is pink.', zh: '朱迪最喜欢的颜色是粉红色。' },
     { en: 'His face was a queer pink colour.', zh: '他满脸奇怪的粉红色。' }
@@ -2617,7 +2617,7 @@ export const A1: Word[] = [
     { en: 'A good plan.', zh: '一个好计划。' },
     { en: 'We plan a trip.', zh: '我们计划旅行。' }
   ] },
-  { word: 'plane', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 飞机；（几何学中的）平面', examples: [
+  { word: 'plane', level: 'A1', ipa: 'pleɪn', pos: 'n.', meaning: 'n. 飞机；（几何学中的）平面', examples: [
     { en: 'The plane flipped and crashed.', zh: '飞机猛地翻转，撞毁了。' },
     { en: 'A plane passed low overhead.', zh: '一架飞机从头上低空飞过。' },
     { en: 'The plane landed at Geneva.', zh: '飞机在日内瓦降落。' }
@@ -2630,7 +2630,7 @@ export const A1: Word[] = [
     { en: 'Play with me.', zh: '和我玩吧。' },
     { en: 'He plays the piano.', zh: '他弹钢琴。' }
   ] },
-  { word: 'player', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 运动员，选手；（乐器的）演奏者', examples: [
+  { word: 'player', level: 'A1', ipa: 'ˈpleɪə(r)', pos: 'n.', meaning: 'n. 运动员，选手；（乐器的）演奏者', examples: [
     { en: 'She\'s a good all-round player.', zh: '她是个优秀的全能选手。' },
     { en: 'She\'s an instinctive player.', zh: '她是个天生的运动员。' },
     { en: 'The next player discarded a club.', zh: '接下来的那位玩家出了张梅花牌。' }
@@ -2647,12 +2647,12 @@ export const A1: Word[] = [
     { en: 'Call the police.', zh: '报警。' },
     { en: 'A police officer.', zh: '一名警察。' }
   ] },
-  { word: 'policeman', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 警察，警员；[分化] 淀帚（橡皮头玻璃搅棒）', examples: [
+  { word: 'policeman', level: 'A1', ipa: 'pəˈliːsmən', pos: 'n.', meaning: 'n. 警察，警员；[分化] 淀帚（橡皮头玻璃搅棒）', examples: [
     { en: 'An injured policeman was led away by colleagues.', zh: '一位受伤的警察被同事们带走了。' },
     { en: 'The policeman reached down and petted the wolfhound.', zh: '警察伸出手，摸了摸那条猎狼犬。' },
     { en: 'The policeman asked me to blow into the breathalyser.', zh: '警察要我对着呼吸检测仪吹气。' }
   ] },
-  { word: 'pool', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 游泳池；池塘，水坑', examples: [
+  { word: 'pool', level: 'A1', ipa: 'puːl', pos: 'n.', meaning: 'n. 游泳池；池塘，水坑', examples: [
     { en: 'We lazed by the pool all day.', zh: '我们整天都在池塘边消磨。' },
     { en: 'Was there a pool at the hotel?', zh: '饭店里有游泳池吗？' },
     { en: 'Does the hotel have a pool?', zh: '这家旅馆有没有游泳池？' }
@@ -2668,7 +2668,7 @@ export const A1: Word[] = [
   { word: 'pork', level: 'A1', ipa: '/pɔːk/', pos: 'n.', meaning: 'n. 猪肉', examples: [
     { en: 'We had pork for dinner.', zh: '我们晚饭吃了猪肉。' }
   ] },
-  { word: 'positive', level: 'A1', ipa: '', pos: 'adj., n.', meaning: 'adj. 乐观的，有信心的；积极的，建设性的', examples: [
+  { word: 'positive', level: 'A1', ipa: 'ˈpɒzətɪv', pos: 'adj., n.', meaning: 'adj. 乐观的，有信心的；积极的，建设性的', examples: [
     { en: 'I adopted a positive outlook on life.', zh: '我选择了一种积极的人生观。' },
     { en: 'The athlete tested positive for steroids.', zh: '这个运动员类固醇检测呈阳性。' },
     { en: 'Two athletes tested positive for steroids.', zh: '两名运动员的类固醇试验呈阳性。' }
@@ -2681,12 +2681,12 @@ export const A1: Word[] = [
     { en: 'A post card.', zh: '一张明信片。' },
     { en: 'Post the letter.', zh: '寄信。' }
   ] },
-  { word: 'potato', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 马铃薯，土豆，洋芋；马铃薯植株', examples: [
+  { word: 'potato', level: 'A1', ipa: 'pəˈteɪtəʊ', pos: 'n.', meaning: 'n. 马铃薯，土豆，洋芋；马铃薯植株', examples: [
     { en: 'The boiled potato was mealy.', zh: '这个煮土豆干巴巴的。' },
     { en: 'On the menu is wiener schnitzel and potato salad.', zh: '菜单上有维也纳炸小牛排和土豆沙拉。' },
     { en: 'All main courses are served with chips or baked potato.', zh: '所有的主菜都配有炸土豆条或烤土豆。' }
   ] },
-  { word: 'pound', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 磅（重量单位）；英镑（英国货币单位）', examples: [
+  { word: 'pound', level: 'A1', ipa: 'paʊnd', pos: 'n.', meaning: 'n. 磅（重量单位）；英镑（英国货币单位）', examples: [
     { en: 'They cost two dollars a pound.', zh: '这些东西每磅两元。' },
     { en: 'The pound rallied against the dollar.', zh: '英镑对美元的比值回升了。' },
     { en: 'The pound steadied against the dollar.', zh: '英镑对美元的汇率稳定下来。' }
@@ -2695,12 +2695,12 @@ export const A1: Word[] = [
     { en: 'Practice every day.', zh: '每天练习。' },
     { en: 'I practice English.', zh: '我练习英语。' }
   ] },
-  { word: 'practise', level: 'A1', ipa: '', pos: 'v.', meaning: 'v. 练习，实践；（尤指）形成……的习惯（或风俗、传统）', examples: [
+  { word: 'practise', level: 'A1', ipa: 'ˈpræktɪs', pos: 'v.', meaning: 'v. 练习，实践；（尤指）形成……的习惯（或风俗、传统）', examples: [
     { en: 'He usually wants to practise his English on me.', zh: '他通常想跟我练习英语。' },
     { en: 'Practise mental arithmetic when you go out shopping.', zh: '外出购物时练习一下心算。' },
     { en: 'If you practise speaking English, you\'ll soon improve.', zh: '只要你练习说英语，很快就会进步。' }
   ] },
-  { word: 'prefer', level: 'A1', ipa: '', pos: 'v.', meaning: 'v. 更喜爱，宁可；<法律>举报，提出（控告）', examples: [
+  { word: 'prefer', level: 'A1', ipa: 'prɪˈfɜː(r)', pos: 'v.', meaning: 'v. 更喜爱，宁可；<法律>举报，提出（控告）', examples: [
     { en: 'I prefer reading non-fiction.', zh: '我喜欢看纪实作品。' },
     { en: 'I prefer walking to climbing.', zh: '我喜欢散步多于喜欢爬山。' },
     { en: 'I prefer playing in defence.', zh: '我喜欢打防守。' }
@@ -2721,7 +2721,7 @@ export const A1: Word[] = [
     { en: 'A low price.', zh: '低价。' },
     { en: 'What is the price?', zh: '价格是多少？' }
   ] },
-  { word: 'probably', level: 'A1', ipa: '', pos: 'adv.', meaning: 'adv. 大概，或许', examples: [
+  { word: 'probably', level: 'A1', ipa: 'ˈprɒbəbli', pos: 'adv.', meaning: 'adv. 大概，或许', examples: [
     { en: 'The driver was probably taking a pee.', zh: '司机可能在小便。' },
     { en: 'It was probably infested with cooties.', zh: '它可能是染上虱子了。' },
     { en: 'You\'re probably right.', zh: '你很可能是对的。' }
@@ -2730,7 +2730,7 @@ export const A1: Word[] = [
     { en: 'A big problem.', zh: '一个大问题。' },
     { en: 'No problem!', zh: '没问题！' }
   ] },
-  { word: 'product', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 产品，制品；（自然、化学或工业过程的）生成物', examples: [
+  { word: 'product', level: 'A1', ipa: 'ˈprɒdʌkt', pos: 'n.', meaning: 'n. 产品，制品；（自然、化学或工业过程的）生成物', examples: [
     { en: 'The product of 21 and 16 is 336.', zh: '21和16的乘积是336。' },
     { en: 'The product is at the design stage.', zh: '产品处于设计阶段。' },
     { en: 'We cannot satisfy demand for the product.', zh: '我们不能满足对该产品的需求。' }
@@ -2739,7 +2739,7 @@ export const A1: Word[] = [
     { en: 'A TV programme.', zh: '一个电视节目。' },
     { en: 'A school programme.', zh: '一个学校项目。' }
   ] },
-  { word: 'project', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'n. 项目，计划；（学校的）课题，研究项目', examples: [
+  { word: 'project', level: 'A1', ipa: 'ˈprɒdʒekt; prəˈdʒekt', pos: 'n., v.', meaning: 'n. 项目，计划；（学校的）课题，研究项目', examples: [
     { en: 'The project is in its final stages.', zh: '这个项目到了最后阶段。' },
     { en: 'The whole project was badly managed.', zh: '整个项目管理得差劲。' },
     { en: 'What\'s the timescale for the project?', zh: '这个项目的工期是多长？' }
@@ -2753,7 +2753,7 @@ export const A1: Word[] = [
     { en: 'Put the book here.', zh: '把书放这儿。' },
     { en: 'Put on your coat.', zh: '穿上外套。' }
   ] },
-  { word: 'quarter', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 四分之一；一刻钟，十五分钟', examples: [
+  { word: 'quarter', level: 'A1', ipa: 'ˈkwɔːtə(r)', pos: 'n.', meaning: 'n. 四分之一；一刻钟，十五分钟', examples: [
     { en: 'Nowitzki fouled Mitchell early in the third quarter.', zh: '在第三节早些时候，诺维斯基就对米切尔犯了规。' },
     { en: 'It\'s (a) quarter to four now—I\'ll meet you at (a) quarter past.', zh: '现在是差一刻四点，我会在四点一刻和你碰面。' },
     { en: 'The moon is in its first quarter.', zh: '月亮正处于上弦。' }
@@ -2766,7 +2766,7 @@ export const A1: Word[] = [
     { en: 'A quick answer.', zh: '快速回答。' },
     { en: 'Be quick!', zh: '快点儿！' }
   ] },
-  { word: 'quickly', level: 'A1', ipa: '', pos: 'adv.', meaning: 'adv. 快速地；很快，马上', examples: [
+  { word: 'quickly', level: 'A1', ipa: 'ˈkwɪkli', pos: 'adv.', meaning: 'adv. 快速地；很快，马上', examples: [
     { en: 'Her health degenerated quickly.', zh: '她的健康状况迅速恶化。' },
     { en: 'The party was arranged quickly.', zh: '聚会很快就安排好了。' },
     { en: 'The room was filling quickly.', zh: '房间很快就挤满了人。' }
@@ -2779,7 +2779,7 @@ export const A1: Word[] = [
     { en: 'Quite good.', zh: '相当好。' },
     { en: 'It is quite cold.', zh: '天气相当冷。' }
   ] },
-  { word: 'radio', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 收音机；无线电收发设备', examples: [
+  { word: 'radio', level: 'A1', ipa: 'ˈreɪdiəʊ', pos: 'n.', meaning: 'n. 收音机；无线电收发设备', examples: [
     { en: 'He smashed the radio to pieces.', zh: '他啪的一声把收音机摔得稀巴烂。' },
     { en: 'The radio crackled into life.', zh: '收音机嘎嘎地响了起来。' },
     { en: 'My friend here writes for radio.', zh: '我身边这位朋友为电台撰稿。' }
@@ -2792,12 +2792,12 @@ export const A1: Word[] = [
     { en: 'I read a book.', zh: '我读一本书。' },
     { en: 'She reads every day.', zh: '她每天都阅读。' }
   ] },
-  { word: 'reader', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 读者， 爱读书的人；（初级）读本，简易读物', examples: [
+  { word: 'reader', level: 'A1', ipa: 'ˈriːdə(r)', pos: 'n.', meaning: 'n. 读者， 爱读书的人；（初级）读本，简易读物', examples: [
     { en: 'Are you a \'Times\' reader?', zh: '你是《泰晤士报》的读者吗？' },
     { en: 'The reader is told the story in flashback.', zh: '故事是以倒叙手法向读者讲述的。' },
     { en: 'I leave it to the reader to ferret these out.', zh: '我让读者来找出线索。' }
   ] },
-  { word: 'reading', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 阅读，宣读；读物，阅读材料', examples: [
+  { word: 'reading', level: 'A1', ipa: 'ˈriːdɪŋ', pos: 'n.', meaning: 'n. 阅读，宣读；读物，阅读材料', examples: [
     { en: 'I have always loved reading.', zh: '我一直很喜欢读书。' },
     { en: 'I enjoy reading very much.', zh: '我非常喜欢阅读。' },
     { en: 'The report repays careful reading.', zh: '这份报告值得仔细阅读。' }
@@ -2822,7 +2822,7 @@ export const A1: Word[] = [
     { en: 'A red apple.', zh: '一个红苹果。' },
     { en: 'I like red.', zh: '我喜欢红色。' }
   ] },
-  { word: 'relax', level: 'A1', ipa: '', pos: 'v.', meaning: 'v. 休息，（使）放松；放心，镇定', examples: [
+  { word: 'relax', level: 'A1', ipa: 'rɪˈlæks', pos: 'v.', meaning: 'v. 休息，（使）放松；放心，镇定', examples: [
     { en: 'A bath can relax tense muscles.', zh: '泡个澡能放松紧绷的肌肉。' },
     { en: 'Let\'s just relax and enjoy ourselves.', zh: '咱们轻松一下，好好享受享受。' },
     { en: 'She just won\'t relax.', zh: '她就是不放松。' }
@@ -2831,7 +2831,7 @@ export const A1: Word[] = [
     { en: 'I remember you.', zh: '我记得你。' },
     { en: 'Do you remember?', zh: '你记得吗？' }
   ] },
-  { word: 'repeat', level: 'A1', ipa: '', pos: 'v., n.', meaning: 'v. 重复，重说；复述，跟读（尤指为学习）', examples: [
+  { word: 'repeat', level: 'A1', ipa: 'rɪˈpiːt', pos: 'v., n.', meaning: 'v. 重复，重说；复述，跟读（尤指为学习）', examples: [
     { en: 'The joke is too rude to repeat.', zh: '这个笑话太下流，不宜重复。' },
     { en: '\'Is it a new series?\' \'No, a repeat\'.', zh: '“这是新播出的连续剧吗？”“不，是重播的。”' },
     { en: 'The claims are, I repeat, totally unfounded.', zh: '我再说一遍，这些说法是毫无根据的。' }
@@ -2840,7 +2840,7 @@ export const A1: Word[] = [
     { en: 'A school report.', zh: '一份学校成绩单。' },
     { en: 'He reports the news.', zh: '他报道新闻。' }
   ] },
-  { word: 'restaurant', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 餐馆，饭店', examples: [
+  { word: 'restaurant', level: 'A1', ipa: 'ˈrestrɒnt', pos: 'n.', meaning: 'n. 餐馆，饭店', examples: [
     { en: 'The restaurant was packed.', zh: '餐馆里坐满了客人。' },
     { en: 'The restaurant is deservedly popular.', zh: '这餐馆为大众喜爱是理所当然的。' },
     { en: 'The restaurant is under new ownership.', zh: '这个餐厅已换了新的东家。' }
@@ -2869,7 +2869,7 @@ export const A1: Word[] = [
     { en: 'The right answer.', zh: '正确答案。' },
     { en: 'Turn right.', zh: '向右转。' }
   ] },
-  { word: 'river', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 河，江', examples: [
+  { word: 'river', level: 'A1', ipa: 'ˈrɪvə(r)', pos: 'n.', meaning: 'n. 河，江', examples: [
     { en: 'The river was alive with birds.', zh: '这条河流周围满是各种鸟类。' },
     { en: 'The river overflowed its banks.', zh: '河水涨出了堤岸。' },
     { en: 'The river gurgled and burbled.', zh: '河水汩汩流淌。' }
@@ -2882,7 +2882,7 @@ export const A1: Word[] = [
     { en: 'A clean room.', zh: '一个干净的房间。' },
     { en: 'There is room.', zh: '有空间。' }
   ] },
-  { word: 'routine', level: 'A1', ipa: '', pos: 'n., adj.', meaning: 'n. 常规，惯例；生活乏味，无聊', examples: [
+  { word: 'routine', level: 'A1', ipa: 'ruːˈtiːn', pos: 'n., adj.', meaning: 'n. 常规，惯例；生活乏味，无聊', examples: [
     { en: 'Police work is mainly routine.', zh: '警察的工作主要都是按常规的。' },
     { en: 'A routine DNA sample was taken.', zh: '采集了一份常规的脱氧核糖核酸样本。' },
     { en: 'You need a break from routine.', zh: '你需要从日常工作中解脱出来去休息一下。' }
@@ -2919,7 +2919,7 @@ export const A1: Word[] = [
     { en: 'She was eating a sandwich.', zh: '她正在吃一个三明治。' },
     { en: 'Would you like a sandwich?', zh: '您来一个三明治好吗？' }
   ] },
-  { word: 'Saturday', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 星期六', examples: [
+  { word: 'Saturday', level: 'A1', ipa: 'ˈsætədeɪ', pos: 'n.', meaning: 'n. 星期六', examples: [
     { en: 'Let\'s go out on Saturday night.', zh: '我们星期六晚上出去吧。' },
     { en: 'We\'re going sailing on Saturday.', zh: '我们打算星期六乘帆船出游。' },
     { en: 'I used to go there every Saturday.', zh: '我以前每星期六都去那儿。' }
@@ -2970,7 +2970,7 @@ export const A1: Word[] = [
     { en: 'A long sentence.', zh: '一个长句子。' },
     { en: 'Write a sentence.', zh: '写一句话。' }
   ] },
-  { word: 'September', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 九月', examples: [
+  { word: 'September', level: 'A1', ipa: 'sepˈtembə(r)', pos: 'n.', meaning: 'n. 九月', examples: [
     { en: 'September was a long way off.', zh: '那时离九月份还有很长一段时间。' },
     { en: 'The rains come in September.', zh: '雨季九月份开始。' },
     { en: 'Enrolment is the first week of September.', zh: '九月份的第一周注册。' }
@@ -2984,7 +2984,7 @@ export const A1: Word[] = [
     { en: 'He had confessed to seventeen murders.', zh: '他已供认了17项谋杀罪。' },
     { en: 'Nora thought he was seventeen years old.', zh: '诺拉觉得他有17岁。' }
   ] },
-  { word: 'seventy', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 七十；七十个', examples: [
+  { word: 'seventy', level: 'A1', ipa: 'ˈsev(ə)nti', pos: 'number', meaning: 'n. 七十；七十个', examples: [
     { en: 'How old is she—seventy odd?', zh: '她多大年纪？七十出头？' },
     { en: 'Seventy thousand tons of oil spilled from the tanker.', zh: '7万吨油从油轮漏出。' },
     { en: 'Seventy-two percent of people now work in service industries.', zh: '72%的人现今从事服务业。' }
@@ -2997,7 +2997,7 @@ export const A1: Word[] = [
     { en: 'She is happy.', zh: '她很开心。' },
     { en: 'She likes cats.', zh: '她喜欢猫。' }
   ] },
-  { word: 'sheep', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 羊，绵羊；胆小鬼', examples: [
+  { word: 'sheep', level: 'A1', ipa: 'ʃiːp', pos: 'n.', meaning: 'n. 羊，绵羊；胆小鬼', examples: [
     { en: 'Sheep were grazing in the fields.', zh: '羊在野地里吃草。' },
     { en: 'They kept a small flock of sheep.', zh: '他们养了一小群绵羊。' },
     { en: 'The field had been grazed by sheep.', zh: '这块地羊已经啃过了。' }
@@ -3015,7 +3015,7 @@ export const A1: Word[] = [
     { en: 'A small shop.', zh: '一家小店。' },
     { en: 'We shop for food.', zh: '我们买食物。' }
   ] },
-  { word: 'shopping', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 购物；<英>从商店采买的东西', examples: [
+  { word: 'shopping', level: 'A1', ipa: 'ˈʃɒpɪŋ', pos: 'n.', meaning: 'n. 购物；<英>从商店采买的东西', examples: [
     { en: 'When shall I do the shopping ?', zh: '我什么时候去买东西呢？' },
     { en: 'We do our shopping on Saturdays.', zh: '我们星期六购物。' },
     { en: 'Maybe they\'ve just gone shopping.', zh: '或许他们刚刚去买东西了。' }
@@ -3032,7 +3032,7 @@ export const A1: Word[] = [
     { en: 'Show me the book.', zh: '给我看那本书。' },
     { en: 'A TV show.', zh: '一个电视节目。' }
   ] },
-  { word: 'shower', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 淋浴器，花洒；淋浴间，淋浴室', examples: [
+  { word: 'shower', level: 'A1', ipa: 'ˈʃaʊə(r)', pos: 'n.', meaning: 'n. 淋浴器，花洒；淋浴间，淋浴室', examples: [
     { en: 'She usually sings in the shower.', zh: '她常常边冲澡边唱歌。' },
     { en: 'She heard him turn on the shower.', zh: '她听见他拧开了淋浴器。' },
     { en: 'We now have a functioning shower.', zh: '现在我们有一个功能正常的淋浴器。' }
@@ -3051,7 +3051,7 @@ export const A1: Word[] = [
     { en: 'She sings a song.', zh: '她唱一首歌。' },
     { en: 'We sing together.', zh: '我们一起唱。' }
   ] },
-  { word: 'singer', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 歌手，歌唱家', examples: [
+  { word: 'singer', level: 'A1', ipa: 'ˈsɪŋə(r)', pos: 'n.', meaning: 'n. 歌手，歌唱家', examples: [
     { en: 'The singer re-formed his band.', zh: '这名歌手对他的乐队进行了重组。' },
     { en: 'She\'s a singer with a band.', zh: '她是一个乐队的歌手。' },
     { en: 'The singer earns a colossal amount of money.', zh: '那歌手现在可赚大钱了。' }
@@ -3078,7 +3078,7 @@ export const A1: Word[] = [
     { en: 'Sixteen times as many men are colour-blind as women.', zh: '色盲的男性人数是女性人数的十六倍。' },
     { en: 'He worked sixteen hours a day.', zh: '他每天工作16个小时。' }
   ] },
-  { word: 'sixty', level: 'A1', ipa: '', pos: 'number', meaning: 'num. 六十，六十个；六十几，六十年代', examples: [
+  { word: 'sixty', level: 'A1', ipa: 'ˈsɪksti', pos: 'number', meaning: 'num. 六十，六十个；六十几，六十年代', examples: [
     { en: 'He has now appeared in sixty odd films.', zh: '他如今已在六十部左右的电影中露过面。' },
     { en: 'Ruth hit sixty home runs that year.', zh: '露丝那一年击中了60个本垒打。' },
     { en: 'She is close on sixty.', zh: '她快满六十岁了。' }
@@ -3087,7 +3087,7 @@ export const A1: Word[] = [
     { en: 'A new skill.', zh: '一项新技能。' },
     { en: 'She has a skill.', zh: '她有一项技能。' }
   ] },
-  { word: 'skirt', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 女裙，半身裙；（连衣裙、外衣等的）下摆（skirts）', examples: [
+  { word: 'skirt', level: 'A1', ipa: 'skɜːt', pos: 'n.', meaning: 'n. 女裙，半身裙；（连衣裙、外衣等的）下摆（skirts）', examples: [
     { en: 'There\'s a mark on your skirt.', zh: '你裙子上有一块斑。' },
     { en: 'The skirt has a side opening.', zh: '这裙子是侧面开口的。' },
     { en: 'The skirt is cut on the bias.', zh: '这条裙子是斜裁的。' }
@@ -3255,7 +3255,7 @@ export const A1: Word[] = [
     { en: 'I study English.', zh: '我学英语。' },
     { en: 'A quiet study.', zh: '安静的书房。' }
   ] },
-  { word: 'style', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 方式，作风；款式，样式', examples: [
+  { word: 'style', level: 'A1', ipa: 'staɪl', pos: 'n.', meaning: 'n. 方式，作风；款式，样式', examples: [
     { en: 'He had a dense, ponderous style.', zh: '他的风格是词藻堆砌、冗长沉闷。' },
     { en: 'Her style is pared-down and simple.', zh: '她的风格简洁明了。' },
     { en: 'Her style of dress was never conservative.', zh: '她的服装式样一点儿也不保守。' }
@@ -3269,7 +3269,7 @@ export const A1: Word[] = [
     { en: 'She felt heady with success.', zh: '成功使她得意忘形。' },
     { en: 'He had finally achieved success.', zh: '他终于获得了成功。' }
   ] },
-  { word: 'sugar', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 食糖；一匙糖，一块方糖', examples: [
+  { word: 'sugar', level: 'A1', ipa: 'ˈʃʊɡə(r)', pos: 'n.', meaning: 'n. 食糖；一匙糖，一块方糖', examples: [
     { en: 'Sugar is ubiquitous in the diet.', zh: '糖在饮食中到处可见。' },
     { en: 'Sugar occurs naturally in fruit.', zh: '水果天然含糖分。' },
     { en: 'My doctor has forbidden me sugar.', zh: '医生禁止我吃糖。' }
@@ -3282,7 +3282,7 @@ export const A1: Word[] = [
     { en: 'The warm sun.', zh: '温暖的太阳。' },
     { en: 'The sun rises.', zh: '太阳升起。' }
   ] },
-  { word: 'Sunday', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 星期日；礼拜日', examples: [
+  { word: 'Sunday', level: 'A1', ipa: 'ˈsʌndeɪ', pos: 'n.', meaning: 'n. 星期日；礼拜日', examples: [
     { en: 'We work every day except Sunday.', zh: '我们除星期天外每天都工作。' },
     { en: 'It was a grey, wet, April Sunday.', zh: '那是一个阴沉、潮湿、4月里的星期天。' },
     { en: 'The driver was rostered for Sunday.', zh: '这名司机被安排在星期日值班。' }
@@ -3310,7 +3310,7 @@ export const A1: Word[] = [
     { en: 'We went swimming very early.', zh: '我们很早就去游泳了。' },
     { en: 'She\'s never liked swimming.', zh: '她从不喜欢游泳。' }
   ] },
-  { word: 'T-shirt', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. T恤；短袖汗衫', examples: [
+  { word: 'T-shirt', level: 'A1', ipa: 'ˈtiː ʃɜːt', pos: 'n.', meaning: 'n. T恤；短袖汗衫', examples: [
     { en: 'She wore an olive-green T-shirt.', zh: '她穿了一件橄榄绿的T恤衫。' },
     { en: 'I brought a T-shirt back for Mark.', zh: '我给马克带回来一件T恤衫。' },
     { en: 'I was in my drawers and my T-shirt.', zh: '我穿着我的内裤和T恤。' }
@@ -3414,7 +3414,7 @@ export const A1: Word[] = [
     { en: 'The sun.', zh: '太阳。' },
     { en: 'The red book.', zh: '那本红书。' }
   ] },
-  { word: 'theatre', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 剧场，戏院；<美>电影院', examples: [
+  { word: 'theatre', level: 'A1', ipa: 'ˈθɪətə(r)', pos: 'n.', meaning: 'n. 剧场，戏院；<美>电影院', examples: [
     { en: 'I like music, theatre and cinema.', zh: '我喜欢音乐、戏剧和电影。' },
     { en: 'I want to work in theatre.', zh: '我想从事戏剧工作。' },
     { en: 'The theatre was practically empty.', zh: '剧院几乎是空的。' }
@@ -3447,22 +3447,22 @@ export const A1: Word[] = [
     { en: 'I think so.', zh: '我这么认为。' },
     { en: 'Think about it.', zh: '考虑一下。' }
   ] },
-  { word: 'third', level: 'A1', ipa: '', pos: 'number, n.', meaning: 'num. 第三；三分之一', examples: [
+  { word: 'third', level: 'A1', ipa: 'θɜːd', pos: 'number, n.', meaning: 'num. 第三；三分之一', examples: [
     { en: 'This is her third win in a row.', zh: '这是她连续获得的第三次胜利。' },
     { en: 'He finished in third place.', zh: '他得了第三名。' },
     { en: 'The favourite came third.', zh: '那个可望夺魁者得了第三名。' }
   ] },
-  { word: 'thirsty', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 渴的，口渴的；渴望的，渴求的', examples: [
+  { word: 'thirsty', level: 'A1', ipa: 'ˈθɜːsti', pos: 'adj.', meaning: 'adj. 渴的，口渴的；渴望的，渴求的', examples: [
     { en: 'When a baby is thirsty, it feeds more often.', zh: '婴儿口渴时，吃奶更频繁。' },
     { en: 'They were all thirsty so I gave them a drink.', zh: '他们都口渴了，所以我给了他们一杯饮料。' },
     { en: 'Drink whenever you feel thirsty during exercise.', zh: '锻炼时一感到口渴就喝水。' }
   ] },
-  { word: 'thirteen', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 十三；十三岁', examples: [
+  { word: 'thirteen', level: 'A1', ipa: 'ˌθɜːˈtiːn', pos: 'number', meaning: 'n. 十三；十三岁', examples: [
     { en: '"Thirteen?" he guessed wildly.', zh: '“十三？”他胡乱猜道。' },
     { en: 'He ran away from home at the age of thirteen.', zh: '他十三岁时离家出走。' },
     { en: 'Thirteen is often considered an unlucky number.', zh: '十三常被认为是不吉利的数字。' }
   ] },
-  { word: 'thirty', level: 'A1', ipa: '', pos: 'number', meaning: 'n. 三十年代', examples: [
+  { word: 'thirty', level: 'A1', ipa: 'ˈθɜːti', pos: 'number', meaning: 'n. 三十年代', examples: [
     { en: 'By sunset we had covered thirty miles.', zh: '到日落时我们已走了三十英里。' },
     { en: 'Some thirty people attended the funeral.', zh: '大约有三十人参加了葬礼。' },
     { en: 'By this time he was thirty.', zh: '到这时他30岁了。' }
@@ -3495,12 +3495,12 @@ export const A1: Word[] = [
     { en: 'What time?', zh: '几点？' },
     { en: 'A long time.', zh: '很长一段时间。' }
   ] },
-  { word: 'tired', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 疲倦的，累的；枯燥乏味的，陈腐的', examples: [
+  { word: 'tired', level: 'A1', ipa: 'ˈtaɪəd', pos: 'adj.', meaning: 'adj. 疲倦的，累的；枯燥乏味的，陈腐的', examples: [
     { en: 'She looked tired and dispirited.', zh: '她显得疲倦而且神情沮丧。' },
     { en: 'He was tired and crotchety.', zh: '他累了，动不动就发火。' },
     { en: 'She looked pale and tired.', zh: '她看起来苍白而疲惫。' }
   ] },
-  { word: 'title', level: 'A1', ipa: '', pos: 'n., v.', meaning: 'n. （书籍、诗歌、图画、乐曲等的）名称，标题；（书刊的）一种，一本', examples: [
+  { word: 'title', level: 'A1', ipa: 'ˈtaɪt(ə)l', pos: 'n., v.', meaning: 'n. （书籍、诗歌、图画、乐曲等的）名称，标题；（书刊的）一种，一本', examples: [
     { en: 'The title is printed in italics.', zh: '标题被印成斜体。' },
     { en: 'The title "colonel" was an honorific.', zh: '"上校"头衔是尊称。' },
     { en: 'He was disgraced and stripped of his title.', zh: '他名誉扫地，被取消了头衔。' }
@@ -3517,12 +3517,12 @@ export const A1: Word[] = [
     { en: 'We play together.', zh: '我们一起玩。' },
     { en: 'Stay together.', zh: '待在一起。' }
   ] },
-  { word: 'toilet', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 抽水马桶，坐便器；厕所，洗手间', examples: [
+  { word: 'toilet', level: 'A1', ipa: 'ˈtɔɪlət', pos: 'n.', meaning: 'n. 抽水马桶，坐便器；厕所，洗手间', examples: [
     { en: 'He heard the flush of a toilet.', zh: '他听到马桶的冲水声。' },
     { en: 'I knelt by the toilet and gagged.', zh: '我跪在马桶边作呕。' },
     { en: 'She had gone in to use the toilet.', zh: '她已经去上洗手间了。' }
   ] },
-  { word: 'tomato', level: 'A1', ipa: '', pos: 'n.', meaning: 'n.  番茄，西红柿；番茄红，鲜红色', examples: [
+  { word: 'tomato', level: 'A1', ipa: 'təˈmɑːtəʊ', pos: 'n.', meaning: 'n.  番茄，西红柿；番茄红，鲜红色', examples: [
     { en: 'It\'s similar in size to a tomato.', zh: '大小和西红柿差不多。' },
     { en: 'The tomato hit the wall with a splat.', zh: '西红柿啪的一声打在墙上。' },
     { en: 'Norman cut open his pie and squirted tomato sauce into it.', zh: '诺曼切开他的馅饼，往里面挤了番茄酱。' }
@@ -3543,12 +3543,12 @@ export const A1: Word[] = [
     { en: 'White teeth.', zh: '白牙齿。' },
     { en: 'Brush your tooth.', zh: '刷牙。' }
   ] },
-  { word: 'topic', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 题目，主题；一般规则，总论', examples: [
+  { word: 'topic', level: 'A1', ipa: 'ˈtɒpɪk', pos: 'n.', meaning: 'n. 题目，主题；一般规则，总论', examples: [
     { en: 'He spoke with authority on the topic.', zh: '他就这个课题发表权威意见。' },
     { en: 'I have discussed this topic in some detail.', zh: '我已相当详细地讨论过这个话题。' },
     { en: 'He returns to this topic later in the report.', zh: '他在报告中后来又提到这个话题。' }
   ] },
-  { word: 'tourist', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 旅行者，观光客；<英>（在国外参加）巡回比赛的运动队队员', examples: [
+  { word: 'tourist', level: 'A1', ipa: 'ˈtʊərɪst', pos: 'n.', meaning: 'n. 旅行者，观光客；<英>（在国外参加）巡回比赛的运动队队员', examples: [
     { en: 'A passing tourist snapped the incident.', zh: '一个过路的游客把这件事拍了下来。' },
     { en: 'He was a pesky tourist asking silly questions.', zh: '他是个问愚蠢问题的讨厌的游客。' },
     { en: 'Thailand has become the tourist mecca of Asia.', zh: '泰国已经成为亚洲旅游胜地。' }
@@ -3557,7 +3557,7 @@ export const A1: Word[] = [
     { en: 'A small town.', zh: '一个小镇。' },
     { en: 'We live in a town.', zh: '我们住在城镇。' }
   ] },
-  { word: 'traffic', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 路上行驶的车辆，交通；（沿固定路线的）航行，行驶，飞行', examples: [
+  { word: 'traffic', level: 'A1', ipa: 'ˈtræfɪk', pos: 'n.', meaning: 'n. 路上行驶的车辆，交通；（沿固定路线的）航行，行驶，飞行', examples: [
     { en: 'The traffic was diabolical.', zh: '交通状况糟糕透了。' },
     { en: 'Air traffic had returned to normal.', zh: '空中交通已恢复正常。' },
     { en: 'Coordinating airline traffic on the ground is as complicated as managing the traffic in the air.', zh: '协调飞机在地面上的交通和掌控空中交通一样复杂。' }
@@ -3578,7 +3578,7 @@ export const A1: Word[] = [
     { en: 'A school trip.', zh: '一次学校旅行。' },
     { en: 'Have a good trip!', zh: '旅途愉快！' }
   ] },
-  { word: 'trousers', level: 'A1', ipa: '', pos: 'n.', meaning: 'n.  裤子，长裤；裤子，长裤（trouser 的复数）', examples: [
+  { word: 'trousers', level: 'A1', ipa: 'ˈtraʊzəz', pos: 'n.', meaning: 'n.  裤子，长裤；裤子，长裤（trouser 的复数）', examples: [
     { en: 'These trousers are a bit tight.', zh: '这条裤子有点紧。' },
     { en: 'He was dressed in khaki trousers.', zh: '他穿着一条卡其色的裤子。' },
     { en: 'The trousers have a fly fastening.', zh: '这条裤子是前开口。' }
@@ -3591,7 +3591,7 @@ export const A1: Word[] = [
     { en: 'Try again.', zh: '再试一次。' },
     { en: 'I try to help.', zh: '我试着帮忙。' }
   ] },
-  { word: 'Tuesday', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 星期二', examples: [
+  { word: 'Tuesday', level: 'A1', ipa: 'ˈtjuːzdeɪ', pos: 'n.', meaning: 'n. 星期二', examples: [
     { en: 'She\'s been off work since Tuesday.', zh: '星期二以来她一直没上班。' },
     { en: 'It\'s my birthday a week on Tuesday.', zh: '一周后的星期二是我的生日。' },
     { en: 'Tuesday is her half day.', zh: '星期二她只工作半天。' }
@@ -3600,7 +3600,7 @@ export const A1: Word[] = [
     { en: 'Turn left.', zh: '向左转。' },
     { en: 'It is your turn.', zh: '轮到你了。' }
   ] },
-  { word: 'TV', level: 'A1', ipa: '', pos: 'n.', meaning: 'abbr. 电视（television）', examples: [
+  { word: 'TV', level: 'A1', ipa: 'ˌtiː ˈviː', pos: 'n.', meaning: 'abbr. 电视（television）', examples: [
     { en: 'He directed various TV shows.', zh: '他导演过各种电视节目。' },
     { en: 'She regularly appears on TV.', zh: '她经常在电视上露面。' },
     { en: 'The TV works perfectly now.', zh: '这台电视机现在效果好极了。' }
@@ -3613,7 +3613,7 @@ export const A1: Word[] = [
     { en: 'Twenty apples.', zh: '二十个苹果。' },
     { en: 'I have twenty.', zh: '我有二十个。' }
   ] },
-  { word: 'twice', level: 'A1', ipa: '', pos: 'adv.', meaning: 'adv.  两次；两倍，强（或好、难）的多', examples: [
+  { word: 'twice', level: 'A1', ipa: 'twaɪs', pos: 'adv.', meaning: 'adv.  两次；两倍，强（或好、难）的多', examples: [
     { en: 'She\'s backpedalled twice already.', zh: '她已经两次改变主意了。' },
     { en: 'I go swimming twice a week.', zh: '我每星期游泳两次。' },
     { en: 'The villa is cleaned twice a week.', zh: '这栋别墅一周打扫两次。' }
@@ -3626,12 +3626,12 @@ export const A1: Word[] = [
     { en: 'What type?', zh: '哪种类型？' },
     { en: 'I type a letter.', zh: '我打一封信。' }
   ] },
-  { word: 'umbrella', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 伞，雨伞，阳伞；综合体，总体', examples: [
+  { word: 'umbrella', level: 'A1', ipa: 'ʌmˈbrelə', pos: 'n.', meaning: 'n. 伞，雨伞，阳伞；综合体，总体', examples: [
     { en: 'Her umbrella blew inside out.', zh: '她的伞被吹得往外翻了。' },
     { en: 'Can I borrow your umbrella?', zh: '借你的伞用一下行吗？' },
     { en: 'They held a large umbrella over her.', zh: '他们给她撑起一把大伞。' }
   ] },
-  { word: 'uncle', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 叔叔；伯父', examples: [
+  { word: 'uncle', level: 'A1', ipa: 'ˈʌŋk(ə)l', pos: 'n.', meaning: 'n. 叔叔；伯父', examples: [
     { en: 'My uncle taught me to juggle.', zh: '我叔叔教我玩杂耍。' },
     { en: 'My Uncle Jim had a high fever.', zh: '我的叔叔吉姆发高烧了。' },
     { en: 'I\'m going to visit my uncle.', zh: '我要去看我舅舅。' }
@@ -3644,7 +3644,7 @@ export const A1: Word[] = [
     { en: 'I understand.', zh: '我明白了。' },
     { en: 'Do you understand?', zh: '你懂吗？' }
   ] },
-  { word: 'university', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 大学，综合性大学；大学校舍', examples: [
+  { word: 'university', level: 'A1', ipa: 'ˌjuːnɪˈvɜːsəti', pos: 'n.', meaning: 'n. 大学，综合性大学；大学校舍', examples: [
     { en: 'My daughter is at university.', zh: '我女儿在上大学。' },
     { en: 'She goes to Duke University.', zh: '她上杜克大学。' },
     { en: 'University was the making of Joe.', zh: '大学造就了乔。' }
@@ -3657,7 +3657,7 @@ export const A1: Word[] = [
     { en: 'Stand up.', zh: '起立。' },
     { en: 'Go up the hill.', zh: '上山。' }
   ] },
-  { word: 'upstairs', level: 'A1', ipa: '', pos: 'adv., adj.', meaning: 'adv. 往楼上，在楼上；脑力上，精神上', examples: [
+  { word: 'upstairs', level: 'A1', ipa: 'ˌʌpˈsteəz', pos: 'adv., adj.', meaning: 'adv. 往楼上，在楼上；脑力上，精神上', examples: [
     { en: 'She\'s upstairs getting ready.', zh: '她在楼上做准备。' },
     { en: 'I carried her bags upstairs.', zh: '我把她的包拿到楼上。' },
     { en: 'He\'s upstairs unpacking his bags.', zh: '他在楼上打开他的旅行袋取出东西。' }
@@ -3678,12 +3678,12 @@ export const A1: Word[] = [
     { en: 'I usually read.', zh: '我通常读书。' },
     { en: 'She usually sings.', zh: '她通常唱歌。' }
   ] },
-  { word: 'vacation', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. （学校的）假期，（法院的）休庭期；<美>休假，假期', examples: [
+  { word: 'vacation', level: 'A1', ipa: 'veɪˈkeɪʃ(ə)n', pos: 'n.', meaning: 'n. （学校的）假期，（法院的）休庭期；<美>休假，假期', examples: [
     { en: 'We\'re going to the beach for vacation.', zh: '我们要去海滨度假。' },
     { en: 'They\'re on vacation in Hawaii right now.', zh: '他们此时正在夏威夷度假。' },
     { en: 'The job includes two weeks\' paid vacation.', zh: '这份工作包括两周的带薪假期。' }
   ] },
-  { word: 'vegetable', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 蔬菜；植物人', examples: [
+  { word: 'vegetable', level: 'A1', ipa: 'ˈvedʒtəb(ə)l', pos: 'n.', meaning: 'n. 蔬菜；植物人', examples: [
     { en: 'Severe brain damage turned him into a vegetable.', zh: '严重的脑损伤使他变成了植物人。' },
     { en: 'The vegetable harvest is disastrously behind schedule.', zh: '蔬菜收割灾难性地滞后于计划。' },
     { en: 'Peas, beans and lentils are a good source of vegetable protein.', zh: '豌豆、豆荚和扁豆是植物蛋白质的大好来源。' }
@@ -3692,7 +3692,7 @@ export const A1: Word[] = [
     { en: 'Very good!', zh: '非常好！' },
     { en: 'A very big cat.', zh: '一只很大的猫。' }
   ] },
-  { word: 'video', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. （某个事件或场合的）录像；（指方法）录影', examples: [
+  { word: 'video', level: 'A1', ipa: 'ˈvɪdiəʊ', pos: 'n.', meaning: 'n. （某个事件或场合的）录像；（指方法）录影', examples: [
     { en: 'Do we have a blank video ?', zh: '我们有空白录像带吗？' },
     { en: 'She has watched the race on video.', zh: '她已观看了比赛的录像。' },
     { en: 'A wedding is the perfect subject for video.', zh: '婚礼是极好的录像主题。' }
@@ -3705,7 +3705,7 @@ export const A1: Word[] = [
     { en: 'Visit my friend.', zh: '拜访我的朋友。' },
     { en: 'A visit to the zoo.', zh: '一次动物园之游。' }
   ] },
-  { word: 'visitor', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 访问者，参观者；（网站的）浏览者', examples: [
+  { word: 'visitor', level: 'A1', ipa: 'ˈvɪzɪtə(r)', pos: 'n.', meaning: 'n. 访问者，参观者；（网站的）浏览者', examples: [
     { en: 'I wasn\'t expecting a visitor.', zh: '我没有预期会有访客。' },
     { en: '"You must be Emma," said the visitor.', zh: '“你一定是埃玛,”来访者说道。' },
     { en: 'Reception just rang through to say my visitor has arrived.', zh: '服务台刚刚打电话来说我的客人到了。' }
@@ -3714,7 +3714,7 @@ export const A1: Word[] = [
     { en: 'Wait for me.', zh: '等我。' },
     { en: 'We wait at the bus stop.', zh: '我们在车站等。' }
   ] },
-  { word: 'waiter', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 服务员，侍者', examples: [
+  { word: 'waiter', level: 'A1', ipa: 'ˈweɪtə(r)', pos: 'n.', meaning: 'n. 服务员，侍者', examples: [
     { en: 'A waiter offered him the menu.', zh: '一个侍者给他送上了菜单。' },
     { en: 'Did you give the waiter a tip?', zh: '你给服务员小费了吗？' },
     { en: 'He beckoned to the waiter.', zh: '他朝服务员招了招手。' }
@@ -3767,12 +3767,12 @@ export const A1: Word[] = [
     { en: 'Good weather.', zh: '好天气。' },
     { en: 'What is the weather?', zh: '天气怎样？' }
   ] },
-  { word: 'website', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 网站（全球资讯网的主机站）', examples: [
+  { word: 'website', level: 'A1', ipa: 'ˈwebsaɪt', pos: 'n.', meaning: 'n. 网站（全球资讯网的主机站）', examples: [
     { en: 'There\'s jazz a gogo on our website.', zh: '我们的网站上有大量的爵士音乐。' },
     { en: 'Check out the new website. It\'s the bomb!', zh: '看一看这新网站。简直是太棒了！' },
     { en: 'I found this information on their website.', zh: '我在他们的网站上发现了这一信息。' }
   ] },
-  { word: 'Wednesday', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 星期三', examples: [
+  { word: 'Wednesday', level: 'A1', ipa: 'ˈwenzdeɪ', pos: 'n.', meaning: 'n. 星期三', examples: [
     { en: 'Let\'s move the meeting to Wednesday.', zh: '我们把开会时间改到星期三吧。' },
     { en: 'Today is Tuesday, so tomorrow is Wednesday.', zh: '今天是星期二，那么明天就是星期三。' },
     { en: 'Did you happen to see her leave last Wednesday?', zh: '上星期三你正好碰巧看见她离开？' }
@@ -3841,7 +3841,7 @@ export const A1: Word[] = [
     { en: 'Open the window.', zh: '开窗。' },
     { en: 'A clean window.', zh: '干净的窗户。' }
   ] },
-  { word: 'wine', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 葡萄酒，果蔬酒；深紫红色', examples: [
+  { word: 'wine', level: 'A1', ipa: 'waɪn', pos: 'n.', meaning: 'n. 葡萄酒，果蔬酒；深紫红色', examples: [
     { en: 'Wine vinegar tenderizes meat.', zh: '酒醋能让肉变得软嫩。' },
     { en: 'The wine had been doctored.', zh: '这葡萄酒里掺入了有害物质。' },
     { en: 'She sipped her wine reflectively.', zh: '她一边品酒，一边沉思。' }
@@ -3862,7 +3862,7 @@ export const A1: Word[] = [
     { en: 'A kind woman.', zh: '一位善良的女人。' },
     { en: 'The woman is a teacher.', zh: '这位女士是老师。' }
   ] },
-  { word: 'wonderful', level: 'A1', ipa: '', pos: 'adj.', meaning: 'adj. 绝妙的，令人惊叹的，极好的', examples: [
+  { word: 'wonderful', level: 'A1', ipa: 'ˈwʌndəf(ə)l', pos: 'adj.', meaning: 'adj. 绝妙的，令人惊叹的，极好的', examples: [
     { en: 'Ben\'s a wonderful father.', zh: '本是个极好的父亲。' },
     { en: 'They\'ve got a wonderful house.', zh: '他们有一座漂亮的房子。' },
     { en: '\'How wonderful!\' she trilled.', zh: '“太妙了！”她高兴地喊道。' }
@@ -3895,7 +3895,7 @@ export const A1: Word[] = [
     { en: 'A famous writer.', zh: '一位著名作家。' },
     { en: 'He is a writer.', zh: '他是作家。' }
   ] },
-  { word: 'writing', level: 'A1', ipa: '', pos: 'n.', meaning: 'n. 写作，著书；作品，著作', examples: [
+  { word: 'writing', level: 'A1', ipa: 'ˈraɪtɪŋ', pos: 'n.', meaning: 'n. 写作，著书；作品，著作', examples: [
     { en: 'His writing lacks imagination.', zh: '他的作品缺乏想象。' },
     { en: 'Jenny\'s writing a film script.', zh: '珍妮在写一个电影脚本。' },
     { en: 'Leo, what\'s that you\'re writing?', zh: '利奥，你写的那是什么呀？' }
@@ -3904,7 +3904,7 @@ export const A1: Word[] = [
     { en: 'A wrong answer.', zh: '错误答案。' },
     { en: 'What is wrong?', zh: '怎么了？' }
   ] },
-  { word: 'yeah', level: 'A1', ipa: '', pos: 'exclam.', meaning: 'int. 是，对', examples: [
+  { word: 'yeah', level: 'A1', ipa: 'jeə', pos: 'exclam.', meaning: 'int. 是，对', examples: [
     { en: 'Uh, yeah, I guess so.', zh: '嗯，对，我想是这样。' },
     { en: '"You got married, right?"—"Yeah, that\'s it."', zh: '“你结婚了，对吧？”—“是的，没错。”' },
     { en: 'When I finished, he said, "Yeah. That figures."', zh: '我做完时，他说：“嗯，正如所料。”' }
@@ -3921,7 +3921,7 @@ export const A1: Word[] = [
     { en: 'Yes, please.', zh: '好的，麻烦了。' },
     { en: 'Yes, I can.', zh: '是的，我能。' }
   ] },
-  { word: 'yesterday', level: 'A1', ipa: '', pos: 'adv., n.', meaning: 'adv.  在昨天；日前，不久前', examples: [
+  { word: 'yesterday', level: 'A1', ipa: 'ˈjestədeɪ', pos: 'adv., n.', meaning: 'adv.  在昨天；日前，不久前', examples: [
     { en: 'Patrick emailed me yesterday.', zh: '帕特里克昨天给我发电邮了。' },
     { en: 'We were expecting him yesterday.', zh: '我们昨天一直在等他。' },
     { en: 'Where were you yesterday morning?', zh: '你昨天上午在哪儿？' }

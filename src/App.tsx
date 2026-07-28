@@ -431,10 +431,10 @@ function WordDetail({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg overflow-hidden rounded-t-3xl bg-white shadow-2xl animate-scale-in dark:bg-slate-800 sm:rounded-3xl"
+        className="flex max-h-[90vh] max-h-[90dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl animate-scale-in dark:bg-slate-800 sm:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4 dark:border-slate-700">
+        <div className="flex shrink-0 items-center justify-between border-b border-slate-100 px-5 py-4 dark:border-slate-700 sm:px-6">
           <div className="flex items-center gap-2">
             <LevelBadge level={word.level} />
             
@@ -444,10 +444,10 @@ function WordDetail({
           </button>
         </div>
 
-        <div className="px-6 py-5">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h2 className="break-words text-3xl font-extrabold text-slate-900 dark:text-white">{word.word}</h2>
+              <h2 className="break-words text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">{word.word}</h2>
               <p className="mt-1 text-slate-400 dark:text-slate-500">{word.ipa}</p>
             </div>
             <SpeakerBtn text={word.word} rate={0.85} className="h-12 w-12 bg-brand-50 dark:bg-brand-500/10" />
@@ -474,7 +474,7 @@ function WordDetail({
           </ul>
         </div>
 
-        <div className="border-t border-slate-100 px-6 py-4 dark:border-slate-700">
+        <div className="shrink-0 border-t border-slate-100 px-5 py-4 dark:border-slate-700 sm:px-6">
           <button
             onClick={onToggleMastered}
             className={`flex w-full items-center justify-center gap-2 rounded-xl py-3 font-semibold transition ${
