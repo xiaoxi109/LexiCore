@@ -1,5 +1,5 @@
 diff --git a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
-index e969f08..f244c9e 100644
+index e969f08..d3a6554 100644
 --- a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 +++ b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 @@ -10,9 +10,9 @@ var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot
@@ -15,25 +15,86 @@ index e969f08..f244c9e 100644
  const PATH_MAP = {
    "ar_JO-kareem-low": "ar/ar_JO/kareem/low/ar_JO-kareem-low.onnx",
    "ar_JO-kareem-medium": "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx",
-@@ -141,7 +141,7 @@ const PATH_MAP = {
+@@ -140,43 +140,57 @@ const PATH_MAP = {
+   "en_US-norman-medium": "en/en_US/norman/medium/en_US-norman-medium.onnx",
    "it_IT-paola-medium": "it/it_IT/paola/medium/it_IT-paola-medium.onnx"
  };
++const PIPER_DB = "piper-tts-cache";
++const PIPER_STORE = "models";
++function openPiperDB() {
++  return new Promise((resolve, reject) => {
++    const req = indexedDB.open(PIPER_DB, 1);
++    req.onupgradeneeded = () => req.result.createObjectStore(PIPER_STORE);
++    req.onsuccess = () => resolve(req.result);
++    req.onerror = () => reject(req.error);
++  });
++}
  async function writeBlob(url, blob) {
 -  if (!url.match("https://huggingface.co")) return;
-+  if (!url.match("https://hf-mirror.com")) return;
++  if (!url.match("/tts/")) return;
    try {
-     const root = await navigator.storage.getDirectory();
-     const dir = await root.getDirectoryHandle("piper", {
-@@ -168,7 +168,7 @@ async function removeBlob(url) {
+-    const root = await navigator.storage.getDirectory();
+-    const dir = await root.getDirectoryHandle("piper", {
+-      create: true
++    const db = await openPiperDB();
++    await new Promise((resolve, reject) => {
++      const tx = db.transaction(PIPER_STORE, "readwrite");
++      tx.objectStore(PIPER_STORE).put(blob, url);
++      tx.oncomplete = resolve;
++      tx.onerror = () => reject(tx.error);
+     });
+-    const path = url.split("/").at(-1);
+-    const file = await dir.getFileHandle(path, { create: true });
+-    const writable = await file.createWritable();
+-    await writable.write(blob);
+-    await writable.close();
++    db.close();
+   } catch (e) {
+     console.error(e);
+   }
+ }
+ async function removeBlob(url) {
+   try {
+-    const root = await navigator.storage.getDirectory();
+-    const dir = await root.getDirectoryHandle("piper");
+-    const path = url.split("/").at(-1);
+-    const file = await dir.getFileHandle(path);
+-    await file.remove();
++    const db = await openPiperDB();
++    await new Promise((resolve) => {
++      const tx = db.transaction(PIPER_STORE, "readwrite");
++      tx.objectStore(PIPER_STORE).delete(url);
++      tx.oncomplete = resolve;
++      tx.onerror = resolve;
++    });
++    db.close();
+   } catch (e) {
+     console.error(e);
    }
  }
  async function readBlob(url) {
 -  if (!url.match("https://huggingface.co")) return;
-+  if (!url.match("https://hf-mirror.com")) return;
++  if (!url.match("/tts/")) return;
    try {
-     const root = await navigator.storage.getDirectory();
-     const dir = await root.getDirectoryHandle("piper", {
-@@ -376,6 +376,9 @@ _wasmPaths = new WeakMap();
+-    const root = await navigator.storage.getDirectory();
+-    const dir = await root.getDirectoryHandle("piper", {
+-      create: true
++    const db = await openPiperDB();
++    const blob = await new Promise((resolve, reject) => {
++      const tx = db.transaction(PIPER_STORE, "readonly");
++      const r = tx.objectStore(PIPER_STORE).get(url);
++      r.onsuccess = () => resolve(r.result);
++      r.onerror = () => reject(r.error);
+     });
+-    const path = url.split("/").at(-1);
+-    const file = await dir.getFileHandle(path);
+-    return await file.getFile();
++    db.close();
++    return blob;
+   } catch (e) {
+     return void 0;
+   }
+@@ -376,6 +390,9 @@ _wasmPaths = new WeakMap();
  _logger = new WeakMap();
  _TtsSession_instances = new WeakSet();
  setupWasmPaths_fn = async function(fallbackStrategy) {
@@ -43,3 +104,48 @@ index e969f08..f244c9e 100644
    var _a, _b, _c, _d, _e;
    const strategy = fallbackStrategy ?? "cdn";
    try {
+@@ -456,24 +473,30 @@ async function remove(voiceId) {
+   await Promise.all(urls.map((url) => removeBlob(url)));
+ }
+ async function stored() {
+-  const root = await navigator.storage.getDirectory();
+-  const dir = await root.getDirectoryHandle("piper", {
+-    create: true
+-  });
+-  const result = [];
+-  for await (const name of dir.keys()) {
+-    const key = name.split(".")[0];
+-    if (name.endsWith(".onnx") && key in PATH_MAP) {
+-      result.push(key);
+-    }
++  try {
++    const db = await openPiperDB();
++    const keys = await new Promise((resolve, reject) => {
++      const tx = db.transaction(PIPER_STORE, "readonly");
++      const r = tx.objectStore(PIPER_STORE).getAllKeys();
++      r.onsuccess = () => resolve(r.result);
++      r.onerror = () => reject(r.error);
++    });
++    db.close();
++    return keys.filter((u) => String(u).endsWith(".onnx"));
++  } catch (e) {
++    return [];
+   }
+-  return result;
+ }
+ async function flush() {
+   try {
+-    const root = await navigator.storage.getDirectory();
+-    const dir = await root.getDirectoryHandle("piper");
+-    await dir.remove({ recursive: true });
++    const db = await openPiperDB();
++    await new Promise((resolve) => {
++      const tx = db.transaction(PIPER_STORE, "readwrite");
++      tx.objectStore(PIPER_STORE).clear();
++      tx.oncomplete = resolve;
++      tx.onerror = resolve;
++    });
++    db.close();
+   } catch (e) {
+     console.error(e);
+   }
