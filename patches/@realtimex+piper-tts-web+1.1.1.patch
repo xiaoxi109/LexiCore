@@ -1,5 +1,5 @@
 diff --git a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
-index e969f08..d3a6554 100644
+index e969f08..e6c5aea 100644
 --- a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 +++ b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 @@ -10,9 +10,9 @@ var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot
@@ -15,7 +15,7 @@ index e969f08..d3a6554 100644
  const PATH_MAP = {
    "ar_JO-kareem-low": "ar/ar_JO/kareem/low/ar_JO-kareem-low.onnx",
    "ar_JO-kareem-medium": "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx",
-@@ -140,43 +140,57 @@ const PATH_MAP = {
+@@ -140,47 +140,101 @@ const PATH_MAP = {
    "en_US-norman-medium": "en/en_US/norman/medium/en_US-norman-medium.onnx",
    "it_IT-paola-medium": "it/it_IT/paola/medium/it_IT-paola-medium.onnx"
  };
@@ -31,7 +31,7 @@ index e969f08..d3a6554 100644
 +}
  async function writeBlob(url, blob) {
 -  if (!url.match("https://huggingface.co")) return;
-+  if (!url.match("/tts/")) return;
++  if (!url.match("/tts/") && !/\.(wasm|data|onnx|onnx\.json)$/.test(url || "")) return;
    try {
 -    const root = await navigator.storage.getDirectory();
 -    const dir = await root.getDirectoryHandle("piper", {
@@ -74,7 +74,7 @@ index e969f08..d3a6554 100644
  }
  async function readBlob(url) {
 -  if (!url.match("https://huggingface.co")) return;
-+  if (!url.match("/tts/")) return;
++  if (!url.match("/tts/") && !/\.(wasm|data|onnx|onnx\.json)$/.test(url || "")) return;
    try {
 -    const root = await navigator.storage.getDirectory();
 -    const dir = await root.getDirectoryHandle("piper", {
@@ -94,7 +94,71 @@ index e969f08..d3a6554 100644
    } catch (e) {
      return void 0;
    }
-@@ -376,6 +390,9 @@ _wasmPaths = new WeakMap();
+ }
++
++// ── Global fetch cache for WASM engine files (e.g. onnxruntime-web .wasm) ──
++// The model .onnx/.json are already cached via getBlob(); this catches the
++// ONNX runtime wasm which the library fetches directly and is NOT under /tts/.
++const _origFetch = globalThis.fetch ? globalThis.fetch.bind(globalThis) : null;
++async function _cachedFetch(input, init) {
++  if (!_origFetch) return;
++  const url = typeof input === "string" ? input : (input && input.url) || "";
++  const method = (init && init.method) || (typeof Request !== "undefined" && input instanceof Request ? input.method : "GET") || "GET";
++  const clean = String(url).split("#")[0].split("?")[0];
++  if (method.toUpperCase() === "GET" && /\.wasm$/.test(clean)) {
++    try {
++      const cached = await readBlob(url);
++      if (cached) {
++        return new Response(cached, {
++          status: 200,
++          headers: {
++            "Content-Type": "application/wasm",
++            "Content-Length": String(cached.size)
++          }
++        });
++      }
++    } catch (e) {
++    }
++    const res = await _origFetch(input, init);
++    if (res.ok) {
++      try {
++        const b = await res.clone().blob();
++        await writeBlob(url, b);
++      } catch (e) {
++      }
++    }
++    return res;
++  }
++  return _origFetch(input, init);
++}
++if (_origFetch && !globalThis.__piperFetchCached) {
++  globalThis.fetch = _cachedFetch;
++  globalThis.__piperFetchCached = true;
++}
+ async function fetchBlob(url, callback) {
+   var _a;
+   const res = await fetch(url);
+@@ -298,6 +352,19 @@ const _TtsSession = class _TtsSession {
+       (_a = __privateGet(this, _logger)) == null ? void 0 : _a.call(this, `Loading model config for voice: ${this.voiceId}`);
+       const modelConfigBlob = await getBlob(`${HF_BASE}/${path}.json`);
+       __privateSet(this, _modelConfig, JSON.parse(await modelConfigBlob.text()));
++      // Preload Piper phonemize engine (wasm + data) into IndexedDB and serve via
++      // blob URLs so Emscripten's fetch/XHR hits local cache instead of re-downloading.
++      try {
++        const piperWasmBlob = await getBlob(`${WASM_BASE}.wasm`);
++        const piperDataBlob = await getBlob(`${WASM_BASE}.data`);
++        __privateSet(this, _wasmPaths, {
++          onnxWasm: __privateGet(this, _wasmPaths).onnxWasm,
++          piperWasm: URL.createObjectURL(piperWasmBlob),
++          piperData: URL.createObjectURL(piperDataBlob)
++        });
++      } catch (e) {
++        console.warn("Piper engine preload failed, falling back to network:", e);
++      }
+       (_b = __privateGet(this, _logger)) == null ? void 0 : _b.call(this, `Loading model for voice: ${this.voiceId}`);
+       const modelBlob = await getBlob(
+         `${HF_BASE}/${path}`,
+@@ -376,6 +443,9 @@ _wasmPaths = new WeakMap();
  _logger = new WeakMap();
  _TtsSession_instances = new WeakSet();
  setupWasmPaths_fn = async function(fallbackStrategy) {
@@ -104,7 +168,7 @@ index e969f08..d3a6554 100644
    var _a, _b, _c, _d, _e;
    const strategy = fallbackStrategy ?? "cdn";
    try {
-@@ -456,24 +473,30 @@ async function remove(voiceId) {
+@@ -456,24 +526,30 @@ async function remove(voiceId) {
    await Promise.all(urls.map((url) => removeBlob(url)));
  }
  async function stored() {
