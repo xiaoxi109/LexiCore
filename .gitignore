@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # Local build/data scripts (not needed for the deployed web app)
 scripts/
+
+# CodeBuddy IDE tool config
+.codebuddy/
+
+# Temporary certificate files
+certs_tmp/
