@@ -1,6 +1,8 @@
 package com.yourname.lexicore;
 
 import android.annotation.SuppressLint;
+import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -8,6 +10,8 @@ import android.webkit.WebView;
 import com.getcapacitor.Bridge;
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.BridgeWebViewClient;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,6 +66,29 @@ public class MainActivity extends BridgeActivity {
 
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            Uri uri = request.getUrl();
+            String path = uri.getPath();
+
+            // 拦截 tts 离线资源（模型/.wasm/.data 等）：直接由 AssetManager 从 APK
+            // 内部读取并返回正确的 MIME 类型，绕过 Capacitor WebViewLocalServer 的
+            // 兼容性问题（html5mode 回退 / lazy stream 在部分机型返回空 / 404 HTML）。
+            // Capacitor 将 web 资源托管在 assets/public/ 下，页面 URL 为 https://localhost/，
+            // 因此请求 /tts/xxx → 实际文件在 assets/public/tts/xxx。
+            if (path != null && (path.startsWith("/tts/") || path.endsWith(".wasm"))) {
+                String rel = path.startsWith("/") ? path.substring(1) : path;
+                for (String candidate : new String[] { "public/" + rel, rel }) {
+                    try {
+                        AssetManager am = view.getContext().getAssets();
+                        InputStream stream = am.open(candidate);
+                        Map<String, String> headers = new HashMap<>();
+                        headers.put("Cross-Origin-Resource-Policy", "same-origin");
+                        return new WebResourceResponse(mimeFor(path), null, 200, "OK", headers, stream);
+                    } catch (IOException ignored) {
+                        // 尝试下一个候选路径
+                    }
+                }
+            }
+
             WebResourceResponse response;
             try {
                 response = super.shouldInterceptRequest(view, request);
@@ -77,6 +104,13 @@ public class MainActivity extends BridgeActivity {
                 // 头注入失败也不影响资源加载：返回原始响应。
                 return response;
             }
+        }
+
+        private static String mimeFor(String path) {
+            if (path.endsWith(".wasm")) return "application/wasm";
+            if (path.endsWith(".json")) return "application/json";
+            if (path.endsWith(".js")) return "application/javascript";
+            return "application/octet-stream";
         }
 
         @SuppressLint("NewApi")

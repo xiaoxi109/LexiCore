@@ -33,12 +33,6 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
-/** 中文朗读：复用 Piper 本地引擎的 zh_CN-huayan-medium 模型。 */
-function speakZh(text: string, speak: (t: string, rate?: number, onEnded?: () => void, lang?: 'en' | 'zh') => void, RATE: number) {
-  if (!text) return
-  speak(text, RATE, undefined, 'zh')
-}
-
 export default function ListenView({
   onOpen,
 }: {
@@ -52,8 +46,7 @@ export default function ListenView({
   const [showMeaning, setShowMeaning] = useState(false)
   const [index, setIndex] = useState(0)
 
-  const { speak, stop, preload, engine, lastError, audioErr, blobSize, sessionReady, speakPhase, crossOriginIsolated, isCapacitor, downloadStatus, downloadProgress } =
-    useSpeech()
+  const { speak, stop, preload } = useSpeech()
   const autoplayRef = useRef(autoplay)
 
   // 进入听词页即预加载模型（不播放），使后续用户手势内的朗读能同步播放，
@@ -63,6 +56,7 @@ export default function ListenView({
   }, [preload])
   autoplayRef.current = autoplay
   const mounted = useRef(true)
+  // 中文朗读跟随「显示中文」开关；用 ref 读取最新值，避免开关变化重启播放 effect。
   const showMeaningRef = useRef(showMeaning)
   showMeaningRef.current = showMeaning
 
@@ -99,25 +93,37 @@ export default function ListenView({
   const graded = cefrSel !== 'all' || gradeSel !== 'all'
 
   // Auto-speak current word on index change; auto-advance if autoplay on.
+  // 串行连播：英文朗读 → 开启「显示中文」时英文结束后自动接中文释义 →
+  // 自动连播时再进入下一词（未显示中文则英文结束直接下一词）。
   useEffect(() => {
     mounted.current = true
     if (!list.length) return
     const w = list[index]
     if (!w) return
     const timers: number[] = []
+    const advance = () => {
+      if (autoplayRef.current && mounted.current) {
+        const t2 = window.setTimeout(() => {
+          if (!mounted.current) return
+          setIndex((i) => (i + 1 < list.length ? i + 1 : i))
+        }, AUTOPLAY_GAP)
+        timers.push(t2)
+      }
+    }
     const t = window.setTimeout(() => {
       if (!mounted.current) return
       speak(w.word, RATE, () => {
-        if (autoplayRef.current && mounted.current) {
-          const t2 = window.setTimeout(() => {
-            if (!mounted.current) return
-            setIndex((i) => (i + 1 < list.length ? i + 1 : i))
-          }, AUTOPLAY_GAP)
-          timers.push(t2)
+        if (!mounted.current) return
+        if (showMeaningRef.current) {
+          if (!w.meaning) {
+            advance()
+            return
+          }
+          speak(w.meaning, RATE, advance, 'zh')
+        } else {
+          advance()
         }
       })
-      // 显示中文时同步朗读中文释义（Piper 中文引擎）。
-      if (showMeaningRef.current) speakZh(w.meaning, speak, RATE)
     }, 300)
     timers.push(t)
     return () => {
@@ -131,8 +137,10 @@ export default function ListenView({
   const replay = () => {
     const w = list[index]
     if (!w) return
-    speak(w.word, RATE)
-    if (showMeaning) speakZh(w.meaning, speak, RATE)
+    // 与自动连播一致：开启「显示中文」时英文结束后自动接中文。
+    speak(w.word, RATE, () => {
+      if (showMeaning && w.meaning) speak(w.meaning, RATE, undefined, 'zh')
+    })
   }
   const prev = () => setIndex((i) => Math.max(0, i - 1))
   const next = () => setIndex((i) => (i + 1 < list.length ? i + 1 : i))
@@ -254,16 +262,6 @@ export default function ListenView({
   return (
     <div>
       {LevelGradePicker}
-
-      {/* 调试条：真机排查 TTS 为何无声（修复后删除） */}
-      <div className="mb-3 rounded-xl border border-amber-300 bg-amber-50 p-2 text-[11px] leading-relaxed text-amber-900 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-200">
-        <div>engine: <b>{engine}</b> · isCapacitor: <b>{String(isCapacitor)}</b> · crossOriginIsolated: <b>{String(crossOriginIsolated)}</b></div>
-        <div>status: <b>{downloadStatus}</b> · sessionReady: <b>{String(sessionReady)}</b> {downloadStatus !== 'ready' && downloadProgress ? `(${downloadProgress.pct}% ${downloadProgress.label})` : ''}</div>
-        <div>blobSize: <b>{blobSize != null ? blobSize + ' B' : '—'}</b> {blobSize != null && blobSize < 100 ? '⚠ 几乎为空（疑似静音/空音频）' : ''}</div>
-        <div>phase: <b>{speakPhase}</b></div>
-        {audioErr && <div className="mt-1 font-semibold text-orange-600 dark:text-orange-300">AUDIO_ERR: {audioErr}</div>}
-        {lastError && <div className="mt-1 font-semibold text-red-600 dark:text-red-300">ERR: {lastError}</div>}
-      </div>
 
       <div className="mb-4 flex items-center justify-between gap-3">
         <div>

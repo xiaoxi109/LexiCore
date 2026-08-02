@@ -26,18 +26,27 @@ function getAudioCtx(): AudioContext | null {
 // APK 播放双路径：主用 <audio>(new Audio) 播放 blob wav；失败时回退 Web Audio。
 let audioSharedHtml: HTMLAudioElement | null = null
 
+// Web Audio 兜底播放。url 传入时在播放结束/失败后 revoke，避免 blob URL 泄漏。
 function playViaWebAudio(
   blob: Blob,
   rate: number,
   reqId: number,
   onEnded?: () => void,
   setSpeakingFn?: (v: boolean) => void,
-  setLastErrorFn?: (v: string) => void,
+  url?: string,
 ): void {
+  const revoke = () => {
+    if (!url) return
+    try {
+      URL.revokeObjectURL(url)
+    } catch {
+      /* noop */
+    }
+  }
   const ctx = getAudioCtx()
   if (!ctx) {
-    setLastErrorFn?.('音频播放失败：无可用音频后端')
     setSpeakingFn?.(false)
+    revoke()
     return
   }
   if (ctx.state === 'suspended') ctx.resume().catch(() => {})
@@ -45,7 +54,11 @@ function playViaWebAudio(
     .arrayBuffer()
     .then((buf) => ctx!.decodeAudioData(buf))
     .then((audioBuf) => {
-      if (reqId !== reqIdShared) return
+      if (reqId !== reqIdShared) {
+        // 已被更新的请求取代，本结果作废
+        revoke()
+        return
+      }
       const src = ctx!.createBufferSource()
       src.buffer = audioBuf
       src.playbackRate.value = rate
@@ -54,13 +67,15 @@ function playViaWebAudio(
       src.onended = () => {
         setSpeakingFn?.(false)
         if (audioShared === src) audioShared = null
+        revoke()
         onEnded?.()
       }
       src.start(0)
     })
     .catch((e) => {
-      setLastErrorFn?.(`音频播放失败（Web Audio）：${String(e)}`)
+      console.error('Web Audio 播放失败:', e)
       setSpeakingFn?.(false)
+      revoke()
     })
 }
 
@@ -85,40 +100,6 @@ function emitProgress(pct: number, label: string) {
   progressSubscribers.forEach((fn) => fn({ pct, label }))
 }
 
-// 全局诊断状态（所有 useSpeech 实例共享，调试条才能看到真实情况）
-export type Diag = {
-  engine: 'piper' | 'speechSynthesis' | 'unknown'
-  speaking: boolean
-  lastError: string | null
-  blobSize: number | null
-  audioErr: string | null
-  sessionReady: boolean
-  speakPhase: string
-}
-let _diag: Diag = {
-  engine: 'unknown',
-  speaking: false,
-  lastError: null,
-  blobSize: null,
-  audioErr: null,
-  sessionReady: false,
-  speakPhase: 'idle',
-}
-const diagSubscribers = new Set<(d: Diag) => void>()
-function setDiag(patch: Partial<Diag>) {
-  _diag = { ..._diag, ...patch }
-  diagSubscribers.forEach((fn) => fn(_diag))
-}
-export function getDiag(): Diag {
-  return _diag
-}
-function onDiagChange(fn: (d: Diag) => void) {
-  diagSubscribers.add(fn)
-  return () => {
-    diagSubscribers.delete(fn)
-  }
-}
-
 /** Subscribe to shared download status. Returns unsubscribe function. */
 function onStatusChange(fn: (s: DownloadStatus) => void) {
   subscribers.add(fn)
@@ -135,7 +116,7 @@ function onProgressChange(fn: (p: { pct: number; label: string }) => void) {
 export async function downloadModel(): Promise<void> {
   // 仅当英文/中文 session 都已就绪时才跳过，避免假 ready（status=ready 但 session 为 null）导致永不重建
   if (sessionShared?.ready && sessionZh?.ready) return
-  if (_status === 'downloading') return initPromiseShared!
+  if (_status === 'downloading' && initPromiseShared) return initPromiseShared
 
   emit('downloading')
   emitProgress(0, '准备中…')
@@ -188,10 +169,15 @@ export async function downloadModel(): Promise<void> {
           }
         },
       })
+      // 防御断言：两个语音必须是独立会话。若库仍为单例（补丁未生效），
+      // 二次 create 会复用同一实例并覆盖 _wasmPaths，导致 predict 必败
+      // （wasm 被当目录 fetch → 拿到 index.html → magic word 错误）。
+      if (sessionZh === sessionShared) {
+        throw new Error('TtsSession 复用了同一实例（单例补丁未生效），中英文会话必须独立')
+      }
       if (sessionZh?.ready) {
         emitProgress(100, '完成')
         emit('ready')
-        setDiag({ sessionReady: true })
       } else {
         throw new Error('Chinese TtsSession not ready after create')
       }
@@ -217,7 +203,8 @@ export function getDownloadProgress(): { pct: number; label: string } {
 
 /**
  * Text-to-speech via Piper WASM (local inference, no system TTS needed).
- * Uses en_US-lessac-medium voice (American English, female, clear).
+ * Uses en_US-lessac-medium voice (American English, female, clear) and
+ * zh_CN-huayan-medium (Mandarin) for Chinese text.
  */
 export function useSpeech() {
   const [speaking, setSpeaking] = useState(false)
@@ -227,35 +214,11 @@ export function useSpeech() {
     pct: _progress,
     label: _progressLabel,
   })
-  // 诊断信息：提升到模块级共享，确保任意组件触发播放，调试条都能看到
-  const [engine, setEngine] = useState<'piper' | 'speechSynthesis' | 'unknown'>(_diag.engine)
-  const [lastError, setLastError] = useState<string | null>(_diag.lastError)
-  const [blobSize, setBlobSize] = useState<number | null>(_diag.blobSize)
-  const [audioErr, setAudioErr] = useState<string | null>(_diag.audioErr)
-  const [sessionReady, setSessionReady] = useState<boolean>(_diag.sessionReady)
-  const [speakPhase, setSpeakPhase] = useState<string>(_diag.speakPhase)
-
-  // 同时更新本地 state 与全局诊断（供其它组件实例的调试条读取）
-  const pushEngine = (v: typeof engine) => { setEngine(v); setDiag({ engine: v }) }
-  const pushLastError = (v: string | null) => { setLastError(v); setDiag({ lastError: v }) }
-  const pushBlobSize = (v: number | null) => { setBlobSize(v); setDiag({ blobSize: v }) }
-  const pushAudioErr = (v: string | null) => { setAudioErr(v); setDiag({ audioErr: v }) }
-  const pushSessionReady = (v: boolean) => { setSessionReady(v); setDiag({ sessionReady: v }) }
-  const pushPhase = (v: string) => { setSpeakPhase(v); setDiag({ speakPhase: v }) }
 
   // Sync shared status into local state
   useEffect(() => onStatusChange(setStatus), [])
   // Sync shared download progress into local state
   useEffect(() => onProgressChange(setProgress), [])
-  // 订阅全局诊断，更新本实例 UI（仅本地 set，避免回写全局导致循环）
-  useEffect(() => onDiagChange((d) => {
-    setEngine(d.engine)
-    setLastError(d.lastError)
-    setBlobSize(d.blobSize)
-    setAudioErr(d.audioErr)
-    setSessionReady(d.sessionReady)
-    setSpeakPhase(d.speakPhase)
-  }), [])
 
   // 浏览器环境：预热 SpeechSynthesis 语音列表（部分浏览器需异步 loaded）。
   useEffect(() => {
@@ -291,16 +254,16 @@ export function useSpeech() {
 
   // 回退方案：系统语音合成（WebView 内置，不需要模型/联网）。当 Piper 挂起或失败时兜底，保证至少能出声。
   const fallbackSpeechSynthesis = useCallback(
-    (text: string, rate: number, onEnded?: () => void) => {
-      pushEngine('speechSynthesis')
+    (text: string, rate: number, onEnded?: () => void, lang: 'en' | 'zh' = 'en') => {
       try {
         if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-          pushLastError('系统 TTS 不可用，且 Piper 失败')
+          console.error('系统 TTS 不可用，且 Piper 失败')
           return
         }
         window.speechSynthesis.cancel()
         const u = new SpeechSynthesisUtterance(text)
-        const voiceLang = 'en-US'
+        // 按文本语言选择系统语音：中文走 zh-CN，英文走 en-US。
+        const voiceLang = lang === 'zh' ? 'zh-CN' : 'en-US'
         const voices = window.speechSynthesis.getVoices()
         const picked = voices.find((v) => v.lang === voiceLang) ?? null
         if (picked) u.voice = picked
@@ -311,13 +274,15 @@ export function useSpeech() {
           setSpeaking(false)
           onEnded?.()
         }
-        u.onerror = () => setSpeaking(false)
+        u.onerror = () => {
+          setSpeaking(false)
+          // 系统 TTS 也失败：仍然走完回调链，避免听词自动连播卡死。
+          onEnded?.()
+        }
         window.speechSynthesis.speak(u)
-        pushPhase('playing(fallback)')
       } catch (e) {
         console.error('fallback TTS failed:', e)
         setSpeaking(false)
-        pushLastError('系统 TTS 也失败: ' + (e instanceof Error ? e.message : String(e)))
       }
     },
     [],
@@ -326,13 +291,9 @@ export function useSpeech() {
   // Ensure session: wait for download if in progress, trigger download if idle
   const ensureSession = useCallback(async (lang: 'en' | 'zh' = 'en') => {
     const sess = lang === 'zh' ? sessionZh : sessionShared
-    if (sess?.ready) {
-      pushSessionReady(true)
-      return sess
-    }
+    if (sess?.ready) return sess
     if (_status === 'downloading') {
       await initPromiseShared
-      pushSessionReady(!!(lang === 'zh' ? sessionZh?.ready : sessionShared?.ready))
       return lang === 'zh' ? sessionZh : sessionShared!
     }
     // idle or error → trigger download
@@ -344,14 +305,13 @@ export function useSpeech() {
     setLoading(true)
     try {
       await downloadModel()
-      pushSessionReady(!!(lang === 'zh' ? sessionZh?.ready : sessionShared?.ready))
       setLoading(false)
       return lang === 'zh' ? sessionZh : sessionShared!
     } catch (err) {
       setLoading(false)
       const msg = err instanceof Error ? err.message : String(err)
-      pushLastError('Piper 初始化失败: ' + msg)
-      throw new Error('Piper init failed')
+      console.error('Piper 初始化失败:', err)
+      throw new Error('Piper init failed: ' + msg)
     }
   }, [])
 
@@ -361,10 +321,8 @@ export function useSpeech() {
 
       // ── 浏览器环境：直接用原生 SpeechSynthesis，不加载模型、不联网 ──
       if (!isCapacitor) {
-        pushEngine('speechSynthesis')
         if (!synthAvailable) {
-          pushLastError('浏览器环境 speechSynthesis 不可用')
-          console.warn('SpeechSynthesis 不可用')
+          console.warn('浏览器环境 speechSynthesis 不可用')
           return
         }
         try {
@@ -395,7 +353,6 @@ export function useSpeech() {
       }
 
       // ── APK 环境：Piper 离线模型（中+英两个 medium） ──
-      pushEngine('piper')
       // Stop currently playing audio
       if (audioSharedHtml) {
         try {
@@ -423,18 +380,14 @@ export function useSpeech() {
       const id = ++reqIdShared
 
       try {
-        pushPhase('ensuring')
         const session = await ensureSession(lang)
-        // 注意：不再因后续新请求而丢弃本结果，否则 predict 已出声却被静默 return，导致无声且无错
         if (!session) {
-          pushPhase('no-session')
-          pushLastError('ensureSession 返回空 session')
+          console.error('ensureSession 返回空 session')
           setSpeaking(false)
           return
         }
 
         setSpeaking(true)
-        pushPhase('predicting')
         let audioBlob: Blob
         try {
           // 超时保护：Piper phonemize wasm 在部分 WebView 下会永久挂起（既不 resolve 也不 reject）。
@@ -447,18 +400,12 @@ export function useSpeech() {
           ])
         } catch (pe) {
           const pm = pe instanceof Error ? pe.message : String(pe)
-          pushPhase('predict-failed: ' + pm)
-          pushLastError('predict 失败: ' + pm + ' → 回退系统 TTS')
-          console.error('Piper predict failed, fallback to system TTS:', pe)
+          console.error('Piper predict failed, fallback to system TTS:', pe, pm)
           setSpeaking(false)
           // 回退：用 WebView 内置系统语音合成（不需要模型、不需要联网）
-          fallbackSpeechSynthesis(text, rate, onEnded)
+          fallbackSpeechSynthesis(text, rate, onEnded, lang)
           return
         }
-        pushPhase('blobReady size=' + audioBlob.size)
-        // 诊断：记录生成的音频字节数（正常英文词约 10KB~60KB；若极小≈44字节说明生成静音/空）
-        pushBlobSize(audioBlob.size)
-        pushAudioErr(null)
 
         // 主路径：<audio> 元素播放 blob wav（真机此前验证可正常出声）。
         // WebView 对 blob:wav 的 <audio> 支持稳定，且点击手势内 play() 不受自动播放限制。
@@ -468,7 +415,6 @@ export function useSpeech() {
         // 用 HTMLAudioElement 持有，stop() 时 pause+revoke
         audioSharedHtml = audio
 
-        pushPhase('playing')
         let ended = false
         const cleanup = () => {
           if (ended) return
@@ -483,37 +429,34 @@ export function useSpeech() {
           onEnded?.()
         }
         audio.onended = cleanup
+        // <audio> 失败与 play() 被拒绝都可能触发回退；用标志防重入，避免双次播放。
+        let webAudioTried = false
+        const tryWebAudio = () => {
+          if (webAudioTried) return
+          webAudioTried = true
+          playViaWebAudio(audioBlob, rate, id, onEnded, setSpeaking, url)
+        }
         audio.onerror = () => {
-          const m = 'HTMLAudio onerror（blob 无法播放，可能 WebView 不支持 blob:wav）'
-          console.warn(m, url)
-          pushAudioErr(m)
           // <audio> 失败时回退 Web Audio（decodeAudioData + bufferSource）
-          playViaWebAudio(audioBlob, rate, id, onEnded, setSpeaking, (e) => {
-            pushAudioErr(e)
-            pushLastError(e)
-          })
+          console.warn('HTMLAudio onerror（blob 无法播放，可能 WebView 不支持 blob:wav）', url)
+          tryWebAudio()
         }
         const p = audio.play()
         if (p && typeof p.catch === 'function') {
           p.catch((e) => {
-            const m = `HTMLAudio play() 被拒绝: ${String(e)}`
-            console.warn(m)
-            pushAudioErr(m)
             // play() 被拒绝（如自动播放策略）：尝试 Web Audio 兜底
-            playViaWebAudio(audioBlob, rate, id, onEnded, setSpeaking, (er) => {
-              pushAudioErr(er)
-              pushLastError(er)
-            })
+            console.warn(`HTMLAudio play() 被拒绝: ${String(e)}`)
+            tryWebAudio()
           })
         }
       } catch (err) {
-        const msg = err instanceof Error ? err.message : String(err)
         console.error('Piper TTS speak failed:', err)
-        pushLastError('Piper speak 失败: ' + msg)
         setSpeaking(false)
+        // ensureSession/downloadModel 失败（模型未就绪且重试失败）：回退系统 TTS，保证至少能出声。
+        fallbackSpeechSynthesis(text, rate, onEnded, lang)
       }
     },
-    [ensureSession],
+    [ensureSession, fallbackSpeechSynthesis],
   )
 
   const stop = useCallback(() => {
@@ -564,14 +507,5 @@ export function useSpeech() {
     loading: finalLoading,
     downloadStatus: finalStatus,
     downloadProgress: browserReady ? { pct: 100, label: '就绪' } : progress,
-    engine,
-    lastError,
-    audioErr,
-    blobSize,
-    sessionReady,
-    speakPhase,
-    crossOriginIsolated:
-      typeof window !== 'undefined' && (window as any).crossOriginIsolated === true,
-    isCapacitor,
   }
 }

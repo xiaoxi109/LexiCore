@@ -1,5 +1,5 @@
 diff --git a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
-index e969f08..dc78e30 100644
+index e969f08..f21f3fb 100644
 --- a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 +++ b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 @@ -10,9 +10,9 @@ var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot
@@ -15,7 +15,7 @@ index e969f08..dc78e30 100644
  const PATH_MAP = {
    "ar_JO-kareem-low": "ar/ar_JO/kareem/low/ar_JO-kareem-low.onnx",
    "ar_JO-kareem-medium": "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx",
-@@ -140,55 +140,124 @@ const PATH_MAP = {
+@@ -140,55 +140,139 @@ const PATH_MAP = {
    "en_US-norman-medium": "en/en_US/norman/medium/en_US-norman-medium.onnx",
    "it_IT-paola-medium": "it/it_IT/paola/medium/it_IT-paola-medium.onnx"
  };
@@ -115,13 +115,24 @@ index e969f08..dc78e30 100644
 +    try {
 +      const cached = await readBlob(url);
 +      if (cached) {
-+        return new Response(cached, {
-+          status: 200,
-+          headers: {
-+            "Content-Type": "application/wasm",
-+            "Content-Length": String(cached.size)
-+          }
-+        });
++        // 校验缓存内容是否为真正的 WASM 二进制（魔数 00 61 73 6d）。
++        // 历史上曾把 404 页面等 HTML 内容误写入缓存，导致 WebAssembly.instantiate
++        // 永远报 "expected magic word ... found <!do"。发现坏缓存立即删除并重新拉取。
++        const head = new Uint8Array(await cached.slice(0, 4).arrayBuffer());
++        if (cached.size >= 4 && head[0] === 0 && head[1] === 0x61 && head[2] === 0x73 && head[3] === 0x6d) {
++          return new Response(cached, {
++            status: 200,
++            headers: {
++              "Content-Type": "application/wasm",
++              "Content-Length": String(cached.size)
++            }
++          });
++        }
++        // 坏缓存：删除后走真实 fetch。
++        try {
++          await removeBlob(url);
++        } catch (e) {
++        }
 +      }
 +    } catch (e) {
 +    }
@@ -129,7 +140,11 @@ index e969f08..dc78e30 100644
 +    if (res.ok) {
 +      try {
 +        const b = await res.clone().blob();
-+        await writeBlob(url, b);
++        // 写入缓存前同样校验魔数，防止再次把 HTML 内容写入缓存。
++        const head = new Uint8Array(await b.slice(0, 4).arrayBuffer());
++        if (b.size >= 4 && head[0] === 0 && head[1] === 0x61 && head[2] === 0x73 && head[3] === 0x6d) {
++          await writeBlob(url, b);
++        }
 +      } catch (e) {
 +      }
 +    }
@@ -162,13 +177,21 @@ index e969f08..dc78e30 100644
      const { done, value } = await reader.read();
      if (done) {
        break;
-@@ -264,15 +333,16 @@ const _TtsSession = class _TtsSession {
-       logger == null ? void 0 : logger("Reusing session for TTS!");
-       _TtsSession._instance.voiceId = voiceId ?? _TtsSession._instance.voiceId;
-       __privateSet(_TtsSession._instance, _progressCallback, progress ?? __privateGet(_TtsSession._instance, _progressCallback));
-+      __privateSet(_TtsSession._instance, _wasmPaths, wasmPaths ?? __privateGet(_TtsSession._instance, _wasmPaths));
-       return _TtsSession._instance;
-     }
+@@ -260,20 +344,18 @@ const _TtsSession = class _TtsSession {
+     // @ts-ignore-next-line
+     __privateAdd(this, _logger);
+     var _a;
+-    if (_TtsSession._instance) {
+-      logger == null ? void 0 : logger("Reusing session for TTS!");
+-      _TtsSession._instance.voiceId = voiceId ?? _TtsSession._instance.voiceId;
+-      __privateSet(_TtsSession._instance, _progressCallback, progress ?? __privateGet(_TtsSession._instance, _progressCallback));
+-      return _TtsSession._instance;
+-    }
++    // 关键修复：移除单例复用。原逻辑在第二次 create()（加载第二个语音）时会把
++    // _wasmPaths 覆盖成 useSpeech 传入的原始目录路径，丢失 blob URL 与
++    // piperWasmBinary，导致 predict() 里 wasmBinary=undefined，Emscripten 去
++    // fetch 目录（./tts/piper/）拿到 index.html，报 "expected magic word ... <!do"。
++    // 现在每个 create() 都新建独立会话，中英文各自持有自己的模型与 wasm 路径。
      logger == null ? void 0 : logger("New session");
      __privateSet(this, _logger, logger);
      this.voiceId = voiceId;
@@ -176,11 +199,12 @@ index e969f08..dc78e30 100644
 -    this.waitReady = this.init(allowLocalModels, fallbackStrategy);
      __privateSet(this, _wasmPaths, wasmPaths ?? DEFAULT_WASM_PATHS);
      (_a = __privateGet(this, _logger)) == null ? void 0 : _a.call(this, `Loaded WASMPaths at: ${JSON.stringify(__privateGet(this, _wasmPaths))}`);
+-    _TtsSession._instance = this;
 +    this.waitReady = this.init(allowLocalModels, fallbackStrategy);
-     _TtsSession._instance = this;
      return this;
    }
-@@ -289,7 +359,9 @@ const _TtsSession = class _TtsSession {
+   static async create(options) {
+@@ -289,7 +371,9 @@ const _TtsSession = class _TtsSession {
        const ortModule = await import("onnxruntime-web");
        __privateSet(this, _ort, ortModule.default || ortModule);
        __privateGet(this, _ort).env.allowLocalModels = allowLocalModels ?? true;
@@ -191,7 +215,7 @@ index e969f08..dc78e30 100644
        await __privateMethod(this, _TtsSession_instances, setupWasmPaths_fn).call(this, fallbackStrategy);
        const path = PATH_MAP[this.voiceId];
        if (!path) {
-@@ -298,6 +370,25 @@ const _TtsSession = class _TtsSession {
+@@ -298,6 +382,34 @@ const _TtsSession = class _TtsSession {
        (_a = __privateGet(this, _logger)) == null ? void 0 : _a.call(this, `Loading model config for voice: ${this.voiceId}`);
        const modelConfigBlob = await getBlob(`${HF_BASE}/${path}.json`);
        __privateSet(this, _modelConfig, JSON.parse(await modelConfigBlob.text()));
@@ -205,6 +229,14 @@ index e969f08..dc78e30 100644
 +        const piperWasmBlob = await getBlob(`${WASM_BASE}.wasm`);
 +        const piperDataBlob = await getBlob(`${WASM_BASE}.data`);
 +        piperWasmArrayBuffer = await piperWasmBlob.arrayBuffer();
++        // 诊断校验：确认拿到的真的是 WASM 二进制（魔数 00 61 73 6d）。
++        // 如果 fetch 被 WebView 拦截后返回了 HTML（如 404 页面），这里立即报错，
++        // 错误信息会带上实际内容，便于定位加载链路问题。
++        if (piperWasmArrayBuffer.byteLength < 4 || new Uint8Array(piperWasmArrayBuffer)[0] !== 0 || new Uint8Array(piperWasmArrayBuffer)[1] !== 0x61 || new Uint8Array(piperWasmArrayBuffer)[2] !== 0x73 || new Uint8Array(piperWasmArrayBuffer)[3] !== 0x6d) {
++          const firstBytes = Array.from(new Uint8Array(piperWasmArrayBuffer.slice(0, 32))).join(",");
++          const sample = new TextDecoder().decode(piperWasmArrayBuffer.slice(0, 120));
++          throw new Error(`[WASM-DIAG] piper_phonemize.wasm 内容异常! size=${piperWasmArrayBuffer.byteLength} 首字节=${firstBytes} 文本="${sample}"`);
++        }
 +        __privateSet(this, _wasmPaths, {
 +          onnxWasm: __privateGet(this, _wasmPaths).onnxWasm,
 +          piperWasm: URL.createObjectURL(piperWasmBlob),
@@ -212,12 +244,13 @@ index e969f08..dc78e30 100644
 +          piperWasmBinary: piperWasmArrayBuffer
 +        });
 +      } catch (e) {
-+        console.warn("Piper engine preload failed, falling back to network:", e);
++        console.warn("Piper engine preload failed:", e);
++        throw e;
 +      }
        (_b = __privateGet(this, _logger)) == null ? void 0 : _b.call(this, `Loading model for voice: ${this.voiceId}`);
        const modelBlob = await getBlob(
          `${HF_BASE}/${path}`,
-@@ -316,28 +407,58 @@ const _TtsSession = class _TtsSession {
+@@ -316,28 +428,58 @@ const _TtsSession = class _TtsSession {
    async predict(text) {
      await this.waitReady;
      const input = JSON.stringify([{ text: text.trim() }]);
@@ -288,7 +321,7 @@ index e969f08..dc78e30 100644
      });
      const speakerId = 0;
      const sampleRate = __privateGet(this, _modelConfig).audio.sample_rate;
-@@ -379,6 +500,7 @@ setupWasmPaths_fn = async function(fallbackStrategy) {
+@@ -379,6 +521,7 @@ setupWasmPaths_fn = async function(fallbackStrategy) {
    var _a, _b, _c, _d, _e;
    const strategy = fallbackStrategy ?? "cdn";
    try {
@@ -296,7 +329,15 @@ index e969f08..dc78e30 100644
      if (strategy === "local") {
        __privateGet(this, _ort).env.wasm.wasmPaths = __privateGet(this, _wasmPaths).onnxWasm;
        (_a = __privateGet(this, _logger)) == null ? void 0 : _a.call(this, "Using local WASM paths");
-@@ -420,6 +542,15 @@ async function predict(config, callback) {
+@@ -410,7 +553,6 @@ setupWasmPaths_fn = async function(fallbackStrategy) {
+   }
+ };
+ __publicField(_TtsSession, "WASM_LOCATIONS", DEFAULT_WASM_PATHS);
+-__publicField(_TtsSession, "_instance", null);
+ let TtsSession = _TtsSession;
+ async function predict(config, callback) {
+   const session = new TtsSession({
+@@ -420,6 +562,15 @@ async function predict(config, callback) {
    return session.predict(config.text);
  }
  async function getBlob(url, callback, maxRetries = 3) {
@@ -312,7 +353,7 @@ index e969f08..dc78e30 100644
    let blob = await readBlob(url);
    if (!blob) {
      let lastError = null;
-@@ -456,24 +587,30 @@ async function remove(voiceId) {
+@@ -456,24 +607,30 @@ async function remove(voiceId) {
    await Promise.all(urls.map((url) => removeBlob(url)));
  }
  async function stored() {

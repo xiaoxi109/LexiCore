@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "build:android": "cross-env TARGET=android tsc -b && cross-env TARGET=android vite build && npx cap sync",
     "fill:ipa": "python scripts/fill_ipa.py && python scripts/generate_data.py",
-    "preview": "vite preview",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@capacitor/android": "^8.4.2",
