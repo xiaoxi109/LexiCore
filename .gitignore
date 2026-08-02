@@ -57,3 +57,5 @@ android/app/capacitor.build.gradle
 public/tts/onnx/cjs/
 public/tts/onnx/esm/
 public/tts/onnx/*.map
+# Threaded WASM not needed (numThreads=1)
+public/tts/onnx/ort-wasm-simd-threaded*
