@@ -1,5 +1,5 @@
 diff --git a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
-index e969f08..e6aea42 100644
+index e969f08..7fd7e18 100644
 --- a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 +++ b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 @@ -10,9 +10,9 @@ var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot
@@ -10,17 +10,23 @@ index e969f08..e6aea42 100644
 -const ONNX_BASE = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/";
 -const WASM_BASE = "https://cdn.jsdelivr.net/npm/@diffusionstudio/piper-wasm@1.0.0/build/piper_phonemize";
 +const HF_BASE = `${import.meta.env.BASE_URL}tts/model`;
-+const ONNX_BASE = "https://fastly.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/";
++const ONNX_BASE = `${import.meta.env.BASE_URL}tts/onnx/`;
 +const WASM_BASE = `${import.meta.env.BASE_URL}tts/piper/piper_phonemize`;
  const PATH_MAP = {
    "ar_JO-kareem-low": "ar/ar_JO/kareem/low/ar_JO-kareem-low.onnx",
    "ar_JO-kareem-medium": "ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx",
-@@ -140,47 +140,101 @@ const PATH_MAP = {
+@@ -140,55 +140,124 @@ const PATH_MAP = {
    "en_US-norman-medium": "en/en_US/norman/medium/en_US-norman-medium.onnx",
    "it_IT-paola-medium": "it/it_IT/paola/medium/it_IT-paola-medium.onnx"
  };
 +const PIPER_DB = "piper-tts-cache";
 +const PIPER_STORE = "models";
++// 缓存版本号：每次资源结构/内容变动时递增，使旧 APK 写入的脏缓存立即失效。
++// 旧版本因缺失 wasm 把错误响应缓存进了 IndexedDB，key 无版本号导致永远命中脏数据。
++const CACHE_VER = "v4::";
++function _ck(url) {
++  return CACHE_VER + url;
++}
 +function openPiperDB() {
 +  return new Promise((resolve, reject) => {
 +    const req = indexedDB.open(PIPER_DB, 1);
@@ -39,7 +45,7 @@ index e969f08..e6aea42 100644
 +    const db = await openPiperDB();
 +    await new Promise((resolve, reject) => {
 +      const tx = db.transaction(PIPER_STORE, "readwrite");
-+      tx.objectStore(PIPER_STORE).put(blob, url);
++      tx.objectStore(PIPER_STORE).put(blob, _ck(url));
 +      tx.oncomplete = resolve;
 +      tx.onerror = () => reject(tx.error);
      });
@@ -63,7 +69,7 @@ index e969f08..e6aea42 100644
 +    const db = await openPiperDB();
 +    await new Promise((resolve) => {
 +      const tx = db.transaction(PIPER_STORE, "readwrite");
-+      tx.objectStore(PIPER_STORE).delete(url);
++      tx.objectStore(PIPER_STORE).delete(_ck(url));
 +      tx.oncomplete = resolve;
 +      tx.onerror = resolve;
 +    });
@@ -82,7 +88,7 @@ index e969f08..e6aea42 100644
 +    const db = await openPiperDB();
 +    const blob = await new Promise((resolve, reject) => {
 +      const tx = db.transaction(PIPER_STORE, "readonly");
-+      const r = tx.objectStore(PIPER_STORE).get(url);
++      const r = tx.objectStore(PIPER_STORE).get(_ck(url));
 +      r.onsuccess = () => resolve(r.result);
 +      r.onerror = () => reject(r.error);
      });
@@ -138,7 +144,25 @@ index e969f08..e6aea42 100644
  async function fetchBlob(url, callback) {
    var _a;
    const res = await fetch(url);
-@@ -264,15 +318,16 @@ const _TtsSession = class _TtsSession {
+   const reader = (_a = res.body) == null ? void 0 : _a.getReader();
++  if (!reader) {
++    const arrayBuffer = await res.arrayBuffer();
++    callback == null ? void 0 : callback({
++      url,
++      total: arrayBuffer.byteLength,
++      loaded: arrayBuffer.byteLength
++    });
++    return new Blob([arrayBuffer], { type: res.headers.get("Content-Type") ?? void 0 });
++  }
+   const contentLength = +(res.headers.get("Content-Length") ?? 0);
+   let receivedLength = 0;
+   let chunks = [];
+-  while (reader) {
++  while (true) {
+     const { done, value } = await reader.read();
+     if (done) {
+       break;
+@@ -264,15 +333,16 @@ const _TtsSession = class _TtsSession {
        logger == null ? void 0 : logger("Reusing session for TTS!");
        _TtsSession._instance.voiceId = voiceId ?? _TtsSession._instance.voiceId;
        __privateSet(_TtsSession._instance, _progressCallback, progress ?? __privateGet(_TtsSession._instance, _progressCallback));
@@ -156,19 +180,36 @@ index e969f08..e6aea42 100644
      _TtsSession._instance = this;
      return this;
    }
-@@ -298,6 +353,19 @@ const _TtsSession = class _TtsSession {
+@@ -289,7 +359,9 @@ const _TtsSession = class _TtsSession {
+       const ortModule = await import("onnxruntime-web");
+       __privateSet(this, _ort, ortModule.default || ortModule);
+       __privateGet(this, _ort).env.allowLocalModels = allowLocalModels ?? true;
+-      __privateGet(this, _ort).env.wasm.numThreads = navigator.hardwareConcurrency;
++      // 强制单线程：多线程 wasm 需要 crossOriginIsolated (SharedArrayBuffer)，
++      // 而本 App 为修复白屏已关闭 COEP，crossOriginIsolated=false，多线程 wasm 会 init 失败。
++      __privateGet(this, _ort).env.wasm.numThreads = 1;
+       await __privateMethod(this, _TtsSession_instances, setupWasmPaths_fn).call(this, fallbackStrategy);
+       const path = PATH_MAP[this.voiceId];
+       if (!path) {
+@@ -298,6 +370,25 @@ const _TtsSession = class _TtsSession {
        (_a = __privateGet(this, _logger)) == null ? void 0 : _a.call(this, `Loading model config for voice: ${this.voiceId}`);
        const modelConfigBlob = await getBlob(`${HF_BASE}/${path}.json`);
        __privateSet(this, _modelConfig, JSON.parse(await modelConfigBlob.text()));
-+      // Preload Piper phonemize engine (wasm + data) into IndexedDB and serve via
-+      // blob URLs so Emscripten's fetch/XHR hits local cache instead of re-downloading.
++      // Preload Piper phonemize engine (wasm + data) into IndexedDB.
++      // 关键修复：Android WebView 对 blob URL 的 instantiateStreaming 会因 MIME
++      // 类型非 application/wasm 失败。因此直接把 wasm 的 ArrayBuffer 注入 Emscripten
++      // 的 Module.wasmBinary，彻底跳过 fetch/streaming；data 文件仍用 blob URL
++      // （XHR/fetch 读 data 不受 MIME 限制）。
++      let piperWasmArrayBuffer = null;
 +      try {
 +        const piperWasmBlob = await getBlob(`${WASM_BASE}.wasm`);
 +        const piperDataBlob = await getBlob(`${WASM_BASE}.data`);
++        piperWasmArrayBuffer = await piperWasmBlob.arrayBuffer();
 +        __privateSet(this, _wasmPaths, {
 +          onnxWasm: __privateGet(this, _wasmPaths).onnxWasm,
 +          piperWasm: URL.createObjectURL(piperWasmBlob),
-+          piperData: URL.createObjectURL(piperDataBlob)
++          piperData: URL.createObjectURL(piperDataBlob),
++          piperWasmBinary: piperWasmArrayBuffer
 +        });
 +      } catch (e) {
 +        console.warn("Piper engine preload failed, falling back to network:", e);
@@ -176,7 +217,86 @@ index e969f08..e6aea42 100644
        (_b = __privateGet(this, _logger)) == null ? void 0 : _b.call(this, `Loading model for voice: ${this.voiceId}`);
        const modelBlob = await getBlob(
          `${HF_BASE}/${path}`,
-@@ -420,6 +488,15 @@ async function predict(config, callback) {
+@@ -316,28 +407,58 @@ const _TtsSession = class _TtsSession {
+   async predict(text) {
+     await this.waitReady;
+     const input = JSON.stringify([{ text: text.trim() }]);
+-    const phonemeIds = await new Promise(async (resolve) => {
+-      const module = await __privateGet(this, _createPiperPhonemize).call(this, {
++    const phonemeIds = await new Promise((resolve, reject) => {
++      let settled = false;
++      // 超时保护：phonemize wasm 在部分 WebView 下会永久挂起（既不 resolve 也不 reject）
++      const timer = setTimeout(() => {
++        if (!settled) {
++          settled = true;
++          reject(new Error("phonemize-timeout(8s): Piper wasm 在 WebView 下挂起"));
++        }
++      }, 8000);
++      __privateGet(this, _createPiperPhonemize).call(this, {
++        // 注入 wasm ArrayBuffer，跳过 instantiateStreaming（Android WebView blob URL MIME 问题）
++        wasmBinary: __privateGet(this, _wasmPaths).piperWasmBinary || void 0,
+         print: (data) => {
+-          resolve(JSON.parse(data).phoneme_ids);
++          if (settled) return;
++          try {
++            const parsed = JSON.parse(data);
++            settled = true;
++            clearTimeout(timer);
++            resolve(parsed.phoneme_ids);
++          } catch (e) {
++            settled = true;
++            clearTimeout(timer);
++            reject(new Error("phonemize print 解析失败: " + e));
++          }
+         },
+         printErr: (message) => {
+-          throw new Error(message);
++          if (settled) return;
++          settled = true;
++          clearTimeout(timer);
++          reject(new Error("phonemize printErr: " + message));
+         },
+         locateFile: (url) => {
+           if (url.endsWith(".wasm")) return __privateGet(this, _wasmPaths).piperWasm;
+           if (url.endsWith(".data")) return __privateGet(this, _wasmPaths).piperData;
+           return url;
+         }
++      }).then((module) => {
++        if (settled) return;
++        module.callMain([
++          "-l",
++          __privateGet(this, _modelConfig).espeak.voice,
++          "--input",
++          input,
++          "--espeak_data",
++          "/espeak-ng-data"
++        ]);
++      }).catch((e) => {
++        if (settled) return;
++        settled = true;
++        clearTimeout(timer);
++        reject(new Error("phonemize 实例化失败: " + (e && e.message ? e.message : e)));
+       });
+-      module.callMain([
+-        "-l",
+-        __privateGet(this, _modelConfig).espeak.voice,
+-        "--input",
+-        input,
+-        "--espeak_data",
+-        "/espeak-ng-data"
+-      ]);
+     });
+     const speakerId = 0;
+     const sampleRate = __privateGet(this, _modelConfig).audio.sample_rate;
+@@ -379,6 +500,7 @@ setupWasmPaths_fn = async function(fallbackStrategy) {
+   var _a, _b, _c, _d, _e;
+   const strategy = fallbackStrategy ?? "cdn";
+   try {
++    __privateGet(this, _ort).env.wasm.numThreads = 1;
+     if (strategy === "local") {
+       __privateGet(this, _ort).env.wasm.wasmPaths = __privateGet(this, _wasmPaths).onnxWasm;
+       (_a = __privateGet(this, _logger)) == null ? void 0 : _a.call(this, "Using local WASM paths");
+@@ -420,6 +542,15 @@ async function predict(config, callback) {
    return session.predict(config.text);
  }
  async function getBlob(url, callback, maxRetries = 3) {
@@ -192,7 +312,7 @@ index e969f08..e6aea42 100644
    let blob = await readBlob(url);
    if (!blob) {
      let lastError = null;
-@@ -456,24 +533,30 @@ async function remove(voiceId) {
+@@ -456,24 +587,30 @@ async function remove(voiceId) {
    await Promise.all(urls.map((url) => removeBlob(url)));
  }
  async function stored() {
