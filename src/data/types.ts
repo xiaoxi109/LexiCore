@@ -57,6 +57,11 @@ export interface Word {
   /** Marked true for words from the supplementary extension package (not in the
    *  official CEFR list); shown with an 扩展/补充 badge and excluded from stats. */
   extended?: boolean
+  /** Marked true for words that exist in the 人教版 (PEP) grade list but are NOT
+   *  in the main word library — their 音标/释义 come from PEP data (no examples / category). */
+  pepOnly?: boolean
+  /** 人教版年级归属（primary / g7 …），用于人教词表显示「小学 / 初一」等年级徽标。 */
+  grade?: string
 }
 
 export interface LevelMeta {

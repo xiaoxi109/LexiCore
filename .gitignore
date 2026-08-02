@@ -20,10 +20,21 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Build logs and artifacts (root level)
+*.log
+*.err
+*.tgz
+tools.zip
+
+# Build scripts (root level)
+build_*.ps1
+build_*.sh
+
 # TypeScript build info
 *.tsbuildinfo
+tsc_err.log
 
-# Local build/data scripts (not needed for the deployed web app)
+# Local build/data scripts
 scripts/
 
 # CodeBuddy IDE tool config
@@ -31,3 +42,18 @@ scripts/
 
 # Temporary certificate files
 certs_tmp/
+
+# Android / Capacitor build output
+android/app/build/
+android/app/src/main/assets/public/
+android/app/src/main/assets/capacitor.*.json
+android/.gradle/
+local.properties
+
+# Capacitor auto-generated file (overridden by main build.gradle)
+android/app/capacitor.build.gradle
+
+# ONNX runtime full distribution (cjs/esm not needed for runtime)
+public/tts/onnx/cjs/
+public/tts/onnx/esm/
+public/tts/onnx/*.map

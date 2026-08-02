@@ -1,4 +1,4 @@
-// Oxford 3000 · B2 (auto-generated from official CEFR list + enriched data)
+// B2 级别词库 (auto-generated from CEFR list + enriched data)
 import type { Word } from './types'
 
 export const B2: Word[] = [

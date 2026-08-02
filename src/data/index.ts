@@ -8,6 +8,22 @@ import { CATEGORIES, categoryOf, isCommon } from './generated/categories'
 import { CATEGORY_THEMES, WORD_THEME } from './themes'
 import type { Level, LevelMeta, Word, CategoryId, CategoryMeta } from './types'
 
+/**
+ * 数据来源与合规声明
+ * -------------------
+ * 1. 分级词汇（小学/初一/…/高三）：整理自开源词库 cyforkk/pep-english-words（MIT License，
+ *    见 src/data/pepGrades.ts 头部声明），仅收录“人教版教材中出现过的单词”这一事实性词表，
+ *    表述为“依据人教版教材整理”，不代表人教社官方授权。
+ * 2. 下方单词主库（preA1/a1/a2/b1/b2 + 扩展包）的级别划分参考了 Oxford 3000 词汇表，
+ *    实际释义/音标/例句数据由本项目通过公开词典接口整理，仅用于个人学习用途。
+ *    若本应用转为公开/商业分发，建议将本部分替换为完全自由来源（如 CC 协议词典、有道公开接口），
+ *    以避免对“Oxford 3000”名称及释义汇编的权利主张。
+ */
+export const DATA_DISCLAIMER = {
+  grades: '分级词表依据人教版教材整理，来源：cyforkk/pep-english-words (MIT)',
+  dictionary: '单词释义/音标/例句用于个人学习，来源非牛津官方授权',
+} as const
+
 export { PRE_A1, A1, A2, B1, B2, EXTENSION, CATEGORIES }
 export type { Level, LevelMeta, Word, CategoryId }
 

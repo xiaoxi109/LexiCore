@@ -1,577 +1,234 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { ALL_WORDS, LEVELS, TOTAL, CATEGORIES, groupByCategory } from './data'
-import type { Level, Word, CategoryId } from './data'
-import { useSpeech, downloadModel } from './hooks/useSpeech'
-import { useLocalStorage } from './hooks/useLocalStorage'
-import { useToast, ToastContainer, type ToastType } from './hooks/useToast'
-import { StatusBar, Style } from '@capacitor/status-bar'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import type { Word } from './data'
+import { useSpeech } from './hooks/useSpeech'
+import { WordDetail } from './components/word'
+import HomeView from './views/HomeView'
+import GradesView from './views/GradesView'
+import ListenView from './views/ListenView'
 import {
   CheckIcon,
   DownloadIcon,
+  HeadphonesIcon,
+  HomeIcon,
+  ListIcon,
   MoonIcon,
-  SearchIcon,
-  SpeakerIcon,
   SpinnerIcon,
   SunIcon,
   UploadIcon,
   XIcon,
 } from './components/icons'
 
-type Theme = 'light' | 'dark'
+type View = 'home' | 'grades' | 'listen'
 
-const LEVEL_STYLE: Record<Level, { badge: string; dot: string }> = {
-  'Pre-A1': { badge: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300', dot: 'bg-emerald-500' },
-  A1: { badge: 'bg-sky-100 text-sky-700 dark:bg-sky-500/15 dark:text-sky-300', dot: 'bg-sky-500' },
-  A2: { badge: 'bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300', dot: 'bg-violet-500' },
-  B1: { badge: 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300', dot: 'bg-amber-500' },
-  B2: { badge: 'bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300', dot: 'bg-rose-500' },
-}
+/* ----------------------------- Toast ----------------------------- */
+type Toast = { id: number; msg: string; type: 'success' | 'error' | 'info' }
+let toastId = 0
 
-// Scene category accent dots (used in grouped section headers).
-const CAT_DOT: Record<CategoryId, string> = {
-  people: 'bg-pink-500',
-  body: 'bg-rose-500',
-  health: 'bg-red-400',
-  clothes: 'bg-fuchsia-500',
-  food: 'bg-orange-500',
-  home: 'bg-indigo-500',
-  animals: 'bg-amber-500',
-  nature: 'bg-green-500',
-  space: 'bg-cyan-500',
-  time: 'bg-violet-500',
-  numbers: 'bg-red-500',
-  colors: 'bg-purple-500',
-  size: 'bg-teal-500',
-  actions: 'bg-lime-500',
-  emotions: 'bg-rose-400',
-  communication: 'bg-sky-400',
-  education: 'bg-teal-400',
-  work: 'bg-emerald-500',
-  travel: 'bg-cyan-400',
-  shopping: 'bg-amber-600',
-  society: 'bg-slate-500',
-  science: 'bg-emerald-600',
-  media: 'bg-rose-500',
-  arts: 'bg-fuchsia-600',
-  thinking: 'bg-indigo-400',
-  grammar: 'bg-slate-400',
-  questions: 'bg-blue-500',
-  toys: 'bg-yellow-500',
-}
-
-function LevelBadge({ level }: { level: Level }) {
-  const s = LEVEL_STYLE[level]
+function ToastContainer({ toasts }: { toasts: Toast[] }) {
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${s.badge}`}>
-      <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
-      {level}
-    </span>
-  )
-}
-
-function SpeakerBtn({ text, className = '', rate }: { text: string; className?: string; rate?: number }) {
-  const { speak, speaking, loading } = useSpeech()
-  return (
-    <button
-      type="button"
-      onClick={(e) => {
-        e.stopPropagation()
-        speak(text, rate)
-      }}
-      title={loading ? '正在加载语音模型…' : '发音'}
-      className={`inline-flex items-center justify-center rounded-full p-2 text-brand-600 transition hover:bg-brand-50 hover:text-brand-700 active:scale-95 dark:text-brand-300 dark:hover:bg-brand-500/10 ${
-        speaking || loading ? 'animate-pulse' : ''
-      } ${className}`}
-    >
-      <SpeakerIcon width={18} height={18} />
-    </button>
-  )
-}
-
-/* ---------------------------- Import/Export Progress ---------------------------- */
-
-interface ImportExportResult {
-  type: 'success' | 'error' | 'info'
-  message: string
-}
-
-function SyncProgressBtns({
-  masteredArr,
-  onImport,
-  onToast,
-  className = '',
-}: {
-  masteredArr: string[]
-  onImport: (words: string[]) => void
-  onToast: (message: string, type: 'success' | 'error' | 'info') => void
-  className?: string
-}) {
-  const fileRef = useRef<HTMLInputElement>(null)
-
-  // Build a known-word set for validation
-  const knownWords = useMemo(() => new Set(ALL_WORDS.map((w) => w.word.toLowerCase())), [])
-
-  // Export format version
-  const EXPORT_VERSION = 2
-
-  const handleExport = () => {
-    const levels: Record<string, number> = {}
-    for (const w of masteredArr) {
-      const word = ALL_WORDS.find((x) => x.word.toLowerCase() === w.toLowerCase())
-      if (word) {
-        levels[word.level] = (levels[word.level] || 0) + 1
-      }
-    }
-
-    const data = {
-      app: 'LexiCore',
-      version: EXPORT_VERSION,
-      exportedAt: new Date().toISOString(),
-      masteredCount: masteredArr.length,
-      byLevel: levels,
-      mastered: masteredArr,
-    }
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    const dateStr = new Date().toISOString().slice(0, 10)
-    a.download = `lexicore-progress-${dateStr}.json`
-    a.click()
-    URL.revokeObjectURL(url)
-    onToast(`已导出 ${masteredArr.length} 个已掌握单词`, 'success')
-  }
-
-  const validateAndMerge = (incoming: string[]): ImportExportResult => {
-    // Normalize: lowercase, trim
-    const clean = incoming
-      .map((w) => (typeof w === 'string' ? w.trim() : ''))
-      .filter((w) => w.length > 0)
-      .map((w) => w.toLowerCase())
-
-    if (clean.length === 0) {
-      return { type: 'error', message: '文件中没有找到有效的单词' }
-    }
-
-    // Validate against known word list
-    const valid = clean.filter((w) => knownWords.has(w))
-    const unknown = clean.filter((w) => !knownWords.has(w))
-
-    if (valid.length === 0) {
-      return {
-        type: 'error',
-        message: `文件中的单词均不在词表中。请确认选择的是 LexiCore 导出的进度文件。`,
-      }
-    }
-
-    // Merge with existing (union)
-    const existingLower = masteredArr.map((w) => w.toLowerCase())
-    const mergedLower = [...new Set([...existingLower, ...valid])]
-
-    // Restore original casing from ALL_WORDS
-    const merged = mergedLower.map((lower) => {
-      const found = ALL_WORDS.find((w) => w.word.toLowerCase() === lower)
-      return found ? found.word : lower
-    })
-
-    const added = merged.length - masteredArr.length
-
-    let msg = `导入成功！新增 ${added} 个已掌握单词`
-    if (unknown.length > 0) {
-      msg += `（${unknown.length} 个单词不在词表中，已忽略）`
-    }
-    if (added === 0) {
-      msg = '导入完成，没有新增单词（所有单词已掌握）'
-    }
-
-    return { type: 'success', message: msg }
-  }
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    const reader = new FileReader()
-    reader.onload = () => {
-      try {
-        const raw = reader.result as string
-
-        // Try JSON format first
-        let words: string[] | null = null
-        try {
-          const data = JSON.parse(raw)
-          if (data && Array.isArray(data.mastered)) {
-            words = data.mastered
-          } else if (Array.isArray(data)) {
-            // Plain JSON array of words
-            words = data
-          }
-        } catch {
-          // Not JSON, try plain text format
-        }
-
-        // Try plain text format (one word per line, or comma-separated)
-        if (words === null) {
-          // Split by newlines or commas
-          const lines = raw
-            .split(/[\n\r,]+/)
-            .map((s) => s.trim())
-            .filter((s) => s.length > 0 && !s.startsWith('{') && !s.startsWith('['))
-          if (lines.length > 0) {
-            words = lines
-          }
-        }
-
-        if (!words || words.length === 0) {
-          onToast('无法解析文件内容，请使用 LexiCore 导出的 JSON 文件', 'error')
-          return
-        }
-
-        const result = validateAndMerge(words)
-        if (result.type === 'error') {
-          onToast(result.message, 'error')
-          return
-        }
-
-        // Merge and apply
-        const clean = words
-          .map((w) => (typeof w === 'string' ? w.trim().toLowerCase() : ''))
-          .filter((w) => w.length > 0 && knownWords.has(w))
-        const existingLower = masteredArr.map((w) => w.toLowerCase())
-        const mergedLower = [...new Set([...existingLower, ...clean])]
-        const merged = mergedLower.map((lower) => {
-          const found = ALL_WORDS.find((w) => w.word.toLowerCase() === lower)
-          return found ? found.word : lower
-        })
-
-        onImport(merged)
-        onToast(result.message, 'success')
-      } catch {
-        onToast('文件读取失败，请重试', 'error')
-      }
-    }
-    reader.onerror = () => {
-      onToast('文件读取失败，请重试', 'error')
-    }
-    reader.readAsText(file)
-    // reset so same file can be re-imported
-    e.target.value = ''
-  }
-
-  return (
-    <div className={`flex items-center gap-1 ${className}`}>
-      <button
-        type="button"
-        onClick={handleExport}
-        disabled={masteredArr.length === 0}
-        title="导出已掌握进度"
-        className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-50 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
-      >
-        <DownloadIcon width={14} height={14} />
-        导出
-      </button>
-      <button
-        type="button"
-        onClick={() => fileRef.current?.click()}
-        title="导入已掌握进度（合并）"
-        className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-600 transition hover:bg-slate-50 active:scale-95 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
-      >
-        <UploadIcon width={14} height={14} />
-        导入
-      </button>
-      <input ref={fileRef} type="file" accept=".json,.txt,.csv" onChange={handleFileChange} className="hidden" />
-    </div>
-  )
-}
-
-/* ---------------------------- Model Download Btn ---------------------------- */
-function ModelDownloadBtn({ className = '' }: { className?: string }) {
-  const { downloadStatus, downloadProgress } = useSpeech()
-
-  const handleClick = async (e: React.MouseEvent) => {
-    e.stopPropagation()
-    try {
-      await downloadModel()
-    } catch {
-      // error already handled in hook
-    }
-  }
-
-  if (downloadStatus === 'ready') {
-    return (
-      <span
-        className={`inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300 ${className}`}
-        title="语音模型已就绪"
-      >
-        <CheckIcon width={14} height={14} />
-        语音就绪
-      </span>
-    )
-  }
-
-  if (downloadStatus === 'downloading') {
-    const pct = Math.min(99, Math.max(0, downloadProgress.pct))
-    return (
-      <span
-        className={`inline-flex items-center gap-2 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700 dark:bg-amber-500/15 dark:text-amber-300 ${className}`}
-        title={downloadProgress.label || '正在下载语音模型…'}
-      >
-        <SpinnerIcon width={14} height={14} className="animate-spin shrink-0" />
-        <span className="relative h-1.5 w-16 overflow-hidden rounded-full bg-amber-200 dark:bg-amber-500/30">
-          <span
-            className="absolute inset-y-0 left-0 rounded-full bg-amber-500 transition-all duration-200"
-            style={{ width: `${pct}%` }}
-          />
-        </span>
-        <span className="tabular-nums">{pct}%</span>
-      </span>
-    )
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={handleClick}
-      title={downloadStatus === 'error' ? '下载失败，点击重试' : '点击下载语音模型（约 70MB，仅首次较慢）'}
-      className={`inline-flex items-center gap-1.5 rounded-full border text-xs font-medium transition active:scale-95 ${
-        downloadStatus === 'error'
-          ? 'border-red-300 bg-red-50 text-red-600 hover:bg-red-100 dark:border-red-800 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20'
-          : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
-      } ${className}`}
-    >
-      <DownloadIcon width={14} height={14} />
-      {downloadStatus === 'error' ? '重试下载' : '下载语音'}
-    </button>
-  )
-}
-
-/* ----------------------------- Browse card ----------------------------- */
-function WordCard({
-  word,
-  mastered,
-  onOpen,
-  onToggleMastered,
-}: {
-  word: Word
-  mastered: boolean
-  onOpen: () => void
-  onToggleMastered: () => void
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className="group relative flex flex-col items-start gap-1 rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/60 dark:hover:border-brand-500/50"
-    >
-      <div className="flex w-full items-center justify-between gap-2">
-        <div className="flex items-center gap-1.5">
-          <LevelBadge level={word.level} />
-          {word.common && (
-            <span className="rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">
-              常用
-            </span>
-          )}
-          
-        </div>
-        <span
-          role="button"
-          tabIndex={0}
-          title={mastered ? '已掌握' : '标记为已掌握'}
-          onClick={(e) => {
-            e.stopPropagation()
-            onToggleMastered()
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault()
-              e.stopPropagation()
-              onToggleMastered()
-            }
-          }}
-          className={`flex h-6 w-6 items-center justify-center rounded-full border transition ${
-            mastered
-              ? 'border-emerald-500 bg-emerald-500 text-white'
-              : 'border-slate-300 text-transparent hover:border-emerald-400 dark:border-slate-600'
+    <div className="pointer-events-none fixed inset-x-0 top-4 z-[60] flex flex-col items-center gap-2 px-4">
+      {toasts.map((t) => (
+        <div
+          key={t.id}
+          className={`pointer-events-auto flex max-w-sm items-center gap-2 rounded-xl px-4 py-2.5 text-sm shadow-lg ${
+            t.type === 'success'
+              ? 'bg-emerald-600 text-white'
+              : t.type === 'error'
+              ? 'bg-rose-600 text-white'
+              : 'bg-slate-800 text-white dark:bg-slate-700'
           }`}
         >
-          <CheckIcon width={14} height={14} />
-        </span>
-      </div>
-      <div className="mt-1 flex w-full min-w-0 items-baseline justify-between gap-2">
-        <span className="min-w-0 break-words text-lg font-bold text-slate-800 dark:text-slate-100">{word.word}</span>
-        <SpeakerBtn text={word.word} />
-      </div>
-      <span className="text-sm text-slate-400 dark:text-slate-500">{word.ipa}</span>
-      <span className="line-clamp-1 text-sm text-slate-600 dark:text-slate-300">{word.meaning}</span>
-    </button>
-  )
-}
-
-/* ----------------------------- Detail modal ----------------------------- */
-function WordDetail({
-  word,
-  mastered,
-  onClose,
-  onToggleMastered,
-}: {
-  word: Word
-  mastered: boolean
-  onClose: () => void
-  onToggleMastered: () => void
-}) {
-  useEffect(() => {
-    const h = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
-    window.addEventListener('keydown', h)
-    return () => window.removeEventListener('keydown', h)
-  }, [onClose])
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/50 p-0 backdrop-blur-sm animate-fade-in sm:items-center sm:p-4"
-      onClick={onClose}
-    >
-      <div
-        className="flex max-h-[90vh] max-h-[90dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl animate-scale-in dark:bg-slate-800 sm:rounded-3xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex shrink-0 items-center justify-between border-b border-slate-100 px-5 py-4 dark:border-slate-700 sm:px-6">
-          <div className="flex items-center gap-2">
-            <LevelBadge level={word.level} />
-            
-          </div>
-          <button onClick={onClose} className="rounded-full p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-700">
-            <XIcon width={20} height={20} />
-          </button>
+          {t.type === 'success' && <CheckIcon width={16} height={16} />}
+          {t.type === 'error' && <XIcon width={16} height={16} />}
+          <span>{t.msg}</span>
         </div>
-
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <h2 className="break-words text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">{word.word}</h2>
-              <p className="mt-1 text-slate-400 dark:text-slate-500">{word.ipa}</p>
-            </div>
-            <SpeakerBtn text={word.word} rate={0.85} className="h-12 w-12 bg-brand-50 dark:bg-brand-500/10" />
-          </div>
-
-          <div className="mt-4 rounded-2xl bg-slate-50 p-4 dark:bg-slate-900/40">
-            <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-              <span className="rounded-md bg-white px-2 py-0.5 font-mono text-xs shadow-sm dark:bg-slate-800">{word.pos}</span>
-              <span className="text-base font-semibold text-slate-800 dark:text-slate-100">{word.meaning}</span>
-            </div>
-          </div>
-
-          <p className="mb-2 mt-5 text-xs font-semibold uppercase tracking-wide text-slate-400">例句</p>
-          <ul className="space-y-3">
-            {word.examples.map((ex, i) => (
-              <li key={i} className="rounded-xl border border-slate-100 p-3 dark:border-slate-700">
-                <div className="flex items-start justify-between gap-2">
-                  <p className="text-slate-800 dark:text-slate-100">{ex.en}</p>
-                  <SpeakerBtn text={ex.en} rate={0.9} />
-                </div>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{ex.zh}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="shrink-0 border-t border-slate-100 px-5 py-4 dark:border-slate-700 sm:px-6">
-          <button
-            onClick={onToggleMastered}
-            className={`flex w-full items-center justify-center gap-2 rounded-xl py-3 font-semibold transition ${
-              mastered
-                ? 'bg-emerald-500 text-white hover:bg-emerald-600'
-                : 'bg-brand-600 text-white hover:bg-brand-700'
-            }`}
-          >
-            <CheckIcon width={18} height={18} />
-            {mastered ? '已掌握 · 点击取消' : '标记为已掌握'}
-          </button>
-        </div>
-      </div>
+      ))}
     </div>
   )
 }
 
-/* ------------------------------- App ------------------------------- */
+/* ----------------------------- Model download ----------------------------- */
+function ModelDownloadBtn({ onToast }: { onToast: (msg: string, type?: Toast['type']) => void }) {
+  const { downloadStatus, downloadProgress, speak, speaking, preload } = useSpeech()
+  const ready = downloadStatus === 'ready'
+  const downloading = downloadStatus === 'downloading'
+
+  const handle = async () => {
+    if (ready) {
+      // 模型已就绪：直接试听（在用户手势内播放，避免自动播放拦截）
+      try {
+        await speak('Hello, this is a test.', 0.95)
+      } catch {
+        onToast('播放失败', 'error')
+      }
+      return
+    }
+    if (downloading) return
+    // 未就绪：仅初始化模型（不播放，避免异步加载后 play 失去手势被拦）
+    try {
+      onToast('开始初始化语音模型（约 60MB，首次较慢）…', 'info')
+      await preload()
+      onToast('语音模型已就绪 🎉 点击可试听', 'success')
+    } catch {
+      onToast('语音模型加载失败，请检查资源是否完整', 'error')
+    }
+  }
+
+  return (
+    <button
+      onClick={handle}
+      disabled={downloading}
+      title={ready ? '点击试听' : '点击初始化语音模型'}
+      className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition ${
+        ready
+          ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300'
+          : 'bg-brand-600 text-white hover:bg-brand-700'
+      } disabled:opacity-60`}
+    >
+      {downloading ? (
+        <>
+          <SpinnerIcon width={16} height={16} className="animate-spin" />
+          {downloadProgress.pct}%
+        </>
+      ) : (
+        <>
+          <DownloadIcon width={16} height={16} />
+          {ready ? '语音已就绪' : '下载语音'}
+        </>
+      )}
+      {speaking && <span className="ml-1 h-2 w-2 animate-pulse rounded-full bg-amber-400" />}
+    </button>
+  )
+}
+
+/* ----------------------------- Sync progress ----------------------------- */
+function SyncProgressBtns({ onToast }: { onToast: (msg: string, type?: Toast['type']) => void }) {
+  const exportProgress = () => {
+    try {
+      const data = localStorage.getItem('lexicore-mastered') || '[]'
+      const blob = new Blob([JSON.stringify(JSON.parse(data), null, 2)], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'lexicore-progress.json'
+      a.click()
+      URL.revokeObjectURL(url)
+      onToast('已导出掌握进度', 'success')
+    } catch {
+      onToast('导出失败', 'error')
+    }
+  }
+
+  const importProgress = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'application/json'
+    input.onchange = async () => {
+      const file = input.files?.[0]
+      if (!file) return
+      try {
+        const text = await file.text()
+        const arr = JSON.parse(text)
+        if (!Array.isArray(arr)) throw new Error('格式错误')
+        const merged = Array.from(new Set([...(JSON.parse(localStorage.getItem('lexicore-mastered') || '[]')), ...arr]))
+        localStorage.setItem('lexicore-mastered', JSON.stringify(merged))
+        onToast(`已导入 ${arr.length} 个进度`, 'success')
+        setTimeout(() => location.reload(), 800)
+      } catch {
+        onToast('导入失败：文件格式不正确', 'error')
+      }
+    }
+    input.click()
+  }
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <button
+        onClick={exportProgress}
+        title="导出掌握进度"
+        className="inline-flex items-center gap-1 rounded-lg bg-slate-100 px-2.5 py-1.5 text-sm text-slate-600 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300"
+      >
+        <UploadIcon width={15} height={15} />
+      </button>
+      <button
+        onClick={importProgress}
+        title="导入掌握进度"
+        className="inline-flex items-center gap-1 rounded-lg bg-slate-100 px-2.5 py-1.5 text-sm text-slate-600 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300"
+      >
+        <DownloadIcon width={15} height={15} />
+      </button>
+    </div>
+  )
+}
+
+/* ----------------------------- App ----------------------------- */
 export default function App() {
-  const [theme, setTheme] = useLocalStorage<Theme>('lexicore-theme', 'light')
-  const [levelFilter, setLevelFilter] = useState<Level | 'all'>('all')
-  const [catFilter, setCatFilter] = useState<CategoryId | 'all'>('all')
-  const [commonOnly, setCommonOnly] = useState(false)
-  const [showUnmastered, setShowUnmastered] = useState(true)
-  const [showMastered, setShowMastered] = useState(false)
-  const [search, setSearch] = useState('')
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('lexicore-theme')
+    if (saved) return saved as 'light' | 'dark'
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
+  const [masteredArr, setMasteredArr] = useState<string[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem('lexicore-mastered') || '[]')
+    } catch {
+      return []
+    }
+  })
   const [selected, setSelected] = useState<Word | null>(null)
-  const [masteredArr, setMasteredArr] = useLocalStorage<string[]>('lexicore-mastered', [])
-  const { toasts, addToast, removeToast } = useToast()
+  const [toasts, setToasts] = useState<Toast[]>([])
+  const [view, setView] = useState<View>('home')
 
   const masteredSet = useMemo(() => new Set(masteredArr), [masteredArr])
 
-  const handleToast = useCallback(
-    (message: string, type: ToastType) => addToast(message, type),
-    [addToast],
-  )
+  // App 启动即预加载 Piper 模型（不播放）。模型尽早就绪，可使后续用户手势内的
+  // 朗读同步播放，避免首次 await 加载模型后 audio.play() 失去手势被 Android WebView 拦截。
+  const { preload } = useSpeech()
+  useEffect(() => {
+    preload().catch(() => {})
+  }, [preload])
+
+  const toggleMastered = useCallback((word: string) => {
+    setMasteredArr((prev) => (prev.includes(word) ? prev.filter((w) => w !== word) : [...prev, word]))
+  }, [])
+
+  const pushToast = useCallback((msg: string, type: Toast['type'] = 'success') => {
+    const id = ++toastId
+    setToasts((prev) => [...prev, { id, msg, type }])
+    setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 2600)
+  }, [])
 
   useEffect(() => {
-    const root = document.documentElement
-    if (theme === 'dark') {
-      root.classList.add('dark')
-      StatusBar.setStyle({ style: Style.Dark }).catch(() => {})
-    } else {
-      root.classList.remove('dark')
-      StatusBar.setStyle({ style: Style.Light }).catch(() => {})
-    }
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem('lexicore-theme', theme)
   }, [theme])
 
-  const toggleMastered = useCallback(
-    (w: Word) => {
-      setMasteredArr((prev) => (prev.includes(w.word) ? prev.filter((x) => x !== w.word) : [...prev, w.word]))
-    },
-    [setMasteredArr],
-  )
+  useEffect(() => {
+    localStorage.setItem('lexicore-mastered', JSON.stringify(masteredArr))
+  }, [masteredArr])
 
-  const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase()
-    // 按级别 + 场景筛选
-    const base = ALL_WORDS
-    return base.filter((w) => {
-      if (levelFilter !== 'all' && w.level !== levelFilter) return false
-      if (catFilter !== 'all' && (w.category ?? 'thinking') !== catFilter) return false
-      if (commonOnly && !w.common) return false
-      if (!showUnmastered && !showMastered) return false
-      if (!showUnmastered && showMastered && !masteredSet.has(w.word)) return false
-      if (showUnmastered && !showMastered && masteredSet.has(w.word)) return false
-      if (!q) return true
-      return w.word.toLowerCase().includes(q) || w.meaning.includes(q) || w.ipa.toLowerCase().includes(q)
-    })
-  }, [levelFilter, catFilter, commonOnly, showUnmastered, showMastered, masteredSet, search])
-
-  const groups = useMemo(() => groupByCategory(filtered), [filtered])
-
-  const masteredCount = useMemo(() => ALL_WORDS.filter((w) => masteredSet.has(w.word)).length, [masteredSet])
-  const overallPct = TOTAL ? Math.round((masteredCount / TOTAL) * 100) : 0
+  const openDetail = useCallback((w: Word) => setSelected(w), [])
+  const toggleFromDetail = useCallback(() => selected && toggleMastered(selected.word), [selected, toggleMastered])
 
   return (
-    <div className="min-h-full bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
-      {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-600 text-white shadow">
-              <BookIcon />
-            </div>
-            <div>
-              <h1 className="text-lg font-extrabold leading-tight">LexiCore 分级词汇</h1>
-              <p className="text-xs text-slate-400">基础篇 · Pre-A1 → B2</p>
+    <div className={`min-h-screen bg-slate-50 text-slate-900 transition-colors dark:bg-slate-900 dark:text-slate-100 ${theme === 'dark' ? 'dark' : ''}`}>
+      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-4 py-3">
+          <div className="flex items-center gap-2">
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand-600 text-white">
+              <span className="text-lg font-black">学</span>
+            </span>
+            <div className="leading-tight">
+              <h1 className="text-base font-extrabold">分级背单词</h1>
+              <p className="text-[11px] text-slate-400">CEFR 分级词库 · 人教版分级</p>
             </div>
           </div>
-
-          <div className="flex items-center gap-2">
-            <SyncProgressBtns masteredArr={masteredArr} onImport={(words) => setMasteredArr(words)} onToast={handleToast} />
-            <ModelDownloadBtn className="px-3 py-1.5" />
+          <div className="flex flex-wrap items-center gap-2">
+            <SyncProgressBtns onToast={pushToast} />
+            <ModelDownloadBtn onToast={pushToast} />
             <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="rounded-xl border border-slate-200 p-2 text-slate-600 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+              onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+              className="rounded-lg bg-slate-100 p-2 text-slate-600 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300"
               title="切换主题"
             >
               {theme === 'dark' ? <SunIcon width={18} height={18} /> : <MoonIcon width={18} height={18} />}
@@ -580,197 +237,49 @@ export default function App() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl px-4 py-6">
-        {/* Progress overview */}
-        <section className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Stat label="总词数" value={String(TOTAL)} />
-          <Stat label="已掌握" value={`${masteredCount}`} accent />
-          <Stat label="掌握率" value={`${overallPct}%`} />
-          <Stat
-            label="剩余"
-            value={`${TOTAL - masteredCount}`}
-          />
-        </section>
-
-        {/* Per-level progress */}
-        <section className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {LEVELS.map((l) => {
-            const total = ALL_WORDS.filter((w) => w.level === l.id).length
-            const done = ALL_WORDS.filter((w) => w.level === l.id && masteredSet.has(w.word)).length
-            const pct = total ? Math.round((done / total) * 100) : 0
-            const s = LEVEL_STYLE[l.id]
-            return (
-              <div key={l.id} className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800/60">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className={`h-2 w-2 rounded-full ${s.dot}`} />
-                    <span className="font-bold">{l.label}</span>
-                  </div>
-                  <span className="text-xs text-slate-400">{done}/{total}</span>
-                </div>
-                <p className="mt-1 text-xs text-slate-400">{l.desc}</p>
-                <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700">
-                  <div className={`h-full rounded-full ${s.dot} transition-all`} style={{ width: `${pct}%` }} />
-                </div>
-              </div>
-            )
-          })}
-        </section>
-
-        <p className="mb-5 text-center text-xs text-slate-400">
-          词表共 <span className="font-semibold text-slate-500 dark:text-slate-300">{TOTAL}</span> 个（含牛津 3000 补充词表）·
-          {LEVELS.map((l) => `${l.label} ${ALL_WORDS.filter((w) => w.level === l.id).length}`).join(' · ')}
-        </p>
-
-        <>
-          {/* Filters */}
-          <div className="mb-4 flex flex-col gap-3">
-              {/* Level + search */}
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex flex-wrap items-center gap-2">
-                <FilterChip active={levelFilter === 'all'} onClick={() => setLevelFilter('all')}>
-                  全部
-                </FilterChip>
-                {LEVELS.map((l) => (
-                  <FilterChip key={l.id} active={levelFilter === l.id} onClick={() => setLevelFilter(l.id)}>
-                    {l.label}
-                  </FilterChip>
-                ))}
-                <span className="mx-1 h-4 w-px bg-slate-200 dark:bg-slate-700" />
-                <FilterChip active={showUnmastered} onClick={() => setShowUnmastered((v) => !v)}>
-                  未掌握
-                </FilterChip>
-                <FilterChip active={showMastered} onClick={() => setShowMastered((v) => !v)}>
-                  已掌握
-                </FilterChip>
-              </div>
-                <div className="relative">
-                  <SearchIcon width={16} height={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                  <input
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="搜索单词 / 释义 / 音标"
-                    className="w-full rounded-xl border border-slate-200 bg-white py-2 pl-9 pr-3 text-sm outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:border-slate-700 dark:bg-slate-800 dark:focus:ring-brand-500/20 sm:w-64"
-                  />
-                </div>
-              </div>
-
-              {/* Scene category filter */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="shrink-0 text-xs font-medium text-slate-400">场景</span>
-                <FilterChip active={catFilter === 'all'} onClick={() => setCatFilter('all')}>
-                  全部场景
-                </FilterChip>
-                {CATEGORIES.map((c) => (
-                  <FilterChip key={c.id} active={catFilter === c.id} onClick={() => setCatFilter(c.id)}>
-                    {c.label}
-                  </FilterChip>
-                ))}
-                <span className="mx-1 hidden h-4 w-px bg-slate-200 dark:bg-slate-700 sm:block" />
-                <FilterChip active={commonOnly} onClick={() => setCommonOnly((v) => !v)}>
-                  ★ 只看常用
-                </FilterChip>
-              </div>
-            </div>
-
-            <p className="mb-3 text-sm text-slate-400">
-              共 {filtered.length} 个单词 · {groups.length} 个场景 ·{' '}
-              {groups.reduce((s, g) => s + g.themes.length, 0)} 个分组
-            </p>
-
-            {filtered.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-slate-300 py-16 text-center text-slate-400 dark:border-slate-700">
-                没有找到匹配的单词
-              </div>
-            ) : (
-              <div className="space-y-8">
-                {groups.map((g) => (
-                  <section key={g.category.id}>
-                    <div className="mb-3 flex items-center gap-2">
-                      <span className={`h-2.5 w-2.5 rounded-full ${CAT_DOT[g.category.id]}`} />
-                      <h2 className="text-base font-bold text-slate-700 dark:text-slate-200">{g.category.label}</h2>
-                      <span className="text-xs text-slate-400">{g.category.en}</span>
-                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-slate-800">
-                        {g.count}
-                      </span>
-                    </div>
-                    <div className="space-y-4">
-                      {g.themes.map((t) => (
-                        <div key={t.id}>
-                          {t.label && (
-                            <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">
-                              <span className={`h-1.5 w-1.5 rounded-full ${CAT_DOT[g.category.id]} opacity-60`} />
-                              {t.label}
-                            </p>
-                          )}
-                          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                            {t.items.map((w) => (
-                              <WordCard
-                                key={w.word}
-                                word={w}
-                                mastered={masteredSet.has(w.word)}
-                                onOpen={() => setSelected(w)}
-                                onToggleMastered={() => toggleMastered(w)}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                ))}
-              </div>
-            )}
-          </>
+      <main className="mx-auto max-w-5xl px-4 pb-28 pt-5 md:pb-8">
+        {view === 'home' && (
+          <HomeView masteredSet={masteredSet} onOpen={openDetail} onToggleMastered={(w) => toggleMastered(w.word)} />
+        )}
+        {view === 'grades' && (
+          <GradesView masteredSet={masteredSet} onOpen={openDetail} onToggleMastered={(w) => toggleMastered(w.word)} />
+        )}
+        {view === 'listen' && <ListenView onOpen={openDetail} />}
       </main>
 
-      <footer className="mx-auto max-w-5xl px-4 py-8 text-center text-xs text-slate-400">
-        点击单词卡片查看详情与发音 · 进度自动保存在本地浏览器
-      </footer>
+      {/* Mobile bottom navigation */}
+      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur dark:border-slate-800 dark:bg-slate-900/95 md:hidden">
+        <div className="mx-auto flex max-w-5xl items-stretch justify-around">
+          <NavBtn active={view === 'home'} onClick={() => setView('home')} icon={<HomeIcon width={22} height={22} />} label="CEFR" />
+          <NavBtn active={view === 'grades'} onClick={() => setView('grades')} icon={<ListIcon width={22} height={22} />} label="人教" />
+          <NavBtn active={view === 'listen'} onClick={() => setView('listen')} icon={<HeadphonesIcon width={22} height={22} />} label="听词" />
+        </div>
+      </nav>
 
       {selected && (
-        <WordDetail
-          word={selected}
-          mastered={masteredSet.has(selected.word)}
-          onClose={() => setSelected(null)}
-          onToggleMastered={() => toggleMastered(selected)}
-        />
+        <WordDetail word={selected} mastered={masteredSet.has(selected.word)} onClose={() => setSelected(null)} onToggleMastered={toggleFromDetail} />
       )}
 
-      <ToastContainer toasts={toasts} onRemove={removeToast} />
+      <ToastContainer toasts={toasts} />
+
+      <footer className="mx-auto max-w-5xl px-4 pb-3 pt-2 text-center text-[11px] leading-relaxed text-slate-400">
+        分级词表依据人教版教材整理（来源：cyforkk/pep-english-words, MIT）；
+        单词释义/音标/例句来自公开词典接口，仅供个人学习，非牛津官方授权。
+      </footer>
     </div>
   )
 }
 
-function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800/60">
-      <p className="text-xs text-slate-400">{label}</p>
-      <p className={`mt-1 text-2xl font-extrabold ${accent ? 'text-emerald-500' : 'text-slate-800 dark:text-slate-100'}`}>{value}</p>
-    </div>
-  )
-}
-
-function FilterChip({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
+function NavBtn({ active, onClick, icon, label }: { active: boolean; onClick: () => void; icon: React.ReactNode; label: string }) {
   return (
     <button
       onClick={onClick}
-      className={`shrink-0 whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition ${
-        active
-          ? 'bg-brand-600 text-white shadow-sm'
-          : 'bg-white text-slate-600 hover:bg-slate-100 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
+      className={`flex flex-1 flex-col items-center gap-0.5 py-2.5 text-xs font-medium transition ${
+        active ? 'text-brand-600 dark:text-brand-300' : 'text-slate-400 dark:text-slate-500'
       }`}
     >
-      {children}
+      {icon}
+      {label}
     </button>
-  )
-}
-
-function BookIcon() {
-  return (
-    <svg width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-    </svg>
   )
 }

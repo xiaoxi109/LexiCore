@@ -22,6 +22,15 @@ allprojects {
         google()
         mavenCentral()
     }
+    // 强制所有模块使用 JDK 17 编译（含 capacitor-android 库），避免其默认要求的 21。
+    plugins.withType(com.android.build.gradle.BasePlugin).configureEach {
+        android {
+            compileOptions {
+                sourceCompatibility JavaVersion.VERSION_17
+                targetCompatibility JavaVersion.VERSION_17
+            }
+        }
+    }
 }
 
 task clean(type: Delete) {
