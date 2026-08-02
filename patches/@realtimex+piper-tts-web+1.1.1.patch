@@ -1,5 +1,5 @@
 diff --git a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
-index e969f08..7fd7e18 100644
+index e969f08..dc78e30 100644
 --- a/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 +++ b/node_modules/@realtimex/piper-tts-web/dist/piper-tts-web.js
 @@ -10,9 +10,9 @@ var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot
@@ -235,6 +235,7 @@ index e969f08..7fd7e18 100644
 +      __privateGet(this, _createPiperPhonemize).call(this, {
 +        // 注入 wasm ArrayBuffer，跳过 instantiateStreaming（Android WebView blob URL MIME 问题）
 +        wasmBinary: __privateGet(this, _wasmPaths).piperWasmBinary || void 0,
++        noInitialRun: true,
          print: (data) => {
 -          resolve(JSON.parse(data).phoneme_ids);
 +          if (settled) return;
@@ -251,17 +252,16 @@ index e969f08..7fd7e18 100644
          },
          printErr: (message) => {
 -          throw new Error(message);
-+          if (settled) return;
-+          settled = true;
-+          clearTimeout(timer);
-+          reject(new Error("phonemize printErr: " + message));
++          console.warn("Piper phonemize:", message);
          },
          locateFile: (url) => {
            if (url.endsWith(".wasm")) return __privateGet(this, _wasmPaths).piperWasm;
            if (url.endsWith(".data")) return __privateGet(this, _wasmPaths).piperData;
            return url;
          }
-+      }).then((module) => {
++      }).then(async (module) => {
++        if (settled) return;
++        await module["ready"];
 +        if (settled) return;
 +        module.callMain([
 +          "-l",
